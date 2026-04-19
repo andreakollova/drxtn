@@ -3,7 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Drixton – Web & Dev Studio</title>
+<title>Drixton – Web & Dev Studio | Webstránky, E-shopy, AI riešenia</title>
+<meta name="description" content="Drixton je slovenské Web & Dev Studio tvorené špecialistami na UX/UI dizajn, vývoj webstránok, e-shopov a AI riešení. Vytvárame digitálne produkty, ktoré konvertujú.">
+<meta name="keywords" content="web dizajn, web development, webstránky, e-shop, UI/UX dizajn, AI riešenia, Bratislava, Slovensko, Next.js, React, digitálne produkty, webové studio">
+<meta name="author" content="Drixton Web & Dev Studio">
+<meta name="robots" content="index, follow">
+<meta name="language" content="sk">
+<link rel="canonical" href="https://drixton.sk/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://drixton.sk/">
+<meta property="og:title" content="Drixton – Web & Dev Studio | Webstránky, E-shopy, AI riešenia">
+<meta property="og:description" content="Tvoríme digitálne produkty, ktoré konvertujú. Dizajn. Vývoj. AI riešenia. Všetko pod jednou strechou.">
+<meta property="og:image" content="https://drixton.sk/static/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="sk_SK">
+<meta property="og:site_name" content="Drixton">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://drixton.sk/">
+<meta name="twitter:title" content="Drixton – Web & Dev Studio">
+<meta name="twitter:description" content="Tvoríme digitálne produkty, ktoré konvertujú. Dizajn. Vývoj. AI riešenia.">
+<meta name="twitter:image" content="https://drixton.sk/static/og-image.png">
+
+<!-- Structured Data – Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Drixton",
+  "alternateName": "Drixton Web & Dev Studio",
+  "url": "https://drixton.sk",
+  "logo": "https://drixton.sk/static/logo-keyboard.png",
+  "description": "Slovenské Web & Dev Studio špecializované na UX/UI dizajn, vývoj webstránok, e-shopov a AI riešení.",
+  "foundingLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bratislava",
+      "addressCountry": "SK"
+    }
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@drixton.sk",
+    "contactType": "customer service",
+    "availableLanguage": ["Slovak", "English"]
+  },
+  "sameAs": [],
+  "offers": {
+    "@type": "Offer",
+    "description": "Webstránky, e-shopy, UX/UI dizajn, AI riešenia",
+    "areaServed": "SK"
+  }
+}
+</script>
+
+<!-- Structured Data – WebSite with SearchAction -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Drixton",
+  "url": "https://drixton.sk"
+}
+</script>
+
 <link rel="icon" type="image/png" href="static/keyboard-blue.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2266,7 +2334,7 @@ section { padding: 100px 40px; }
 footer {
   background: linear-gradient(135deg, #1a8fe8 0%, #2c9ffa 30%, #6ab4ff 65%, #bac1fe 100%);
   color: rgba(255,255,255,0.7);
-  padding: 80px 40px 40px;
+  padding: 100px 40px 56px;
   position: relative;
   overflow: hidden;
 }
@@ -2550,7 +2618,8 @@ footer::before {
   .interest-pill { font-size: 13px; padding: 8px 14px; }
 
   /* Footer */
-  footer { padding: 60px 20px 32px; }
+  footer { padding: 60px 20px 40px; }
+  .footer-keyboard { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .footer-logo-area { grid-column: 1 / -1; }
   .footer-logo { height: 64px; }
@@ -2753,9 +2822,9 @@ footer::before {
   </div>
 
   <div class="carousel-nav">
-    <button class="carousel-arrow" id="carouselPrev" aria-label="Predchádzajúci">←</button>
+    <button class="carousel-arrow" id="carouselPrev" aria-label="Predchádzajúci"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
     <div class="carousel-dots" id="carouselDots"></div>
-    <button class="carousel-arrow" id="carouselNext" aria-label="Nasledujúci">→</button>
+    <button class="carousel-arrow" id="carouselNext" aria-label="Nasledujúci"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 </section>
 
@@ -2963,12 +3032,12 @@ footer::before {
 
         <!-- Carousel nav -->
         <div class="mockup-carousel-nav">
-          <button class="mockup-carousel-arrow" onclick="mockupPrev()">←</button>
+          <button class="mockup-carousel-arrow" onclick="mockupPrev()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
           <div class="mockup-carousel-dots">
             <button class="mockup-carousel-dot active" onclick="goMockup(0)"></button>
             <button class="mockup-carousel-dot" onclick="goMockup(1)"></button>
           </div>
-          <button class="mockup-carousel-arrow" onclick="mockupNext()">→</button>
+          <button class="mockup-carousel-arrow" onclick="mockupNext()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
       </div>
     </div>
@@ -3031,7 +3100,7 @@ footer::before {
       <canvas id="kbGameCanvas"></canvas>
       <img src="static/robot-blue.png" alt="Robot" id="kbGameRobot">
       <img src="static/keyboard-blue.png" alt="Klávesnica" id="kbGameKeyboard">
-      <div class="kbgame-hint" id="kbGameHint">Navádzaj robota a zbieraj klávesnice...</div>
+      <div class="kbgame-hint" id="kbGameHint">Prejdi myšou a zbieraj klávesy.</div>
     </div>
   </div>
 </section>
