@@ -561,7 +561,7 @@ nav.scrolled {
 [data-theme="dark"] .hero-h1 .outline-word { -webkit-text-stroke: 2px rgba(255,255,255,0.5); }
 .hero-h1 .typeword {
   display: block;
-  background: linear-gradient(125deg, #1a8fe8 0%, #2c9ffa 35%, #6ab4ff 68%, #bac1fe 100%);
+  background: linear-gradient(125deg, #1a8fe8 0%, #2c9ffa 45%, #60b8ff 75%, #9db5ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -791,6 +791,7 @@ section { padding: 100px 40px; }
 #projects {
   background: var(--bg);
   overflow: hidden;
+  padding-top: 56px;
   padding-bottom: 60px;
 }
 .projects-header { max-width: 1200px; margin: 0 auto 48px; padding: 0 40px; }
@@ -2525,12 +2526,14 @@ footer::before {
   .hero-mini-4 { bottom: 10%; right: 2%; }
 
   /* Projects */
+  #projects { padding-top: 40px !important; padding-bottom: 40px; }
   .projects-header { padding: 0 20px; }
   .carousel { padding: 0 20px 20px; touch-action: pan-x; }
   .carousel-nav { padding: 0 20px; }
   .project-card { flex: 0 0 82vw; }
 
   /* Services — horizontal swipe carousel on mobile */
+  #services { padding: 0 !important; position: relative; }
   .services-grid {
     display: flex;
     flex-direction: row;
@@ -2542,19 +2545,22 @@ footer::before {
   }
   .services-grid::-webkit-scrollbar { display: none; }
   .services-panel {
-    flex: 0 0 92vw;
+    flex: 0 0 100vw;
     scroll-snap-align: start;
     min-height: auto !important;
-    padding: 48px 28px 56px;
+    padding: 56px 24px 64px;
     border-radius: 0;
   }
-  .services-panel + .services-panel { border-left: 1px solid rgba(255,255,255,0.08); }
-  .services-panel-inner { grid-template-columns: 1fr; gap: 32px; }
+  .services-panel + .services-panel { border-left: none; }
+  .services-panel-inner { grid-template-columns: 1fr; gap: 28px; }
   .services-visual { display: none; }
   .svc-list { grid-template-columns: 1fr; gap: 0; }
   .svc-entry { padding: 10px 0; }
-  .panel-pills { gap: 6px; }
+  .panel-pills { gap: 6px; flex-wrap: wrap; }
   .panel-pill { font-size: 11px; padding: 5px 10px; }
+
+  /* Services swipe indicator */
+  .services-swipe-hint { display: flex; }
 
   /* Mobile mockups */
   .mobile-inner { grid-template-columns: 1fr; }
@@ -2830,7 +2836,11 @@ footer::before {
 
 <!-- ===================== SERVICES ===================== -->
 <section id="services">
-  <div class="services-grid">
+  <div class="services-swipe-hint" style="display:none; justify-content:center; gap:6px; padding:12px 0; pointer-events:none;">
+    <span class="svc-dot svc-dot-active" style="width:20px;height:4px;border-radius:2px;background:#a855f7;display:block;transition:all 0.3s"></span>
+    <span class="svc-dot" style="width:4px;height:4px;border-radius:2px;background:rgba(0,0,0,0.15);display:block;transition:all 0.3s"></span>
+  </div>
+  <div class="services-grid" id="servicesGrid">
     <!-- ══════ DESIGN PANEL ══════ -->
     <div class="services-panel services-panel-light fade-up">
       <div class="services-panel-inner">
@@ -3300,8 +3310,6 @@ footer::before {
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="footer-top-fade"></div>
-  <img src="static/keyboard-black.png" alt="" class="footer-keyboard" loading="lazy"
-       onerror="this.style.display='none'">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-logo-area">
@@ -3878,6 +3886,29 @@ function toggleService(item) {
   item.closest('.service-items').querySelectorAll('.service-item').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
+
+// Services swipe dots on mobile
+(function() {
+  const grid = document.getElementById('servicesGrid');
+  const hint = document.querySelector('.services-swipe-hint');
+  if (!grid || !hint) return;
+  function update() {
+    if (window.innerWidth <= 768) {
+      hint.style.display = 'flex';
+      const dots = hint.querySelectorAll('.svc-dot');
+      const idx = Math.round(grid.scrollLeft / grid.offsetWidth);
+      dots.forEach((d, i) => {
+        d.style.width = i === idx ? '20px' : '4px';
+        d.style.background = i === idx ? (idx === 0 ? '#a855f7' : '#0ea5e9') : 'rgba(255,255,255,0.3)';
+      });
+    } else {
+      hint.style.display = 'none';
+    }
+  }
+  grid.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
 
 // ===================== KEYBOARD INTERACTIVE GAME =====================
 const kbData = {
