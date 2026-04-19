@@ -2332,7 +2332,7 @@ section { padding: 100px 40px; }
 
 /* ===================== FOOTER ===================== */
 footer {
-  background: linear-gradient(135deg, #1a8fe8 0%, #2c9ffa 30%, #6ab4ff 65%, #bac1fe 100%);
+  background: #0a0a0a;
   color: rgba(255,255,255,0.7);
   padding: 100px 40px 56px;
   position: relative;
@@ -2364,7 +2364,7 @@ footer::before {
   position: absolute;
   top: -80px; left: 0; right: 0;
   height: 80px;
-  background: linear-gradient(to bottom, transparent, #1a8fe8);
+  background: linear-gradient(to bottom, transparent, #0a0a0a);
   pointer-events: none;
 }
 
@@ -2724,28 +2724,28 @@ footer::before {
 
   <!-- Floating cards — absolutely on section -->
   <div class="hero-mini hero-mini-1" id="heroCard1">
-    <div class="hero-mini-label">Konverzný pomer</div>
+    <div class="hero-mini-label" data-i18n="hero-card-1-label">Konverzný pomer</div>
     <div class="hero-mini-value" data-scramble="+247%">+247%</div>
-    <div class="hero-mini-sub">vs. predošlé riešenie</div>
+    <div class="hero-mini-sub" data-i18n="hero-card-1-sub">vs. predošlé riešenie</div>
   </div>
   <div class="hero-mini hero-mini-2" id="heroCard2">
-    <div class="hero-mini-label">Lighthouse</div>
+    <div class="hero-mini-label" data-i18n="hero-card-2-label">Lighthouse</div>
     <div class="hero-mini-value" data-scramble="98">98</div>
-    <div class="hero-mini-sub">Performance score</div>
+    <div class="hero-mini-sub" data-i18n="hero-card-2-sub">Performance score</div>
   </div>
   <div class="hero-mini hero-mini-3">
-    <div class="hero-mini-label">Projekty 2024</div>
+    <div class="hero-mini-label" data-i18n="hero-card-3-label">Projekty 2024</div>
     <div class="hero-mini-value" data-scramble="50+">50+</div>
-    <div class="hero-mini-sub">dokončených projektov</div>
+    <div class="hero-mini-sub" data-i18n="hero-card-3-sub">dokončených projektov</div>
   </div>
   <div class="hero-mini hero-mini-4">
-    <div class="hero-mini-label">Spokojnosť</div>
+    <div class="hero-mini-label" data-i18n="hero-card-4-label">Spokojnosť</div>
     <div class="hero-mini-value" data-scramble="98%">98%</div>
-    <div class="hero-mini-sub">klientov odporúča</div>
+    <div class="hero-mini-sub" data-i18n="hero-card-4-sub">klientov odporúča</div>
   </div>
 <div class="hero-pill" id="heroPill">
     <div class="hero-pill-dot"></div>
-    <span data-scramble="AI agenti online">AI agenti online</span>
+    <span data-scramble="AI agenti online" data-i18n="hero-pill">AI agenti online</span>
   </div>
 
   <div class="hero-inner">
@@ -2835,24 +2835,24 @@ footer::before {
     <div class="services-panel services-panel-light fade-up">
       <div class="services-panel-inner">
         <div class="services-content">
-          <div class="section-label" style="color:var(--purple)">Dizajn</div>
-          <h2 class="section-h2" style="margin-bottom:14px">Dizajn, ktorý<br><span style="color:var(--purple)">konvertuje.</span></h2>
-          <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:440px;margin-bottom:32px">Vytvárame digitálne produkty, ktoré nie sú len krásne — ale predovšetkým funkčné, rýchle a zamerané na výsledky. Od prvého wireframu po finálne pixely.</p>
+          <div class="section-label" style="color:var(--purple)" data-i18n="services-design-label">Dizajn</div>
+          <h2 class="section-h2" style="margin-bottom:14px" data-i18n="services-design-h2">Dizajn, ktorý<br><span style="color:var(--purple)">konvertuje.</span></h2>
+          <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:440px;margin-bottom:32px" data-i18n="services-design-desc">Vytvárame digitálne produkty, ktoré nie sú len krásne — ale predovšetkým funkčné, rýchle a zamerané na výsledky. Od prvého wireframu po finálne pixely.</p>
 
           <div class="svc-list">
-            <div class="svc-entry"><div class="svc-entry-name">UX &amp; UI Design</div><div class="svc-entry-desc">Wireframy, prototypy, finálny dizajn.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Brand Identity &amp; Logo</div><div class="svc-entry-desc">Vizuálna identita, logotyp, manuál.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Design System</div><div class="svc-entry-desc">Konzistentné komponentové knižnice.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Motion Design</div><div class="svc-entry-desc">UI animácie, micro-interactions, Lottie.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">CRO &amp; A/B testovanie</div><div class="svc-entry-desc">Heatmapy, A/B testy, optimalizácia.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">User Research</div><div class="svc-entry-desc">Rozhovory, user testing, customer journey.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Accessibility WCAG 2.2</div><div class="svc-entry-desc">Audity a implementácia prístupnosti.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Prototypovanie</div><div class="svc-entry-desc">Interaktívne prototypy pre stakeholderov.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Copywriting &amp; Content</div><div class="svc-entry-desc">Texty, tonalita, content stratégia.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-ux-name">UX &amp; UI Design</div><div class="svc-entry-desc" data-i18n="svc-ux-desc">Wireframy, prototypy, finálny dizajn.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-brand-name">Brand Identity &amp; Logo</div><div class="svc-entry-desc" data-i18n="svc-brand-desc">Vizuálna identita, logotyp, manuál.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-design-system-name">Design System</div><div class="svc-entry-desc" data-i18n="svc-design-system-desc">Konzistentné komponentové knižnice.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-motion-name">Motion Design</div><div class="svc-entry-desc" data-i18n="svc-motion-desc">UI animácie, micro-interactions, Lottie.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-cro-name">CRO &amp; A/B testovanie</div><div class="svc-entry-desc" data-i18n="svc-cro-desc">Heatmapy, A/B testy, optimalizácia.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-research-name">User Research</div><div class="svc-entry-desc" data-i18n="svc-research-desc">Rozhovory, user testing, customer journey.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-a11y-name">Accessibility WCAG 2.2</div><div class="svc-entry-desc" data-i18n="svc-a11y-desc">Audity a implementácia prístupnosti.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-proto-name">Prototypovanie</div><div class="svc-entry-desc" data-i18n="svc-proto-desc">Interaktívne prototypy pre stakeholderov.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-copy-name">Copywriting &amp; Content</div><div class="svc-entry-desc" data-i18n="svc-copy-desc">Texty, tonalita, content stratégia.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-3d-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc" data-i18n="svc-3d-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
           </div>
 
-          <div class="section-label" style="color:var(--purple);margin-bottom:12px">Nástroje</div>
+          <div class="section-label" style="color:var(--purple);margin-bottom:12px" data-i18n="services-tools-label">Nástroje</div>
           <div class="panel-pills">
             <span class="panel-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" fill="#F24E1E"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" fill="#FF7262"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" fill="#1ABCFE"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" fill="#0ACF83"/><path d="M5 18.5A3.5 3.5 0 0 1 8.5 15H12v3.5a3.5 3.5 0 1 1-7 0z" fill="#0ACF83"/></svg>Figma</span>
             <span class="panel-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 4h7.2l4.8 8-4.8 8H4l4.8-8L4 4z" fill="#0099FF"/></svg>Framer</span>
@@ -2909,24 +2909,24 @@ footer::before {
     <div class="services-panel services-panel-dark fade-up" style="transition-delay:0.15s">
       <div class="services-panel-inner">
         <div class="services-content">
-          <div class="section-label" style="color:var(--blue)">Vývoj</div>
-          <h2 class="section-h2" style="color:#fff;margin-bottom:14px">Kód, ktorý<br><span style="color:var(--blue)">škáluje.</span></h2>
-          <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:440px;margin-bottom:32px">Píšeme čistý, rýchly a udržiavateľný kód s AI nástrojmi na palube. Od MVP po enterprise — nasadenie do 24 hodín.</p>
+          <div class="section-label" style="color:var(--blue)" data-i18n="services-dev-label">Vývoj</div>
+          <h2 class="section-h2" style="color:#fff;margin-bottom:14px" data-i18n="services-dev-h2">Kód, ktorý<br><span style="color:var(--blue)">škáluje.</span></h2>
+          <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:440px;margin-bottom:32px" data-i18n="services-dev-desc">Píšeme čistý, rýchly a udržiavateľný kód s AI nástrojmi na palube. Od MVP po enterprise — nasadenie do 24 hodín.</p>
 
           <div class="svc-list">
-            <div class="svc-entry"><div class="svc-entry-name">AI Agenti &amp; Chatboty</div><div class="svc-entry-desc">Vlastné LLM agenti, RAG systémy, chatboty.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Web &amp; SaaS na mieru</div><div class="svc-entry-desc">Prezentačné weby, SaaS platformy, portály.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">E-shop na mieru</div><div class="svc-entry-desc">Headless commerce, custom checkout, PIM.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Mobilné aplikácie</div><div class="svc-entry-desc">React Native iOS &amp; Android aplikácie.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">B2B Platformy &amp; Portály</div><div class="svc-entry-desc">Intranety, objednávkové systémy, dashboardy.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">API &amp; Integrácie</div><div class="svc-entry-desc">ERP, CRM, platobné brány, third-party API.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Performance Optimalizácia</div><div class="svc-entry-desc">Core Web Vitals, Lighthouse 98+, CDN.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Security Audit</div><div class="svc-entry-desc">OWASP, pentesting, bezpečnostné hardening.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name">Prevádzka &amp; Support</div><div class="svc-entry-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-web-name">AI Agenti &amp; Chatboty</div><div class="svc-entry-desc" data-i18n="svc-web-desc">Vlastné LLM agenti, RAG systémy, chatboty.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-ecom-name">Web &amp; SaaS na mieru</div><div class="svc-entry-desc" data-i18n="svc-ecom-desc">Prezentačné weby, SaaS platformy, portály.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-api-name">E-shop na mieru</div><div class="svc-entry-desc" data-i18n="svc-api-desc">Headless commerce, custom checkout, PIM.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-db-name">Mobilné aplikácie</div><div class="svc-entry-desc" data-i18n="svc-db-desc">React Native iOS &amp; Android aplikácie.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-ai-name">B2B Platformy &amp; Portály</div><div class="svc-entry-desc" data-i18n="svc-ai-desc">Intranety, objednávkové systémy, dashboardy.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-cms-name">API &amp; Integrácie</div><div class="svc-entry-desc" data-i18n="svc-cms-desc">ERP, CRM, platobné brány, third-party API.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-perf-name">Performance Optimalizácia</div><div class="svc-entry-desc" data-i18n="svc-perf-desc">Core Web Vitals, Lighthouse 98+, CDN.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-security-name">Security Audit</div><div class="svc-entry-desc" data-i18n="svc-security-desc">OWASP, pentesting, bezpečnostné hardening.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-saas-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc" data-i18n="svc-saas-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-maint-name">Prevádzka &amp; Support</div><div class="svc-entry-desc" data-i18n="svc-maint-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
           </div>
 
-          <div class="section-label" style="color:var(--blue);margin-bottom:12px">Technológie</div>
+          <div class="section-label" style="color:var(--blue);margin-bottom:12px" data-i18n="services-tools-label">Technológie</div>
           <div class="panel-pills">
             <span class="panel-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#000"/><path d="M14.5 6H17v12l-9-9.5V18H5V6l9 9.5V6z" fill="white"/></svg>Next.js</span>
             <span class="panel-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="#61DAFB"/><ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" stroke-width="1.5" fill="none"/><ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" stroke-width="1.5" fill="none" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4.2" stroke="#61DAFB" stroke-width="1.5" fill="none" transform="rotate(120 12 12)"/></svg>React</span>
@@ -2990,8 +2990,8 @@ footer::before {
   <div class="mobile-inner">
     <!-- Carousel text + nav -->
     <div class="mobile-text-side fade-up">
-      <div class="section-label">Mobilné aplikácie</div>
-      <h2 class="section-h2">Produkty, ktoré žijú vo vreckách vašich zákazníkov.</h2>
+      <div class="section-label" data-i18n="mockups-label">Mobilné aplikácie</div>
+      <h2 class="section-h2" data-i18n="mockups-h2">Produkty, ktoré žijú vo vreckách vašich zákazníkov.</h2>
       <p style="font-size:15px; color:var(--text-secondary); margin-top:12px; line-height:1.7; max-width:420px">Navrhujeme a vyvíjame mobilné aplikácie s ohľadom na konverzie a používateľský zážitok.</p>
 
       <div class="mockup-carousel" style="margin-top:40px">
@@ -3060,39 +3060,39 @@ footer::before {
 <!-- ===================== KEYBOARD INTERACTIVE ===================== -->
 <section id="keyboard-section">
   <div class="keyboard-section-inner fade-up">
-    <div class="section-label" style="text-align:center">Nástroje nášho tímu</div>
-    <h2 class="section-h2" style="text-align:center; margin-bottom:8px">Nástroje, ktoré milujeme.</h2>
-    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici. Vyber farbu a zisti viac o nástrojoch, ktoré používame.</p>
+    <div class="section-label" style="text-align:center" data-i18n="kb-label">Nástroje nášho tímu</div>
+    <h2 class="section-h2" style="text-align:center; margin-bottom:8px" data-i18n="kb-h2">Nástroje, ktoré milujeme.</h2>
+    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px" data-i18n="kb-desc">Každý projekt začína pri klávesnici. Vyber farbu a zisti viac o nástrojoch, ktoré používame.</p>
     <div class="keyboards-row" style="margin-bottom:32px">
       <div class="kb-item kb-blue kb-active" onclick="kbClick(this,'blue')">
         <img src="static/keyboard-blue.png" alt="Stela AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Stela AI</span>
-        <span class="kb-role">Operations &amp; Automation</span>
+        <span class="kb-label" data-i18n="kb-stela-label">Stela AI</span>
+        <span class="kb-role" data-i18n="kb-stela-role">Operations &amp; Automation</span>
       </div>
       <div class="kb-item kb-purple" onclick="kbClick(this,'purple')">
         <img src="static/keyboard-purple.png" alt="Mia AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Mia AI</span>
-        <span class="kb-role">Growth &amp; Marketing</span>
+        <span class="kb-label" data-i18n="kb-mia-label">Mia AI</span>
+        <span class="kb-role" data-i18n="kb-mia-role">Growth &amp; Marketing</span>
       </div>
       <div class="kb-item kb-grey" onclick="kbClick(this,'grey')">
         <img src="static/keyboard-grey.png" alt="Pete AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Pete AI</span>
-        <span class="kb-role">Data &amp; Insights</span>
+        <span class="kb-label" data-i18n="kb-pete-label">Pete AI</span>
+        <span class="kb-role" data-i18n="kb-pete-role">Data &amp; Insights</span>
       </div>
       <div class="kb-item kb-yellow" onclick="kbClick(this,'yellow')">
         <img src="static/keyboard-yellow.png" alt="Jane AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Jane AI</span>
-        <span class="kb-role">Content &amp; Social</span>
+        <span class="kb-label" data-i18n="kb-jane-label">Jane AI</span>
+        <span class="kb-role" data-i18n="kb-jane-role">Content &amp; Social</span>
       </div>
       <div class="kb-item kb-green" onclick="kbClick(this,'green')">
         <img src="static/keyboard-green.png" alt="Vicky AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Vicky AI</span>
-        <span class="kb-role">Partner Outreach</span>
+        <span class="kb-label" data-i18n="kb-vicky-label">Vicky AI</span>
+        <span class="kb-role" data-i18n="kb-vicky-role">Partner Outreach</span>
       </div>
       <div class="kb-item kb-black" onclick="kbClick(this,'black')">
         <img src="static/keyboard-black.png" alt="Max AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Max AI</span>
-        <span class="kb-role">AI Security</span>
+        <span class="kb-label" data-i18n="kb-max-label">Max AI</span>
+        <span class="kb-role" data-i18n="kb-max-role">AI Security</span>
       </div>
     </div>
     <div id="kbGame">
@@ -3100,7 +3100,7 @@ footer::before {
       <canvas id="kbGameCanvas"></canvas>
       <img src="static/robot-blue.png" alt="Robot" id="kbGameRobot">
       <img src="static/keyboard-blue.png" alt="Klávesnica" id="kbGameKeyboard">
-      <div class="kbgame-hint" id="kbGameHint">Prejdi myšou a zbieraj klávesy.</div>
+      <div class="kbgame-hint" id="kbGameHint" data-i18n="kb-hint">Prejdi myšou a zbieraj klávesy.</div>
     </div>
   </div>
 </section>
@@ -3117,67 +3117,67 @@ footer::before {
     <div class="agent-card agent-blue fade-up" id="agent-max">
       <img src="static/robot-black.png" alt="Max AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
-      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-status"><div class="agent-status-dot"></div> <span data-i18n="agent-status">Online</span></div>
       <div class="agent-name">Max AI</div>
       <div class="agent-real-name">Maximilián</div>
-      <div class="agent-role">AI Security Engineer</div>
-      <div class="agent-desc">Chráni vaše systémy, detekuje hrozby a zabezpečuje bezpečnosť AI riešení 24/7.</div>
-      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-black'),'black')">Viac o Maxovi →</a>
+      <div class="agent-role" data-i18n="agent-max-role">AI Security Engineer</div>
+      <div class="agent-desc" data-i18n="agent-max-desc">Chráni vaše systémy, detekuje hrozby a zabezpečuje bezpečnosť AI riešení 24/7.</div>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-black'),'black')" data-i18n="agent-max-cta">Viac o Maxovi →</a>
     </div>
     <!-- Vicky AI -->
     <div class="agent-card agent-green fade-up" id="agent-vicky" style="transition-delay:0.08s">
       <img src="static/robot-green.png" alt="Vicky AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
-      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-status"><div class="agent-status-dot"></div> <span data-i18n="agent-status">Online</span></div>
       <div class="agent-name">Vicky AI</div>
       <div class="agent-real-name">Viktória</div>
-      <div class="agent-role">Partner Outreach & Email Specialist</div>
-      <div class="agent-desc">Rieši partnerstvá, automatizuje outreach kampane a personalizuje emailovú komunikáciu.</div>
-      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-green'),'green')">Viac o Vicky →</a>
+      <div class="agent-role" data-i18n="agent-vicky-role">Partner Outreach & Email Specialist</div>
+      <div class="agent-desc" data-i18n="agent-vicky-desc">Rieši partnerstvá, automatizuje outreach kampane a personalizuje emailovú komunikáciu.</div>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-green'),'green')" data-i18n="agent-vicky-cta">Viac o Vicky →</a>
     </div>
     <!-- Pete AI -->
     <div class="agent-card agent-gray fade-up" id="agent-pete" style="transition-delay:0.16s">
       <img src="static/robot-grey.png" alt="Pete AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
-      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-status"><div class="agent-status-dot"></div> <span data-i18n="agent-status">Online</span></div>
       <div class="agent-name">Pete AI</div>
       <div class="agent-real-name">Peter</div>
-      <div class="agent-role">Junior Data & Insights Analyst</div>
-      <div class="agent-desc">Analyzuje dáta, generuje reporty a objavuje vzory, ktoré pomáhajú pri rozhodovaní.</div>
-      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-grey'),'grey')">Viac o Petovi →</a>
+      <div class="agent-role" data-i18n="agent-pete-role">Junior Data & Insights Analyst</div>
+      <div class="agent-desc" data-i18n="agent-pete-desc">Analyzuje dáta, generuje reporty a objavuje vzory, ktoré pomáhajú pri rozhodovaní.</div>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-grey'),'grey')" data-i18n="agent-pete-cta">Viac o Petovi →</a>
     </div>
     <!-- Mia AI -->
     <div class="agent-card agent-purple fade-up" id="agent-mia" style="transition-delay:0.24s">
       <img src="static/robot-purple.png" alt="Mia AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
-      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-status"><div class="agent-status-dot"></div> <span data-i18n="agent-status">Online</span></div>
       <div class="agent-name">Mia AI</div>
       <div class="agent-real-name">Majka</div>
-      <div class="agent-role">Senior Growth & Marketing Manager</div>
-      <div class="agent-desc">Strategicky riadi rast, SEO, performance marketing a marketingovú automatizáciu.</div>
-      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-purple'),'purple')">Viac o Mii →</a>
+      <div class="agent-role" data-i18n="agent-mia-role">Senior Growth & Marketing Manager</div>
+      <div class="agent-desc" data-i18n="agent-mia-desc">Strategicky riadi rast, SEO, performance marketing a marketingovú automatizáciu.</div>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-purple'),'purple')" data-i18n="agent-mia-cta">Viac o Mii →</a>
     </div>
     <!-- Jane AI -->
     <div class="agent-card agent-yellow fade-up" id="agent-jane" style="transition-delay:0.32s">
       <img src="static/robot-yellow.png" alt="Jane AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
-      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-status"><div class="agent-status-dot"></div> <span data-i18n="agent-status">Online</span></div>
       <div class="agent-name">Jane AI</div>
       <div class="agent-real-name">Janka</div>
-      <div class="agent-role">Product, Social Media & Content Specialist</div>
-      <div class="agent-desc">Tvorí obsah, spravuje sociálne siete a koordinuje produktovú komunikáciu.</div>
-      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-yellow'),'yellow')">Viac o Jane →</a>
+      <div class="agent-role" data-i18n="agent-jane-role">Product, Social Media & Content Specialist</div>
+      <div class="agent-desc" data-i18n="agent-jane-desc">Tvorí obsah, spravuje sociálne siete a koordinuje produktovú komunikáciu.</div>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-yellow'),'yellow')" data-i18n="agent-jane-cta">Viac o Jane →</a>
     </div>
     <!-- Stela AI -->
     <div class="agent-card agent-blue fade-up" id="agent-stela" style="transition-delay:0.4s">
       <img src="static/robot-blue.png" alt="Stela AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
-      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-status"><div class="agent-status-dot"></div> <span data-i18n="agent-status">Online</span></div>
       <div class="agent-name">Stela AI</div>
       <div class="agent-real-name">Stela</div>
-      <div class="agent-role">Operations & Automation Manager</div>
-      <div class="agent-desc">Optimalizuje interné procesy, automatizuje workflow a stará sa o operatívnu efektivitu.</div>
-      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-blue'),'blue')">Viac o Stele →</a>
+      <div class="agent-role" data-i18n="agent-stela-role">Operations & Automation Manager</div>
+      <div class="agent-desc" data-i18n="agent-stela-desc">Optimalizuje interné procesy, automatizuje workflow a stará sa o operatívnu efektivitu.</div>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-blue'),'blue')" data-i18n="agent-stela-cta">Viac o Stele →</a>
     </div>
   </div>
 </section>
@@ -3193,11 +3193,11 @@ footer::before {
       <a href="#projects" class="gradient-cta-btn-ghost" data-i18n="cta-btn-ghost">Pozrieť portfólio</a>
     </div>
     <div class="gradient-cta-stats">
-      <div class="gradient-cta-stat"><span class="gcs-num">50+</span><span class="gcs-label">projektov</span></div>
+      <div class="gradient-cta-stat"><span class="gcs-num" data-i18n="cta-stat-1-num">50+</span><span class="gcs-label" data-i18n="cta-stat-1-label">projektov</span></div>
       <div class="gradient-cta-divider"></div>
-      <div class="gradient-cta-stat"><span class="gcs-num">98%</span><span class="gcs-label">spokojnosť</span></div>
+      <div class="gradient-cta-stat"><span class="gcs-num" data-i18n="cta-stat-2-num">98%</span><span class="gcs-label" data-i18n="cta-stat-2-label">spokojnosť</span></div>
       <div class="gradient-cta-divider"></div>
-      <div class="gradient-cta-stat"><span class="gcs-num">24h</span><span class="gcs-label">odpoveď</span></div>
+      <div class="gradient-cta-stat"><span class="gcs-num" data-i18n="cta-stat-3-num">24h</span><span class="gcs-label" data-i18n="cta-stat-3-label">odpoveď</span></div>
     </div>
   </div>
 </section>
@@ -3216,8 +3216,8 @@ footer::before {
           <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="contact-team-avatar" style="margin-left:-16px">
         </div>
         <div class="contact-team-text">
-          <div class="contact-team-names">Andrea &amp; Natália</div>
-          <div class="contact-team-sub">Odpovieme do 24 hodín</div>
+          <div class="contact-team-names" data-i18n="contact-team-names">Andrea &amp; Natália</div>
+          <div class="contact-team-sub" data-i18n="contact-team-sub">Odpovieme do 24 hodín</div>
         </div>
       </div>
       <p style="font-size:16px; color:var(--text-secondary); line-height:1.7; margin-bottom:40px" data-i18n="contact-sub">Online alebo osobne – sme flexibilní. Ozveme sa do 24 hodín.</p>
@@ -3237,7 +3237,7 @@ footer::before {
         <div class="contact-detail-icon">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        Bratislava, Slovensko
+        <span data-i18n="contact-location">Bratislava, Slovensko</span>
       </div>
       <img src="static/pattern-circle.png" alt="" class="contact-info-circle" loading="lazy"
            onerror="this.style.display='none'">
@@ -3245,52 +3245,52 @@ footer::before {
 
     <div class="fade-up" style="transition-delay:0.15s">
       <div class="meeting-toggle">
-        <button class="meeting-btn active" onclick="setMeeting(this,'online')">● Online stretnutie</button>
-        <button class="meeting-btn" onclick="setMeeting(this,'personal')">○ Osobné stretnutie</button>
+        <button class="meeting-btn active" onclick="setMeeting(this,'online')" data-i18n="meeting-online">● Online stretnutie</button>
+        <button class="meeting-btn" onclick="setMeeting(this,'personal')" data-i18n="meeting-personal">○ Osobné stretnutie</button>
       </div>
 
-      <div class="interest-label">Záujem o</div>
+      <div class="interest-label" data-i18n="interest-label">Záujem o</div>
       <div class="interest-pills">
-        <button class="interest-pill" onclick="this.classList.toggle('selected')">Webstránka</button>
-        <button class="interest-pill" onclick="this.classList.toggle('selected')">E-shop</button>
-        <button class="interest-pill" onclick="this.classList.toggle('selected')">AI riešenie</button>
-        <button class="interest-pill" onclick="this.classList.toggle('selected')">Dizajn</button>
-        <button class="interest-pill" onclick="this.classList.toggle('selected')">Mobilná aplikácia</button>
-        <button class="interest-pill" onclick="this.classList.toggle('selected')">Iné</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')" data-i18n="interest-web">Webstránka</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')" data-i18n="interest-eshop">E-shop</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')" data-i18n="interest-ai">AI riešenie</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')" data-i18n="interest-design">Dizajn</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')" data-i18n="interest-app">Mobilná aplikácia</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')" data-i18n="interest-other">Iné</button>
       </div>
 
       <form id="contactForm" onsubmit="submitForm(event)">
         <div class="form-grid">
           <div class="form-field">
-            <input type="text" id="fname" placeholder=" " required>
-            <label for="fname">Meno *</label>
+            <input type="text" id="fname" placeholder=" " required data-i18n="form-firstname">
+            <label for="fname" data-i18n="form-firstname">Meno *</label>
           </div>
           <div class="form-field">
-            <input type="text" id="lname" placeholder=" " required>
-            <label for="lname">Priezvisko *</label>
+            <input type="text" id="lname" placeholder=" " required data-i18n="form-lastname">
+            <label for="lname" data-i18n="form-lastname">Priezvisko *</label>
           </div>
         </div>
         <div class="form-grid">
           <div class="form-field">
-            <input type="email" id="email" placeholder=" " required>
-            <label for="email">Email *</label>
+            <input type="email" id="email" placeholder=" " required data-i18n="form-email-input">
+            <label for="email" data-i18n="form-email-input">Email *</label>
           </div>
           <div class="form-field">
-            <input type="tel" id="phone" placeholder=" ">
-            <label for="phone">Telefón</label>
+            <input type="tel" id="phone" placeholder=" " data-i18n="form-phone-input">
+            <label for="phone" data-i18n="form-phone-input">Telefón</label>
           </div>
         </div>
         <div class="form-field">
-          <textarea id="message" placeholder=" "></textarea>
-          <label for="message">Správa / Čo potrebujete?</label>
+          <textarea id="message" placeholder=" " data-i18n="form-message"></textarea>
+          <label for="message" data-i18n="form-message">Správa / Čo potrebujete?</label>
         </div>
-        <button type="submit" class="submit-btn">Odoslať správu →</button>
+        <button type="submit" class="submit-btn" data-i18n="form-submit">Odoslať správu →</button>
       </form>
 
       <div class="form-success" id="formSuccess">
         <img src="static/robot-green.png" alt="Vicky AI" onerror="this.style.fontSize='60px'; this.textContent='✅'">
-        <h3>Správa odoslaná!</h3>
-        <p>Ozveme sa do 24 hodín. Medzitým môžete sledovať naše projekty.</p>
+        <h3 data-i18n="success-h3">Správa odoslaná!</h3>
+        <p data-i18n="success-p">Ozveme sa do 24 hodín. Medzitým môžete sledovať naše projekty.</p>
         <a href="#projects" class="btn-primary" style="margin-top:8px">Pozrieť projekty</a>
       </div>
     </div>
@@ -3343,7 +3343,7 @@ footer::before {
         <h4 data-i18n="footer-newsletter-label">Newsletter</h4>
         <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; line-height:1.6" data-i18n="footer-newsletter-sub">Dostávajte novinky zo sveta webu a AI.</p>
         <div class="newsletter-input-wrap">
-          <input type="email" class="newsletter-input" placeholder="vas@email.sk">
+          <input type="email" class="newsletter-input" placeholder="vas@email.sk" data-i18n="newsletter-placeholder">
           <button class="newsletter-submit">→</button>
         </div>
       </div>
@@ -3448,6 +3448,98 @@ const translations = {
     'footer-newsletter-label': 'Newsletter',
     'footer-newsletter-sub': 'Dostávajte novinky zo sveta webu a AI.',
     'footer-copy': '© 2026 Drixton. Web & Dev Studio. Všetky práva vyhradené.',
+    'hero-pill': 'AI agenti online',
+    'hero-card-1-label': 'Konverzný pomer',
+    'hero-card-1-sub': 'vs. predošlé riešenie',
+    'hero-card-2-label': 'Lighthouse',
+    'hero-card-2-sub': 'Performance score',
+    'hero-card-3-label': 'Projekty 2024',
+    'hero-card-3-sub': 'dokončených projektov',
+    'hero-card-4-label': 'Spokojnosť',
+    'hero-card-4-sub': 'klientov odporúča',
+    'services-design-desc': 'Vytvárame digitálne produkty, ktoré nie sú len krásne — ale predovšetkým funkčné, rýchle a zamerané na výsledky. Od prvého wireframu po finálne pixely.',
+    'services-tools-label': 'Nástroje',
+    'svc-ux-name': 'UX & UI Design', 'svc-ux-desc': 'Wireframy, prototypy, finálny dizajn.',
+    'svc-brand-name': 'Brand Identity & Logo', 'svc-brand-desc': 'Vizuálna identita, logotyp, manuál.',
+    'svc-design-system-name': 'Design System', 'svc-design-system-desc': 'Konzistentné komponentové knižnice.',
+    'svc-motion-name': 'Motion Design', 'svc-motion-desc': 'UI animácie, micro-interactions, Lottie.',
+    'svc-cro-name': 'CRO & A/B testovanie', 'svc-cro-desc': 'Heatmapy, A/B testy, optimalizácia.',
+    'svc-research-name': 'User Research', 'svc-research-desc': 'Rozhovory, user testing, customer journey.',
+    'svc-a11y-name': 'Accessibility WCAG 2.2', 'svc-a11y-desc': 'Audity a implementácia prístupnosti.',
+    'svc-proto-name': 'Prototypovanie', 'svc-proto-desc': 'Interaktívne prototypy pre stakeholderov.',
+    'svc-copy-name': 'Copywriting & Content', 'svc-copy-desc': 'Texty, tonalita, content stratégia.',
+    'svc-3d-name': '3D & Ilustrácie', 'svc-3d-desc': 'Custom ilustrácie, Spline 3D elementy.',
+    'services-dev-h2': 'Vývoj, ktorý škáluje.',
+    'services-dev-desc': 'Píšeme čistý, udržateľný kód, ktorý rastie s vaším biznisom. Od jednoduchých webstránok po komplexné SaaS produkty a AI-powered aplikácie.',
+    'svc-web-name': 'Webové aplikácie', 'svc-web-desc': 'Next.js, React, TypeScript — moderné stacky.',
+    'svc-ecom-name': 'E-commerce riešenia', 'svc-ecom-desc': 'Shopify, vlastné riešenia, integrácie.',
+    'svc-api-name': 'API & Backend', 'svc-api-desc': 'Node.js, Python, FastAPI, REST, GraphQL.',
+    'svc-db-name': 'Databázy & Infrastructure', 'svc-db-desc': 'Supabase, PostgreSQL, Redis, Docker.',
+    'svc-ai-name': 'AI integrácie', 'svc-ai-desc': 'OpenAI, LangChain, vlastné AI modely.',
+    'svc-cms-name': 'CMS & Headless', 'svc-cms-desc': 'Sanity, Contentful, vlastné CMS riešenia.',
+    'svc-perf-name': 'Performance & SEO', 'svc-perf-desc': 'Core Web Vitals, Lighthouse 95+, technické SEO.',
+    'svc-security-name': 'Security & DevOps', 'svc-security-desc': 'CI/CD, AWS, Vercel, monitoring, zálohy.',
+    'svc-saas-name': 'SaaS produkty', 'svc-saas-desc': 'MVP, multi-tenancy, stripe billing.',
+    'svc-maint-name': 'Údržba & podpora', 'svc-maint-desc': 'Dlhodobé partnerstvo, SLA, monitoring.',
+    'kb-label': 'Nástroje nášho tímu',
+    'kb-h2': 'Nástroje, ktoré milujeme.',
+    'kb-desc': 'Každý projekt začína pri klávesnici. Vyber farbu a zisti viac o nástrojoch, ktoré používame.',
+    'kb-hint': 'Prejdi myšou a zbieraj klávesy.',
+    'kb-stela-label': 'Stela AI', 'kb-stela-role': 'Operations & Automation',
+    'kb-mia-label': 'Mia AI', 'kb-mia-role': 'Growth & Marketing',
+    'kb-pete-label': 'Pete AI', 'kb-pete-role': 'Data & Insights',
+    'kb-jane-label': 'Jane AI', 'kb-jane-role': 'Product & Content',
+    'kb-vicky-label': 'Vicky AI', 'kb-vicky-role': 'Outreach & Email',
+    'kb-max-label': 'Max AI', 'kb-max-role': 'AI Security',
+    'agent-status': 'Online',
+    'agent-max-role': 'AI Security Engineer',
+    'agent-max-desc': 'Chráni vaše systémy, detekuje hrozby a zabezpečuje bezpečnosť AI riešení 24/7.',
+    'agent-max-cta': 'Viac o Maxovi →',
+    'agent-vicky-role': 'Partner Outreach & Email Specialist',
+    'agent-vicky-desc': 'Rieši partnerstvá, automatizuje outreach kampane a personalizuje emailovú komunikáciu.',
+    'agent-vicky-cta': 'Viac o Vicky →',
+    'agent-pete-role': 'Junior Data & Insights Analyst',
+    'agent-pete-desc': 'Zbiera a analyzuje dáta, generuje reporty a pomáha prijímať rozhodnutia na základe čísel.',
+    'agent-pete-cta': 'Viac o Petovi →',
+    'agent-mia-role': 'Senior Growth & Marketing Manager',
+    'agent-mia-desc': 'Riadi marketingové kampane, A/B testy a rastové stratégie s precíznosťou dátového analytika.',
+    'agent-mia-cta': 'Viac o Mii →',
+    'agent-jane-role': 'Product, Social Media & Content',
+    'agent-jane-desc': 'Vytvára obsah, spravuje sociálne médiá a pomáha budovať silnú digitálnu prítomnosť.',
+    'agent-jane-cta': 'Viac o Jane →',
+    'agent-stela-role': 'Operations & Automation Manager',
+    'agent-stela-desc': 'Automatizuje procesy, integruje nástroje a zabezpečuje, že všetko beží ako hodinky.',
+    'agent-stela-cta': 'Viac o Stele →',
+    'agent-andrea-name': 'Andrea Kollová',
+    'agent-andrea-role': 'Vývoj',
+    'agent-natalia-name': 'Natália Fondrková',
+    'agent-natalia-role': 'Dizajn',
+    'cta-stat-1-num': '50+', 'cta-stat-1-label': 'projektov',
+    'cta-stat-2-num': '98%', 'cta-stat-2-label': 'spokojnosť',
+    'cta-stat-3-num': '24h', 'cta-stat-3-label': 'odpoveď',
+    'contact-team-names': 'Andrea & Natália',
+    'contact-team-sub': 'Odpovieme do 24 hodín',
+    'contact-location': 'Bratislava, Slovensko',
+    'meeting-online': '● Online stretnutie',
+    'meeting-personal': '○ Osobné stretnutie',
+    'interest-label': 'Záujem o',
+    'interest-web': 'Webstránka',
+    'interest-eshop': 'E-shop',
+    'interest-ai': 'AI riešenie',
+    'interest-design': 'Dizajn',
+    'interest-app': 'Mobilná aplikácia',
+    'interest-other': 'Iné',
+    'form-firstname': 'Meno',
+    'form-lastname': 'Priezvisko',
+    'form-email-input': 'E-mail',
+    'form-phone-input': 'Telefón',
+    'form-message': 'Správa (nepovinné)',
+    'form-submit': 'Odoslať správu →',
+    'success-h3': 'Správa odoslaná!',
+    'success-p': 'Ozveme sa do 24 hodín.',
+    'mockups-label': 'Mobilné produkty',
+    'mockups-h2': 'Produkty, ktoré žijú vo vreckách vašich zákazníkov.',
+    'newsletter-placeholder': 'vas@email.sk',
   },
   en: {
     'nav-services': 'Services',
@@ -3481,6 +3573,98 @@ const translations = {
     'footer-newsletter-label': 'Newsletter',
     'footer-newsletter-sub': 'Get the latest news from the world of web and AI.',
     'footer-copy': '© 2026 Drixton. Web & Dev Studio. All rights reserved.',
+    'hero-pill': 'AI agents online',
+    'hero-card-1-label': 'Conversion rate',
+    'hero-card-1-sub': 'vs. previous solution',
+    'hero-card-2-label': 'Lighthouse',
+    'hero-card-2-sub': 'Performance score',
+    'hero-card-3-label': 'Projects 2024',
+    'hero-card-3-sub': 'completed projects',
+    'hero-card-4-label': 'Satisfaction',
+    'hero-card-4-sub': 'clients recommend',
+    'services-design-desc': 'We create digital products that aren\'t just beautiful — but primarily functional, fast, and results-focused. From the first wireframe to final pixels.',
+    'services-tools-label': 'Tools',
+    'svc-ux-name': 'UX & UI Design', 'svc-ux-desc': 'Wireframes, prototypes, final design.',
+    'svc-brand-name': 'Brand Identity & Logo', 'svc-brand-desc': 'Visual identity, logotype, brand manual.',
+    'svc-design-system-name': 'Design System', 'svc-design-system-desc': 'Consistent component libraries.',
+    'svc-motion-name': 'Motion Design', 'svc-motion-desc': 'UI animations, micro-interactions, Lottie.',
+    'svc-cro-name': 'CRO & A/B Testing', 'svc-cro-desc': 'Heatmaps, A/B tests, optimization.',
+    'svc-research-name': 'User Research', 'svc-research-desc': 'Interviews, user testing, customer journey.',
+    'svc-a11y-name': 'Accessibility WCAG 2.2', 'svc-a11y-desc': 'Audits and accessibility implementation.',
+    'svc-proto-name': 'Prototyping', 'svc-proto-desc': 'Interactive prototypes for stakeholders.',
+    'svc-copy-name': 'Copywriting & Content', 'svc-copy-desc': 'Texts, tone of voice, content strategy.',
+    'svc-3d-name': '3D & Illustrations', 'svc-3d-desc': 'Custom illustrations, Spline 3D elements.',
+    'services-dev-h2': 'Development that scales.',
+    'services-dev-desc': 'We write clean, maintainable code that grows with your business. From simple websites to complex SaaS products and AI-powered applications.',
+    'svc-web-name': 'Web Applications', 'svc-web-desc': 'Next.js, React, TypeScript — modern stacks.',
+    'svc-ecom-name': 'E-commerce Solutions', 'svc-ecom-desc': 'Shopify, custom solutions, integrations.',
+    'svc-api-name': 'API & Backend', 'svc-api-desc': 'Node.js, Python, FastAPI, REST, GraphQL.',
+    'svc-db-name': 'Databases & Infrastructure', 'svc-db-desc': 'Supabase, PostgreSQL, Redis, Docker.',
+    'svc-ai-name': 'AI Integrations', 'svc-ai-desc': 'OpenAI, LangChain, custom AI models.',
+    'svc-cms-name': 'CMS & Headless', 'svc-cms-desc': 'Sanity, Contentful, custom CMS solutions.',
+    'svc-perf-name': 'Performance & SEO', 'svc-perf-desc': 'Core Web Vitals, Lighthouse 95+, technical SEO.',
+    'svc-security-name': 'Security & DevOps', 'svc-security-desc': 'CI/CD, AWS, Vercel, monitoring, backups.',
+    'svc-saas-name': 'SaaS Products', 'svc-saas-desc': 'MVP, multi-tenancy, Stripe billing.',
+    'svc-maint-name': 'Maintenance & Support', 'svc-maint-desc': 'Long-term partnership, SLA, monitoring.',
+    'kb-label': 'Our team\'s tools',
+    'kb-h2': 'Tools we love.',
+    'kb-desc': 'Every project starts at the keyboard. Pick a color and discover the tools we use.',
+    'kb-hint': 'Move your mouse and collect keys.',
+    'kb-stela-label': 'Stela AI', 'kb-stela-role': 'Operations & Automation',
+    'kb-mia-label': 'Mia AI', 'kb-mia-role': 'Growth & Marketing',
+    'kb-pete-label': 'Pete AI', 'kb-pete-role': 'Data & Insights',
+    'kb-jane-label': 'Jane AI', 'kb-jane-role': 'Product & Content',
+    'kb-vicky-label': 'Vicky AI', 'kb-vicky-role': 'Outreach & Email',
+    'kb-max-label': 'Max AI', 'kb-max-role': 'AI Security',
+    'agent-status': 'Online',
+    'agent-max-role': 'AI Security Engineer',
+    'agent-max-desc': 'Protects your systems, detects threats and ensures the security of AI solutions 24/7.',
+    'agent-max-cta': 'More about Max →',
+    'agent-vicky-role': 'Partner Outreach & Email Specialist',
+    'agent-vicky-desc': 'Manages partnerships, automates outreach campaigns and personalizes email communication.',
+    'agent-vicky-cta': 'More about Vicky →',
+    'agent-pete-role': 'Junior Data & Insights Analyst',
+    'agent-pete-desc': 'Collects and analyzes data, generates reports and helps make decisions based on numbers.',
+    'agent-pete-cta': 'More about Pete →',
+    'agent-mia-role': 'Senior Growth & Marketing Manager',
+    'agent-mia-desc': 'Manages marketing campaigns, A/B tests and growth strategies with data analyst precision.',
+    'agent-mia-cta': 'More about Mia →',
+    'agent-jane-role': 'Product, Social Media & Content',
+    'agent-jane-desc': 'Creates content, manages social media and helps build a strong digital presence.',
+    'agent-jane-cta': 'More about Jane →',
+    'agent-stela-role': 'Operations & Automation Manager',
+    'agent-stela-desc': 'Automates processes, integrates tools and ensures everything runs like clockwork.',
+    'agent-stela-cta': 'More about Stela →',
+    'agent-andrea-name': 'Andrea Kollová',
+    'agent-andrea-role': 'Development',
+    'agent-natalia-name': 'Natália Fondrková',
+    'agent-natalia-role': 'Design',
+    'cta-stat-1-num': '50+', 'cta-stat-1-label': 'projects',
+    'cta-stat-2-num': '98%', 'cta-stat-2-label': 'satisfaction',
+    'cta-stat-3-num': '24h', 'cta-stat-3-label': 'response',
+    'contact-team-names': 'Andrea & Natália',
+    'contact-team-sub': 'We respond within 24 hours',
+    'contact-location': 'Bratislava, Slovakia',
+    'meeting-online': '● Online meeting',
+    'meeting-personal': '○ In-person meeting',
+    'interest-label': 'Interested in',
+    'interest-web': 'Website',
+    'interest-eshop': 'E-shop',
+    'interest-ai': 'AI solution',
+    'interest-design': 'Design',
+    'interest-app': 'Mobile app',
+    'interest-other': 'Other',
+    'form-firstname': 'First name',
+    'form-lastname': 'Last name',
+    'form-email-input': 'Email',
+    'form-phone-input': 'Phone',
+    'form-message': 'Message (optional)',
+    'form-submit': 'Send message →',
+    'success-h3': 'Message sent!',
+    'success-p': 'We\'ll get back to you within 24 hours.',
+    'mockups-label': 'Mobile products',
+    'mockups-h2': 'Products that live in your customers\' pockets.',
+    'newsletter-placeholder': 'your@email.com',
   }
 };
 
