@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drixton – Web & Dev Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== RESET & ROOT ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #FFFFFF;
+  --black: #0A0A0A;
+  --blue: #77BAF8;
+  --purple: #C1BFFF;
+  --yellow: #B8F200;
+  --green: #00E57A;
+  --gray-100: #F5F5F5;
+  --gray-200: #EBEBEB;
+  --gray-300: #D4D4D4;
+  --gray-400: #A3A3A3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-800: #262626;
+  --bg: #FFFFFF;
+  --bg-secondary: #FAFAFA;
+  --text: #0A0A0A;
+  --text-secondary: #525252;
+  --border: rgba(0,0,0,0.08);
+  --nav-bg: rgba(255,255,255,0.85);
+  --card-bg: #FFFFFF;
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #0A0A0A;
+  --bg-secondary: #111111;
+  --text: #FFFFFF;
+  --text-secondary: #A3A3A3;
+  --border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,10,10,0.85);
+  --card-bg: #141414;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ===================== CUSTOM CURSOR ===================== */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--text);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--text);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, transform 0.15s, opacity 0.3s;
+  opacity: 0.5;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 52px; height: 52px;
+  opacity: 0.3;
+}
+
+/* ===================== NAVIGATION ===================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+nav.scrolled {
+  padding: 14px 40px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  position: relative;
+  height: 32px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 32px;
+  position: absolute;
+  top: 0; left: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.nav-logo .logo-full { opacity: 1; }
+.nav-logo .logo-short { opacity: 0; transform: scale(0.9); }
+.nav-logo:hover .logo-full { opacity: 0; transform: scale(0.9); }
+.nav-logo:hover .logo-short { opacity: 1; transform: scale(1); }
+.nav-logo-placeholder {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 1px;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 0;
+  transition: color 0.2s;
+}
+.lang-btn.active {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lang-btn:hover { color: var(--text); }
+
+.theme-toggle {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: var(--text);
+}
+.theme-toggle:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+[data-theme="dark"] .theme-toggle:hover { background: var(--gray-800); }
+
+.cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--black);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+[data-theme="dark"] .cta-btn { background: #fff; color: #000; }
+.cta-btn:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+.pulse-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  position: relative;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--green);
+  opacity: 0.4;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--blue); }
+
+/* ===================== PAGE INTRO ===================== */
+.page-intro {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: introOut 0.6s ease 1.6s forwards;
+}
+.page-intro-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  animation: introFade 0.8s ease 0.3s both;
+}
+@keyframes introFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes introOut { to { opacity: 0; pointer-events: none; visibility: hidden; } }
+
+/* ===================== HERO ===================== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url('static/pattern.png');
+  background-size: 200px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+.hero-blob {
+  position: absolute;
+  bottom: -100px; right: -100px;
+  width: 600px; height: 600px;
+  background-image: url('static/gradient-blue-purple.png');
+  background-size: cover;
+  border-radius: 50%;
+  opacity: 0.12;
+  filter: blur(60px);
+  pointer-events: none;
+  transition: transform 0.1s ease;
+}
+.hero-circle {
+  position: absolute;
+  top: 80px; right: 100px;
+  width: 280px; height: 280px;
+  background-image: url('static/pattern-circle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  animation: spin 20s linear infinite;
+  pointer-events: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-keyboard {
+  position: absolute;
+  bottom: 40px; right: 60px;
+  width: 220px;
+  opacity: 0.35;
+  animation: float 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-inner { position: relative; z-index: 1; max-width: 900px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+.hero-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(119,186,248,0.15), rgba(193,191,255,0.15));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.hero-badge:hover::before { opacity: 1; }
+
+.hero-h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.hero-h1 .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  margin-right: 0.22em;
+}
+.hero-h1 .word.visible { opacity: 1; transform: translateY(0); }
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.8s, transform 0.7s ease 0.8s;
+}
+.hero-sub.visible { opacity: 1; transform: translateY(0); }
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 1s, transform 0.7s ease 1s;
+}
+.hero-btns.visible { opacity: 1; transform: translateY(0); }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--black);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+[data-theme="dark"] .btn-primary { background: #fff; color: #000; }
+.btn-primary:hover { transform: scale(1.03); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+}
+.btn-secondary:hover::before { transform: scaleX(1); }
+.btn-secondary:hover { color: var(--bg); border-color: var(--text); }
+.btn-secondary span { position: relative; z-index: 1; }
+
+/* ===================== SECTION COMMONS ===================== */
+section { padding: 100px 40px; }
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ===================== PROJECTS CAROUSEL ===================== */
+#projects {
+  background: var(--bg);
+  overflow: hidden;
+  padding-bottom: 60px;
+}
+.projects-header { max-width: 1200px; margin: 0 auto 48px; padding: 0 40px; }
+
+.carousel-wrap {
+  position: relative;
+}
+.carousel {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 40px 20px;
+  cursor: grab;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.carousel.dragging { cursor: grabbing; scroll-snap-type: none; }
+
+.project-card {
+  flex: 0 0 380px;
+  height: 280px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  background: var(--gray-100);
+  transition: transform 0.3s, box-shadow 0.3s;
+  will-change: transform;
+}
+[data-theme="dark"] .project-card { background: var(--gray-800); }
+.project-card:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); }
+
+.project-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s;
+}
+.project-card:hover img { transform: scale(1.05); }
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+  transform: translateY(40px);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.project-card:hover .project-overlay { opacity: 1; transform: translateY(0); }
+
+.project-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.project-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.project-desc { font-size: 13px; color: rgba(255,255,255,0.7); }
+.project-link {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.project-link:hover { background: rgba(255,255,255,0.3); }
+
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 0 40px;
+}
+.carousel-arrow {
+  width: 44px; height: 44px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: var(--transition);
+  font-size: 16px;
+}
+.carousel-arrow:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.carousel-dots {
+  display: flex;
+  gap: 6px;
+}
+.carousel-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+.carousel-dot.active {
+  width: 24px;
+  border-radius: 3px;
+  background: var(--text);
+}
+
+/* ===================== SERVICES ===================== */
+#services {
+  padding: 100px 0;
+  overflow: hidden;
+}
+.services-header {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 40px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+@media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
+
+.services-panel {
+  padding: 60px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.services-panel-dark {
+  background: #0A0A0A;
+  color: #fff;
+}
+.services-panel-light {
+  background: var(--bg-secondary);
+  color: var(--text);
+}
+[data-theme="dark"] .services-panel-light {
+  background: #141414;
+}
+
+.panel-keyboard {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 200px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.services-panel h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+.services-panel-dark h3 span { color: var(--blue); }
+.services-panel-light h3 span { color: var(--purple); }
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.services-panel-light .service-item {
+  border-bottom-color: var(--border);
+}
+.service-item:last-child { border-bottom: none; }
+
+.service-item-inner {
+  flex: 1;
+  overflow: hidden;
+}
+.service-name {
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.services-panel-dark .service-name { color: rgba(255,255,255,0.8); }
+.service-desc {
+  font-size: 13px;
+  color: var(--gray-400);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+  opacity: 0;
+  margin-top: 0;
+}
+.service-item.open .service-desc {
+  max-height: 60px;
+  opacity: 1;
+  margin-top: 6px;
+}
+
+.services-panel-dark .service-item:hover .service-name,
+.services-panel-dark .service-item.open .service-name { color: var(--blue); }
+.services-panel-light .service-item:hover .service-name,
+.services-panel-light .service-item.open .service-name { color: var(--purple); }
+
+.service-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.services-panel-dark .service-icon { background: rgba(255,255,255,0.06); }
+.services-panel-dark .service-item:hover .service-icon,
+.services-panel-dark .service-item.open .service-icon { background: rgba(119,186,248,0.15); }
+.services-panel-light .service-icon { background: var(--gray-100); }
+.services-panel-light .service-item:hover .service-icon,
+.services-panel-light .service-item.open .service-icon { background: rgba(193,191,255,0.2); }
+
+.service-active-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.services-panel-light .service-active-dot { background: var(--purple); }
+.service-item.open .service-active-dot { opacity: 1; }
+
+.service-expand-icon {
+  font-size: 16px;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  opacity: 0.4;
+}
+.service-item.open .service-expand-icon { transform: rotate(45deg); opacity: 1; }
+
+/* ===================== KEYBOARD INTERACTIVE ===================== */
+#keyboard-section {
+  background: var(--bg);
+  text-align: center;
+  padding: 80px 40px;
+}
+.keyboard-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.keyboard-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.keyboard-interactive {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.keyboard-img {
+  width: 360px;
+  max-width: 100%;
+  transition: transform 0.15s;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.keyboard-img-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.keyboard-img-overlay img {
+  width: 360px;
+  max-width: 100%;
+}
+.keyboard-img-overlay.active { opacity: 1; }
+
+.keyboard-interactive:active .keyboard-img {
+  transform: translateY(-6px) scale(0.97);
+}
+
+.keyboard-badge {
+  position: absolute;
+  top: -16px; right: -16px;
+  background: var(--black);
+  color: #fff;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  animation: float 3s ease-in-out infinite;
+}
+[data-theme="dark"] .keyboard-badge { background: #fff; color: #000; }
+
+.keyboard-toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  border-radius: 100px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  box-shadow: var(--shadow-lg);
+}
+.keyboard-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================== MOBILE MOCKUPS ===================== */
+#mobile {
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+[data-theme="dark"] #mobile { background: #111; }
+
+.mockups-scroll {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  padding: 40px 40px 20px;
+  scrollbar-width: none;
+}
+.mockups-scroll::-webkit-scrollbar { display: none; }
+
+.mockup-item {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.iphone-frame {
+  width: 220px;
+  height: 440px;
+  border-radius: 36px;
+  border: 10px solid var(--black);
+  background: var(--gray-100);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.2), inset 0 0 0 2px rgba(255,255,255,0.1);
+  transition: transform 0.15s;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.iphone-notch {
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 22px;
+  background: var(--black);
+  border-radius: 20px;
+  z-index: 2;
+}
+.iphone-screen {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.iphone-screen img {
+  width: 100%;
+  animation: scrollDown 10s linear infinite;
+}
+@keyframes scrollDown {
+  0% { transform: translateY(0); }
+  90% { transform: translateY(-60%); }
+  100% { transform: translateY(0); }
+}
+
+.mockup-info { text-align: center; }
+.mockup-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.mockup-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.mockup-tags {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.mockup-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: var(--border);
+  border-radius: 100px;
+  padding: 3px 10px;
+  color: var(--text-secondary);
+}
+.mockup-langs {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.mockup-btns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.mockup-btn {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 7px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.mockup-btn-filled {
+  background: var(--black);
+  color: #fff;
+  border: none;
+}
+[data-theme="dark"] .mockup-btn-filled { background: #fff; color: #000; }
+.mockup-btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.mockup-btn:hover { transform: scale(1.05); }
+
+/* ===================== AI AGENTS ===================== */
+#agents {
+  background: var(--bg);
+  padding: 100px 40px;
+}
+.agents-header { max-width: 1200px; margin: 0 auto 60px; }
+
+.agents-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .agents-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .agents-grid { grid-template-columns: 1fr; } }
+
+.agent-card {
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+.agent-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.agent-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: inherit;
+}
+.agent-card:hover::before { opacity: 1; }
+
+.agent-robot {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  animation: float 4s ease-in-out infinite;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+.agent-card:hover .agent-robot {
+  animation: agentWiggle 0.5s ease;
+}
+@keyframes agentWiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.agent-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,229,122,0.1);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+.agent-status-dot {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.agent-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  position: relative; z-index: 1;
+  margin-bottom: 4px;
+}
+.agent-real-name {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+.agent-role {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  position: relative; z-index: 1;
+}
+.agent-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  position: relative; z-index: 1;
+}
+.agent-cta {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s;
+  position: relative; z-index: 1;
+  text-decoration: none;
+}
+.agent-card:hover .agent-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Agent color variants */
+.agent-blue .agent-role { color: var(--blue); }
+.agent-blue::before { background: radial-gradient(ellipse at center, rgba(119,186,248,0.08) 0%, transparent 70%); }
+.agent-blue .agent-cta { color: var(--blue); }
+
+.agent-green .agent-role { color: var(--green); }
+.agent-green::before { background: radial-gradient(ellipse at center, rgba(0,229,122,0.08) 0%, transparent 70%); }
+.agent-green .agent-cta { color: var(--green); }
+
+.agent-gray .agent-role { color: var(--gray-400); }
+.agent-gray::before { background: radial-gradient(ellipse at center, rgba(163,163,163,0.08) 0%, transparent 70%); }
+.agent-gray .agent-cta { color: var(--gray-400); }
+
+.agent-purple .agent-role { color: var(--purple); }
+.agent-purple::before { background: radial-gradient(ellipse at center, rgba(193,191,255,0.1) 0%, transparent 70%); }
+.agent-purple .agent-cta { color: var(--purple); }
+
+.agent-yellow .agent-role { color: var(--yellow); }
+.agent-yellow::before { background: radial-gradient(ellipse at center, rgba(184,242,0,0.08) 0%, transparent 70%); }
+.agent-yellow .agent-cta { color: var(--yellow); }
+
+/* ===================== CONTACT ===================== */
+#contact {
+  background: var(--bg-secondary);
+  padding: 100px 40px;
+}
+[data-theme="dark"] #contact { background: #111; }
+
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.contact-info h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.contact-info p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.contact-detail-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-info-circle {
+  width: 280px;
+  opacity: 0.06;
+  margin-top: 40px;
+}
+[data-theme="dark"] .contact-info-circle { opacity: 0.03; }
+
+/* Meeting toggle */
+.meeting-toggle {
+  display: inline-flex;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  padding: 4px;
+  margin-bottom: 32px;
+  gap: 4px;
+}
+[data-theme="dark"] .meeting-toggle { background: var(--black); }
+
+.meeting-btn {
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+.meeting-btn.active {
+  background: var(--black);
+  color: #fff;
+}
+[data-theme="dark"] .meeting-btn.active { background: #fff; color: #000; }
+
+/* Interest pills */
+.interest-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+.interest-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.interest-pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--text);
+  transition: var(--transition);
+}
+.interest-pill.selected {
+  background: var(--black);
+  color: #fff;
+  border-color: var(--black);
+  transform: scale(1.02);
+}
+[data-theme="dark"] .interest-pill.selected { background: #fff; color: #000; border-color: #fff; }
+.interest-pill:hover:not(.selected) { border-color: var(--text); }
+
+/* Form fields */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+
+.form-field {
+  position: relative;
+}
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 20px 16px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  outline: none;
+  resize: none;
+}
+[data-theme="dark"] .form-field input,
+[data-theme="dark"] .form-field textarea { background: #0A0A0A; }
+.form-field input:focus,
+.form-field textarea:focus { border-color: var(--text); }
+.form-field label {
+  position: absolute;
+  top: 14px; left: 17px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: top 0.2s, font-size 0.2s;
+}
+.form-field input:focus ~ label,
+.form-field input:not(:placeholder-shown) ~ label,
+.form-field textarea:focus ~ label,
+.form-field textarea:not(:placeholder-shown) ~ label {
+  top: 6px;
+  font-size: 11px;
+}
+.form-field input, .form-field textarea { margin-bottom: 16px; }
+.form-field textarea { min-height: 120px; padding-top: 24px; }
+
+.submit-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--black);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+[data-theme="dark"] .submit-btn { background: #fff; color: #000; }
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+.submit-btn:hover::before { left: 150%; }
+.submit-btn:hover { transform: scale(1.01); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 16px;
+}
+.form-success.show { display: flex; }
+.form-success img { width: 100px; animation: agentBounce 0.6s ease; }
+@keyframes agentBounce {
+  0% { transform: scale(0) translateY(20px); opacity: 0; }
+  70% { transform: scale(1.1) translateY(-4px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.form-success h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+.form-success p { color: var(--text-secondary); font-size: 14px; }
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: #0A0A0A;
+  color: rgba(255,255,255,0.7);
+  padding: 80px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('static/pattern.png');
+  background-size: 200px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+.footer-keyboard {
+  position: absolute;
+  bottom: -30px; right: -40px;
+  width: 400px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.footer-top-fade {
+  position: absolute;
+  top: -80px; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #0A0A0A);
+  pointer-events: none;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .footer-grid { grid-template-columns: 1fr; } }
+
+.footer-logo-area { }
+.footer-logo {
+  height: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+.footer-claim {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 240px;
+}
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+.social-link {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: var(--transition);
+  font-size: 14px;
+}
+.social-link:hover {
+  transform: scale(1.1);
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+.footer-col h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: #fff; }
+
+.newsletter-input-wrap {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.newsletter-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+.newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+.newsletter-input:focus { border-color: rgba(255,255,255,0.3); }
+.newsletter-submit {
+  padding: 10px 16px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.newsletter-submit:hover { transform: scale(1.05); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.35); }
+.footer-legal {
+  display: flex;
+  gap: 20px;
+}
+.footer-legal a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: #fff; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  nav.scrolled { padding: 12px 20px; }
+  .nav-links, .lang-toggle, .theme-toggle { display: none; }
+  .hamburger { display: flex; }
+  .cta-btn.desktop { display: none; }
+
+  section { padding: 60px 20px; }
+  #hero { padding: 100px 20px 60px; }
+  .hero-h1 { font-size: clamp(40px, 8vw, 64px); }
+  .hero-keyboard { display: none; }
+  .hero-circle { width: 160px; top: 60px; right: 20px; }
+
+  .projects-header { padding: 0 20px; }
+  .carousel { padding: 0 20px 20px; }
+  .carousel-nav { padding: 0 20px; }
+
+  .services-panel { padding: 40px 32px; }
+
+  #agents { padding: 60px 20px; }
+  .agents-header { margin-bottom: 40px; }
+
+  #contact { padding: 60px 20px; }
+
+  footer { padding: 60px 20px 32px; }
+}
+
+@media (max-width: 480px) {
+  .project-card { flex: 0 0 300px; height: 220px; }
+  .hero-h1 { font-size: 38px; }
+}
+
+/* ===================== DARK MODE EXTRAS ===================== */
+[data-theme="dark"] .hero-pattern { opacity: 0.02; }
+[data-theme="dark"] .services-panel-light { background: #141414; }
+[data-theme="dark"] .services-panel-dark { background: #000; }
+
+/* SVG icons inline */
+.icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- Page Intro -->
+<div class="page-intro" id="pageIntro">
+  <div class="page-intro-logo">Drixton</div>
+</div>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor">
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
+<div class="cursor" id="cursorDot">
+  <div class="cursor-dot"></div>
+</div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobileMenu()">Čo robíme</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projekty</a>
+  <a href="#agents" onclick="closeMobileMenu()">O nás</a>
+  <a href="#contact" onclick="closeMobileMenu()">Kontakt</a>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="static/logo-full-black.png" alt="Drixton" class="logo-full" id="navLogoFull"
+         onerror="this.style.display='none'; document.getElementById('navLogoShort').style.display='none'; document.getElementById('navLogoText').style.display='block'">
+    <img src="static/logo-black.png" alt="Drixton" class="logo-short" id="navLogoShort"
+         onerror="this.style.display='none'">
+    <span class="nav-logo-placeholder" id="navLogoText" style="display:none">Drixton</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Čo robíme</a></li>
+    <li><a href="#projects">Projekty</a></li>
+    <li><a href="#agents">O nás</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnSK" onclick="setLang('sk')">SK</button>
+      <span style="opacity:0.3">|</span>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="sunIcon">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="moonIcon" style="display:none">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </button>
+    <a href="#contact" class="cta-btn desktop">
+      <span class="pulse-dot"></span>
+      Kontaktujte nás
+    </a>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-blob" id="heroBlob"></div>
+  <div class="hero-circle"></div>
+  <img src="static/logo-keyboard.png" alt="" class="hero-keyboard" loading="lazy"
+       onerror="this.style.display='none'">
+
+  <div class="hero-inner">
+    <div class="hero-badge fade-up">
+      <span>✦</span>
+      <span>Web &amp; Dev Studio</span>
+    </div>
+    <h1 class="hero-h1" id="heroH1" aria-label="Tvoríme digitálne produkty, ktoré konvertujú."></h1>
+    <p class="hero-sub" id="heroSub">Dizajn. Vývoj. AI riešenia. Všetko pod jednou strechou.</p>
+    <div class="hero-btns" id="heroBtns">
+      <a href="#projects" class="btn-primary">Pozrieť projekty</a>
+      <a href="#services" class="btn-secondary">
+        <span>Zistiť viac</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects">
+  <div class="projects-header fade-up">
+    <div class="section-label">Projekty</div>
+    <h2 class="section-h2">Posledné práce, na ktoré sme hrdí.</h2>
+  </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel" id="carousel">
+      <div class="project-card fade-up">
+        <img src="static/projekt-1.png" alt="Projekt 1" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#77BAF8,#C1BFFF)'">
+        <div class="project-overlay">
+          <div class="project-tag">Web / E-shop</div>
+          <div class="project-name">Projekt Alpha</div>
+          <div class="project-desc">Moderný e-shop s AI odporúčaniami produktov.</div>
+        </div>
+        <a href="#" class="project-link">↗</a>
+      </div>
+      <div class="project-card fade-up" style="--i:1">
+        <img src="static/projekt-2.png" alt="Projekt 2" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#C1BFFF,#B8F200)'">
+        <div class="project-overlay">
+          <div class="project-tag">AI / SaaS</div>
+          <div class="project-name">Projekt Beta</div>
+          <div class="project-desc">B2B platforma s automatizáciou procesov.</div>
+        </div>
+        <a href="#" class="project-link">↗</a>
+      </div>
+      <div class="project-card fade-up" style="--i:2">
+        <img src="static/projekt-3.png" alt="Projekt 3" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#B8F200,#00E57A)'">
+        <div class="project-overlay">
+          <div class="project-tag">Mobilná aplikácia</div>
+          <div class="project-name">Projekt Gamma</div>
+          <div class="project-desc">Natívna iOS/Android aplikácia pre retail.</div>
+        </div>
+        <a href="#" class="project-link">↗</a>
+      </div>
+      <div class="project-card fade-up" style="--i:3">
+        <img src="static/projekt-4.png" alt="Projekt 4" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#00E57A,#77BAF8)'">
+        <div class="project-overlay">
+          <div class="project-tag">UX / Redesign</div>
+          <div class="project-name">Projekt Delta</div>
+          <div class="project-desc">Kompletný redesign s UX auditom a testovaním.</div>
+        </div>
+        <a href="#" class="project-link">↗</a>
+      </div>
+      <div class="project-card fade-up" style="--i:4">
+        <img src="static/projekt-5.png" alt="Projekt 5" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#77BAF8,#0A0A0A)'">
+        <div class="project-overlay">
+          <div class="project-tag">ERP / Integrácia</div>
+          <div class="project-name">Projekt Epsilon</div>
+          <div class="project-desc">Integrácia ERP systému s e-commerce platformou.</div>
+        </div>
+        <a href="#" class="project-link">↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-nav">
+    <button class="carousel-arrow" id="carouselPrev" aria-label="Predchádzajúci">←</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+    <button class="carousel-arrow" id="carouselNext" aria-label="Nasledujúci">→</button>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services">
+  <div class="services-header fade-up">
+    <div class="section-label">Čo robíme</div>
+    <h2 class="section-h2">Kompletné digitálne riešenia.</h2>
+  </div>
+
+  <div class="services-grid">
+    <!-- Dark panel: Dev -->
+    <div class="services-panel services-panel-dark fade-up">
+      <img src="static/keyboard-blue.png" alt="" class="panel-keyboard" loading="lazy"
+           onerror="this.style.display='none'">
+      <h3>Vývoj &amp;<br><span>Programovanie</span></h3>
+      <div class="service-items" id="devItems">
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">AI na mieru</div>
+            <div class="service-desc">Vlastné AI modely, chatboty a agenti prispôsobení vašim processom.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">B2B riešenie na mieru</div>
+            <div class="service-desc">Komplexné platformy pre B2B spoluprácu, portály a intranety.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">E-shop na mieru</div>
+            <div class="service-desc">Vlastné e-commerce riešenia optimalizované pre konverzie.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Integrácia s ERP</div>
+            <div class="service-desc">Prepojenie webových riešení s ERP, CRM a ďalšími systémami.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Prevádzka a support</div>
+            <div class="service-desc">Dlhodobá správa, monitoring a technická podpora vašich produktov.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Webstránka na mieru</div>
+            <div class="service-desc">Prezentačné weby, landingpages a microsite s najvyšším dizajnom.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Light panel: Design/UX -->
+    <div class="services-panel services-panel-light fade-up" style="transition-delay:0.15s">
+      <img src="static/keyboard-purple.png" alt="" class="panel-keyboard" loading="lazy"
+           onerror="this.style.display='none'">
+      <h3>UX &amp; Customer<br><span style="color:var(--purple)">Experience</span></h3>
+      <div class="service-items" id="designItems">
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Accessibility WCAG 2.2</div>
+            <div class="service-desc">Audity a implementácia prístupnosti pre všetkých používateľov.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Customer Experience</div>
+            <div class="service-desc">Strategické projektovanie zákazníckej cesty a touchpointov.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">CRO – Optimalizácia konverzií</div>
+            <div class="service-desc">A/B testovanie, heatmapovanie a systematické zlepšovanie konverzií.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M3 17c0-3 2.5-5 6-5s6 2 6 5"/><path d="M17 12a5 5 0 010 10"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Grafický dizajn</div>
+            <div class="service-desc">Brand identity, vizuálna komunikácia a marketingové materiály.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Motion design</div>
+            <div class="service-desc">Animácie, micro-interactions a video produkcia pre digitál.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Usability testovanie</div>
+            <div class="service-desc">Moderované testy, eye-tracking a výskum používateľov.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KEYBOARD INTERACTIVE ===================== -->
+<section id="keyboard-section">
+  <div class="keyboard-wrap fade-up">
+    <div class="section-label" style="text-align:center">Interaktívna sekcia</div>
+    <h2 class="section-h2" style="text-align:center; margin-bottom:8px">Nástroje, ktoré milujeme.</h2>
+    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici.</p>
+    <div class="keyboard-hint">↓ Klikni na klávesnicu ↓</div>
+    <div class="keyboard-interactive" id="keyboardInteractive" onclick="clickKeyboard()">
+      <img src="static/keyboard-grey.png" alt="Keyboard" class="keyboard-img" id="keyboardBase"
+           onerror="this.src=''; this.alt='⌨️'; this.style.fontSize='120px'">
+      <div class="keyboard-badge">Stlač ma!</div>
+    </div>
+  </div>
+</section>
+<div class="keyboard-toast" id="keyboardToast"></div>
+
+<!-- ===================== MOBILE MOCKUPS ===================== -->
+<section id="mobile">
+  <div style="max-width:1200px; margin:0 auto 0; padding:0 40px 0" class="fade-up">
+    <div class="section-label">Mobilné aplikácie</div>
+    <h2 class="section-h2">Produkty, ktoré žijú vo vreckách<br>vašich zákazníkov.</h2>
+    <p style="font-size:16px; color:var(--text-secondary); max-width:540px; margin-top:12px">Navrhujeme a vyvíjame mobilné aplikácie s ohľadom na konverzie a používateľský zážitok.</p>
+  </div>
+  <div class="mockups-scroll">
+    <div class="mockup-item fade-up">
+      <div class="iphone-frame" id="mock1">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+          <img src="static/projekt-1.png" alt="App 1" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#77BAF8,#C1BFFF)'">
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">ShopSmart AI</div>
+        <div class="mockup-desc">AI-powered nákupný asistent s personalizáciou.</div>
+        <div class="mockup-tags"><span class="mockup-tag">AI Recommender</span><span class="mockup-tag">E-commerce</span></div>
+        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN &nbsp;|&nbsp; 🇩🇪 DE</div>
+        <div class="mockup-btns">
+          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
+          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+        </div>
+      </div>
+    </div>
+    <div class="mockup-item fade-up" style="transition-delay:0.1s">
+      <div class="iphone-frame" id="mock2">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+          <img src="static/projekt-2.png" alt="App 2" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#C1BFFF,#B8F200)'">
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">DataFlow Pro</div>
+        <div class="mockup-desc">Real-time analytická platforma pre B2B manažérov.</div>
+        <div class="mockup-tags"><span class="mockup-tag">Analytics</span><span class="mockup-tag">B2B</span></div>
+        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN</div>
+        <div class="mockup-btns">
+          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
+          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+        </div>
+      </div>
+    </div>
+    <div class="mockup-item fade-up" style="transition-delay:0.2s">
+      <div class="iphone-frame" id="mock3">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+          <img src="static/projekt-3.png" alt="App 3" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#B8F200,#00E57A)'">
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">GreenTrack</div>
+        <div class="mockup-desc">Sledovanie uhlíkovej stopy a ESG reportovanie.</div>
+        <div class="mockup-tags"><span class="mockup-tag">ESG</span><span class="mockup-tag">UX Redesign</span></div>
+        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN &nbsp;|&nbsp; 🇩🇪 DE</div>
+        <div class="mockup-btns">
+          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
+          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+        </div>
+      </div>
+    </div>
+    <div class="mockup-item fade-up" style="transition-delay:0.3s">
+      <div class="iphone-frame" id="mock4">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+          <img src="static/projekt-4.png" alt="App 4" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#00E57A,#77BAF8)'">
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">LoyaltyHub</div>
+        <div class="mockup-desc">Vernostný program s gamifikáciou pre retail.</div>
+        <div class="mockup-tags"><span class="mockup-tag">Retail</span><span class="mockup-tag">Gamification</span></div>
+        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN</div>
+        <div class="mockup-btns">
+          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
+          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AI AGENTS ===================== -->
+<section id="agents">
+  <div class="agents-header fade-up">
+    <div class="section-label">AI Tím</div>
+    <h2 class="section-h2">Náš AI tím pracuje non-stop.</h2>
+    <p style="font-size:16px; color:var(--text-secondary); margin-top:12px; max-width:480px">Každý agent má špecializáciu. Spoločne tvoria výkonný ekosystém.</p>
+  </div>
+  <div class="agents-grid">
+    <!-- Max AI -->
+    <div class="agent-card agent-blue fade-up">
+      <img src="static/robot-black.png" alt="Max AI" class="agent-robot" loading="lazy"
+           onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
+      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-name">Max AI</div>
+      <div class="agent-real-name">Maximilián</div>
+      <div class="agent-role">AI Security Engineer</div>
+      <div class="agent-desc">Chráni vaše systémy, detekuje hrozby a zabezpečuje bezpečnosť AI riešení 24/7.</div>
+      <a href="#contact" class="agent-cta">Porozprávajte sa s Maxom →</a>
+    </div>
+    <!-- Vicky AI -->
+    <div class="agent-card agent-green fade-up" style="transition-delay:0.08s">
+      <img src="static/robot-green.png" alt="Vicky AI" class="agent-robot" loading="lazy"
+           onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
+      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-name">Vicky AI</div>
+      <div class="agent-real-name">Viktória</div>
+      <div class="agent-role">Partner Outreach & Email Specialist</div>
+      <div class="agent-desc">Rieši partnerstvá, automatizuje outreach kampane a personalizuje emailovú komunikáciu.</div>
+      <a href="#contact" class="agent-cta">Porozprávajte sa s Vicky →</a>
+    </div>
+    <!-- Pete AI -->
+    <div class="agent-card agent-gray fade-up" style="transition-delay:0.16s">
+      <img src="static/robot-grey.png" alt="Pete AI" class="agent-robot" loading="lazy"
+           onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
+      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-name">Pete AI</div>
+      <div class="agent-real-name">Peter</div>
+      <div class="agent-role">Junior Data & Insights Analyst</div>
+      <div class="agent-desc">Analyzuje dáta, generuje reporty a objavuje vzory, ktoré pomáhajú pri rozhodovaní.</div>
+      <a href="#contact" class="agent-cta">Porozprávajte sa s Petom →</a>
+    </div>
+    <!-- Mia AI -->
+    <div class="agent-card agent-purple fade-up" style="transition-delay:0.24s">
+      <img src="static/robot-purple.png" alt="Mia AI" class="agent-robot" loading="lazy"
+           onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
+      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-name">Mia AI</div>
+      <div class="agent-real-name">Majka</div>
+      <div class="agent-role">Senior Growth & Marketing Manager</div>
+      <div class="agent-desc">Strategicky riadi rast, SEO, performance marketing a marketingovú automatizáciu.</div>
+      <a href="#contact" class="agent-cta">Porozprávajte sa s Miou →</a>
+    </div>
+    <!-- Jane AI -->
+    <div class="agent-card agent-yellow fade-up" style="transition-delay:0.32s">
+      <img src="static/robot-yellow.png" alt="Jane AI" class="agent-robot" loading="lazy"
+           onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
+      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-name">Jane AI</div>
+      <div class="agent-real-name">Janka</div>
+      <div class="agent-role">Product, Social Media & Content Specialist</div>
+      <div class="agent-desc">Tvorí obsah, spravuje sociálne siete a koordinuje produktovú komunikáciu.</div>
+      <a href="#contact" class="agent-cta">Porozprávajte sa s Jane →</a>
+    </div>
+    <!-- Stela AI -->
+    <div class="agent-card agent-blue fade-up" style="transition-delay:0.4s; filter: hue-rotate(200deg) saturate(0.8)">
+      <img src="static/robot-black.png" alt="Stela AI" class="agent-robot" loading="lazy" style="filter:brightness(0.9) sepia(0.2)"
+           onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
+      <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
+      <div class="agent-name">Stela AI</div>
+      <div class="agent-real-name">Stela</div>
+      <div class="agent-role" style="filter:none">Operations & Automation Manager</div>
+      <div class="agent-desc" style="filter:none">Optimalizuje interné procesy, automatizuje workflow a stará sa o operatívnu efektivitu.</div>
+      <a href="#contact" class="agent-cta" style="filter:none; color:var(--blue)">Porozprávajte sa so Stelou →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="fade-up">
+      <div class="section-label">Kontakt</div>
+      <h2 class="contact-info" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,4vw,48px); font-weight:700; letter-spacing:-0.02em; line-height:1.1; margin-bottom:16px">
+        Dohodnime si<br>stretnutie.
+      </h2>
+      <p style="font-size:16px; color:var(--text-secondary); line-height:1.7; margin-bottom:40px">Online alebo osobne – sme flexibilní. Ozveme sa do 24 hodín.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        hello@drixton.sk
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.67a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        +421 900 000 000
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        Bratislava, Slovensko
+      </div>
+      <img src="static/pattern-circle.png" alt="" class="contact-info-circle" loading="lazy"
+           onerror="this.style.display='none'">
+    </div>
+
+    <div class="fade-up" style="transition-delay:0.15s">
+      <div class="meeting-toggle">
+        <button class="meeting-btn active" onclick="setMeeting(this,'online')">● Online stretnutie</button>
+        <button class="meeting-btn" onclick="setMeeting(this,'personal')">○ Osobné stretnutie</button>
+      </div>
+
+      <div class="interest-label">Záujem o</div>
+      <div class="interest-pills">
+        <button class="interest-pill" onclick="this.classList.toggle('selected')">Webstránka</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')">E-shop</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')">AI riešenie</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')">Dizajn</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')">Mobilná aplikácia</button>
+        <button class="interest-pill" onclick="this.classList.toggle('selected')">Iné</button>
+      </div>
+
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-grid">
+          <div class="form-field">
+            <input type="text" id="fname" placeholder=" " required>
+            <label for="fname">Meno *</label>
+          </div>
+          <div class="form-field">
+            <input type="text" id="lname" placeholder=" " required>
+            <label for="lname">Priezvisko *</label>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <input type="email" id="email" placeholder=" " required>
+            <label for="email">Email *</label>
+          </div>
+          <div class="form-field">
+            <input type="tel" id="phone" placeholder=" ">
+            <label for="phone">Telefón</label>
+          </div>
+        </div>
+        <div class="form-field">
+          <textarea id="message" placeholder=" "></textarea>
+          <label for="message">Správa / Čo potrebujete?</label>
+        </div>
+        <button type="submit" class="submit-btn">Odoslať správu →</button>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <img src="static/robot-green.png" alt="Vicky AI" onerror="this.style.fontSize='60px'; this.textContent='✅'">
+        <h3>Správa odoslaná!</h3>
+        <p>Ozveme sa do 24 hodín. Medzitým môžete sledovať naše projekty.</p>
+        <a href="#projects" class="btn-primary" style="margin-top:8px">Pozrieť projekty</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-top-fade"></div>
+  <img src="static/keyboard-black.png" alt="" class="footer-keyboard" loading="lazy"
+       onerror="this.style.display='none'">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-logo-area">
+        <img src="static/logo-full-white.png" alt="Drixton" class="footer-logo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:#fff; margin-bottom:16px; display:none">Drixton</div>
+        <p class="footer-claim">Tvoríme digitálne produkty, ktoré konvertujú. Web & Dev Studio.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="GitHub">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigácia</h4>
+        <ul>
+          <li><a href="#services">Čo robíme</a></li>
+          <li><a href="#projects">Projekty</a></li>
+          <li><a href="#agents">O nás</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:hello@drixton.sk">hello@drixton.sk</a></li>
+          <li><a href="tel:+421900000000">+421 900 000 000</a></li>
+          <li><a href="#">Bratislava, SK</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; line-height:1.6">Dostávajte novinky zo sveta webu a AI.</p>
+        <div class="newsletter-input-wrap">
+          <input type="email" class="newsletter-input" placeholder="vas@email.sk">
+          <button class="newsletter-submit">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Drixton. Web & Dev Studio. Všetky práva vyhradené.</span>
+      <div class="footer-legal">
+        <a href="#">SK | EN</a>
+        <a href="#">GDPR</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===================== CURSOR =====================
+const ring = document.getElementById('cursorRing');
+const dot = document.getElementById('cursorDot').firstElementChild;
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.parentElement.style.transform = `translate(${mx}px, ${my}px)`;
+});
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.parentElement.style.transform = `translate(${rx}px, ${ry}px)`;
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+// hide cursor on mobile
+if ('ontouchstart' in window) {
+  document.body.style.cursor = 'auto';
+  document.getElementById('cursor').style.display = 'none';
+  document.getElementById('cursorDot').style.display = 'none';
+}
+
+// ===================== PAGE INTRO =====================
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('pageIntro').style.display = 'none';
+    animateHero();
+  }, 2300);
+});
+
+// ===================== NAV SCROLL =====================
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ===================== THEME TOGGLE =====================
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('sunIcon').style.display = isDark ? 'block' : 'none';
+  document.getElementById('moonIcon').style.display = isDark ? 'none' : 'block';
+
+  // swap logos
+  const logoFull = document.getElementById('navLogoFull');
+  const logoShort = document.getElementById('navLogoShort');
+  if (logoFull) {
+    logoFull.src = isDark ? 'static/logo-full-black.png' : 'static/logo-full-white.png';
+    if (logoShort) logoShort.src = isDark ? 'static/logo-black.png' : 'static/logo-white.png';
+  }
+}
+
+// ===================== LANG =====================
+function setLang(lang) {
+  document.getElementById('btnSK').classList.toggle('active', lang === 'sk');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+}
+
+// ===================== MOBILE MENU =====================
+let menuOpen = false;
+function toggleMobileMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('mobileMenu').classList.toggle('open', menuOpen);
+  document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  menuOpen = false;
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===================== HERO ANIMATION =====================
+function animateHero() {
+  const h1 = document.getElementById('heroH1');
+  const words = 'Tvoríme digitálne produkty, ktoré konvertujú.'.split(' ');
+  h1.innerHTML = words.map((w, i) =>
+    `<span class="word" style="--i:${i}; transition-delay:${i * 100}ms">${w}</span>`
+  ).join(' ');
+  setTimeout(() => {
+    h1.querySelectorAll('.word').forEach(w => w.classList.add('visible'));
+    document.getElementById('heroSub').classList.add('visible');
+    document.getElementById('heroBtns').classList.add('visible');
+    document.querySelector('.hero-badge').classList.add('visible');
+  }, 50);
+}
+
+// ===================== PARALLAX HERO =====================
+document.addEventListener('mousemove', e => {
+  const blob = document.getElementById('heroBlob');
+  if (!blob) return;
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  blob.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+// ===================== INTERSECTION OBSERVER =====================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ===================== CAROUSEL =====================
+const carousel = document.getElementById('carousel');
+const cards = carousel.querySelectorAll('.project-card');
+const dotsContainer = document.getElementById('carouselDots');
+
+// Create dots
+cards.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+  dot.setAttribute('aria-label', `Projekt ${i+1}`);
+  dot.onclick = () => scrollToCard(i);
+  dotsContainer.appendChild(dot);
+});
+
+function scrollToCard(i) {
+  const card = cards[i];
+  carousel.scrollTo({ left: card.offsetLeft - 40, behavior: 'smooth' });
+  dotsContainer.querySelectorAll('.carousel-dot').forEach((d, j) => {
+    d.classList.toggle('active', j === i);
+  });
+}
+
+document.getElementById('carouselNext').onclick = () => {
+  const idx = getCurrentCard();
+  if (idx < cards.length - 1) scrollToCard(idx + 1);
+};
+document.getElementById('carouselPrev').onclick = () => {
+  const idx = getCurrentCard();
+  if (idx > 0) scrollToCard(idx - 1);
+};
+
+function getCurrentCard() {
+  let closest = 0, minDist = Infinity;
+  cards.forEach((c, i) => {
+    const d = Math.abs(c.offsetLeft - carousel.scrollLeft - 40);
+    if (d < minDist) { minDist = d; closest = i; }
+  });
+  return closest;
+}
+
+carousel.addEventListener('scroll', () => {
+  const idx = getCurrentCard();
+  dotsContainer.querySelectorAll('.carousel-dot').forEach((d, j) => {
+    d.classList.toggle('active', j === idx);
+  });
+});
+
+// Drag scroll
+let isDragging = false, startX, scrollLeft;
+carousel.addEventListener('mousedown', e => {
+  isDragging = true;
+  startX = e.pageX - carousel.offsetLeft;
+  scrollLeft = carousel.scrollLeft;
+  carousel.classList.add('dragging');
+});
+carousel.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  e.preventDefault();
+  const x = e.pageX - carousel.offsetLeft;
+  carousel.scrollLeft = scrollLeft - (x - startX) * 1.5;
+});
+carousel.addEventListener('mouseup', () => { isDragging = false; carousel.classList.remove('dragging'); });
+carousel.addEventListener('mouseleave', () => { isDragging = false; carousel.classList.remove('dragging'); });
+
+// ===================== SERVICE ACCORDION =====================
+function toggleService(item) {
+  const isOpen = item.classList.contains('open');
+  item.closest('.service-items').querySelectorAll('.service-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ===================== KEYBOARD INTERACTIVE =====================
+const keyboards = [
+  { src: 'static/keyboard-blue.png', color: '#77BAF8', bg: '#0a1628', text: '🚀 Píšeme kód, ktorý konvertuje.' },
+  { src: 'static/keyboard-purple.png', color: '#C1BFFF', bg: '#13102e', text: '🎨 Dizajnujeme zážitky, nie len rozhrania.' },
+  { src: 'static/keyboard-yellow.png', color: '#B8F200', bg: '#1a2100', text: '⚡ Rýchlosť je funkcia, nie bonus.' },
+  { src: 'static/keyboard-black.png', color: '#FFFFFF', bg: '#0A0A0A', text: '🖥️ Každý pixel má zmysel.' },
+  { src: 'static/keyboard-grey.png', color: '#A3A3A3', bg: '#1a1a1a', text: '🤖 AI agenti pracujú 24/7.' }
+];
+let kbIndex = 0;
+const kbBase = document.getElementById('keyboardBase');
+const toast = document.getElementById('keyboardToast');
+let toastTimeout;
+
+function clickKeyboard() {
+  const kb = keyboards[kbIndex % keyboards.length];
+  kbIndex++;
+  kbBase.src = kb.src;
+
+  // Keystroke animation
+  kbBase.style.transform = 'translateY(-6px) scale(0.96)';
+  setTimeout(() => { kbBase.style.transform = ''; }, 200);
+
+  // Toast
+  clearTimeout(toastTimeout);
+  toast.textContent = kb.text;
+  toast.style.background = kb.bg;
+  toast.style.color = kb.color;
+  toast.classList.add('show');
+  toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ===================== MOBILE MOCKUP TILT =====================
+document.querySelectorAll('.iphone-frame').forEach(frame => {
+  frame.addEventListener('mousemove', e => {
+    const rect = frame.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const rx = ((e.clientY - cy) / rect.height) * 12;
+    const ry = ((e.clientX - cx) / rect.width) * -12;
+    frame.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  frame.addEventListener('mouseleave', () => { frame.style.transform = ''; });
+});
+
+// ===================== MEETING TOGGLE =====================
+function setMeeting(btn, type) {
+  btn.parentElement.querySelectorAll('.meeting-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  btn.textContent = (type === 'online' ? '● ' : '○ ') + btn.textContent.replace(/[●○] /,'');
+}
+
+// ===================== CONTACT FORM =====================
+function submitForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  form.style.display = 'none';
+  success.classList.add('show');
+  console.log('Form submitted:', {
+    name: document.getElementById('fname').value + ' ' + document.getElementById('lname').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    message: document.getElementById('message').value
+  });
+}
+
+// ===================== MAGNETIC BUTTONS =====================
+document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) * 0.25;
+    const dy = (e.clientY - cy) * 0.25;
+    btn.style.transform = `translate(${dx}px, ${dy}px) scale(1.03)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+</script>
+</body>
+</html>
