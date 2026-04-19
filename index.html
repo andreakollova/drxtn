@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Drixton – Web & Dev Studio</title>
+<link rel="icon" type="image/png" href="static/keyboard-blue.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -322,7 +323,7 @@ nav.scrolled {
 
 /* ===================== HERO ===================== */
 #hero {
-  min-height: 74vh;
+  min-height: 58vh;
   background: var(--bg);
   display: flex;
   flex-direction: column;
@@ -419,7 +420,7 @@ nav.scrolled {
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
-  padding: 110px 40px 60px;
+  padding: 90px 40px 40px;
   position: relative;
   z-index: 1;
   text-align: center;
@@ -872,7 +873,7 @@ section { padding: 100px 40px; }
   overflow: hidden;
 }
 .services-panel {
-  padding: 80px max(60px, 7vw);
+  padding: 80px max(40px, 4vw) 80px max(60px, 8vw);
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -888,9 +889,9 @@ section { padding: 100px 40px; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  max-width: 1300px;
+  max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 0 0 auto;
   position: relative;
   z-index: 1;
   align-items: center;
@@ -1264,7 +1265,7 @@ section { padding: 100px 40px; }
 #keyboard-section {
   background: var(--bg);
   text-align: center;
-  padding: 80px 40px;
+  padding: 48px 40px 80px;
   position: relative;
   overflow: hidden;
 }
@@ -1327,31 +1328,38 @@ section { padding: 100px 40px; }
 .kb-item:active img { transform: translateY(-4px); }
 
 /* Agent info strip */
+/* Agent info strip */
 .kb-agent-strip {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 16px 24px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  margin-bottom: 20px; padding: 18px 24px;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 16px; gap: 16px; flex-wrap: wrap;
 }
 .kb-agent-left { display: flex; align-items: center; gap: 12px; }
-.kb-agent-dot { width: 8px; height: 8px; border-radius: 50%; transition: background 0.3s; }
-.kb-agent-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 16px; font-weight: 700;
-}
-.kb-agent-role { font-size: 13px; color: var(--text-secondary); }
-.kb-agent-pills { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 60%; }
-.kb-agent-pill {
+.kb-agent-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transition: background 0.3s, box-shadow 0.3s; }
+.kb-agent-name { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; }
+.kb-agent-role { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.kb-agent-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+.kb-tool-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 100px; padding: 6px 14px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; font-weight: 500; letter-spacing: 0.04em;
-  padding: 3px 10px; border-radius: 100px;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
   transition: border-color 0.3s, color 0.3s;
 }
-.kb-agent-pill.active-color { color: var(--accent); border-color: var(--accent); }
+.kb-tool-badge svg { flex-shrink: 0; }
+.kb-agent-link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #0A0A0A; text-decoration: none;
+  padding: 6px 16px; border-radius: 100px;
+  background: #0A0A0A; color: #fff;
+  transition: opacity 0.2s; white-space: nowrap;
+  display: inline-block;
+}
+[data-theme="dark"] .kb-agent-link { background: #fff; color: #0A0A0A; }
+.kb-agent-link:hover { opacity: 0.8; }
 
 .kb-label {
   font-family: 'JetBrains Mono', monospace;
@@ -1881,7 +1889,7 @@ section { padding: 100px 40px; }
 #gradient-cta {
   position: relative;
   overflow: hidden;
-  padding: 130px 40px;
+  padding: 80px 40px;
   text-align: center;
   background: linear-gradient(125deg, #1a8fe8 0%, #2c9ffa 35%, #6ab4ff 68%, #bac1fe 100%);
 }
@@ -2282,7 +2290,7 @@ footer::before {
 
 .footer-logo-area { }
 .footer-logo {
-  height: 28px;
+  height: 40px;
   margin-bottom: 16px;
   display: block;
 }
@@ -2433,7 +2441,7 @@ footer::before {
 
 <!-- Page Intro -->
 <div class="page-intro" id="pageIntro">
-  <img src="static/logo-full-white.png" alt="Drixton" class="page-intro-logo" style="height:40px;width:auto;" onerror="this.outerHTML='<div class=\'page-intro-logo\'>Drixton</div>'">
+  <img src="static/logo-keyboard.png" alt="Drixton" class="page-intro-logo" style="height:48px;width:auto;" onerror="this.outerHTML='<div class=\'page-intro-logo\'>Drixton</div>'">
 </div>
 
 <!-- Custom Cursor -->
@@ -2455,7 +2463,7 @@ footer::before {
 <!-- Navigation -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="static/logo-full-black.png" alt="Drixton" class="logo-full" id="navLogoFull"
+    <img src="static/logo-keyboard.png" alt="Drixton" class="logo-full" id="navLogoFull"
          onerror="this.style.display='none'; document.getElementById('navLogoShort').style.display='none'; document.getElementById('navLogoText').style.display='block'">
     <img src="static/logo-black.png" alt="Drixton" class="logo-short" id="navLogoShort"
          onerror="this.style.display='none'">
@@ -2838,9 +2846,9 @@ footer::before {
 <!-- ===================== KEYBOARD INTERACTIVE ===================== -->
 <section id="keyboard-section">
   <div class="keyboard-section-inner fade-up">
-    <div class="section-label" style="text-align:center">Interaktívna sekcia</div>
+    <div class="section-label" style="text-align:center">Nástroje nášho tímu</div>
     <h2 class="section-h2" style="text-align:center; margin-bottom:8px">Nástroje, ktoré milujeme.</h2>
-    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici. Vyber farbu a naveď robota.</p>
+    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici. Vyber farbu a zisti viac o nástrojoch, ktoré používame.</p>
     <div class="keyboards-row" style="margin-bottom:32px">
       <div class="kb-item kb-blue kb-active" onclick="kbClick(this,'blue')">
         <img src="static/keyboard-blue.png" alt="Stela AI" loading="lazy" onerror="this.style.display='none'">
@@ -2896,7 +2904,7 @@ footer::before {
   </div>
   <div class="agents-grid">
     <!-- Max AI -->
-    <div class="agent-card agent-blue fade-up">
+    <div class="agent-card agent-blue fade-up" id="agent-max">
       <img src="static/robot-black.png" alt="Max AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
@@ -2907,7 +2915,7 @@ footer::before {
       <a href="#contact" class="agent-cta">Porozprávajte sa s Maxom →</a>
     </div>
     <!-- Vicky AI -->
-    <div class="agent-card agent-green fade-up" style="transition-delay:0.08s">
+    <div class="agent-card agent-green fade-up" id="agent-vicky" style="transition-delay:0.08s">
       <img src="static/robot-green.png" alt="Vicky AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
@@ -2918,7 +2926,7 @@ footer::before {
       <a href="#contact" class="agent-cta">Porozprávajte sa s Vicky →</a>
     </div>
     <!-- Pete AI -->
-    <div class="agent-card agent-gray fade-up" style="transition-delay:0.16s">
+    <div class="agent-card agent-gray fade-up" id="agent-pete" style="transition-delay:0.16s">
       <img src="static/robot-grey.png" alt="Pete AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
@@ -2929,7 +2937,7 @@ footer::before {
       <a href="#contact" class="agent-cta">Porozprávajte sa s Petom →</a>
     </div>
     <!-- Mia AI -->
-    <div class="agent-card agent-purple fade-up" style="transition-delay:0.24s">
+    <div class="agent-card agent-purple fade-up" id="agent-mia" style="transition-delay:0.24s">
       <img src="static/robot-purple.png" alt="Mia AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
@@ -2940,7 +2948,7 @@ footer::before {
       <a href="#contact" class="agent-cta">Porozprávajte sa s Miou →</a>
     </div>
     <!-- Jane AI -->
-    <div class="agent-card agent-yellow fade-up" style="transition-delay:0.32s">
+    <div class="agent-card agent-yellow fade-up" id="agent-jane" style="transition-delay:0.32s">
       <img src="static/robot-yellow.png" alt="Jane AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
@@ -2951,7 +2959,7 @@ footer::before {
       <a href="#contact" class="agent-cta">Porozprávajte sa s Jane →</a>
     </div>
     <!-- Stela AI -->
-    <div class="agent-card agent-blue fade-up" style="transition-delay:0.4s">
+    <div class="agent-card agent-blue fade-up" id="agent-stela" style="transition-delay:0.4s">
       <img src="static/robot-blue.png" alt="Stela AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
@@ -3007,13 +3015,13 @@ footer::before {
         <div class="contact-detail-icon">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
-        hello@drixton.sk
+        studio@drixton.com
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.67a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         </div>
-        +421 900 000 000
+        +421 911 657 234
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">
@@ -3115,8 +3123,8 @@ footer::before {
       <div class="footer-col">
         <h4>Kontakt</h4>
         <ul>
-          <li><a href="mailto:hello@drixton.sk">hello@drixton.sk</a></li>
-          <li><a href="tel:+421900000000">+421 900 000 000</a></li>
+          <li><a href="mailto:studio@drixton.com">studio@drixton.com</a></li>
+          <li><a href="tel:+421911657234">+421 911 657 234</a></li>
           <li><a href="#">Bratislava, SK</a></li>
         </ul>
       </div>
@@ -3189,7 +3197,7 @@ function toggleTheme() {
   const logoFull = document.getElementById('navLogoFull');
   const logoShort = document.getElementById('navLogoShort');
   if (logoFull) {
-    logoFull.src = isDark ? 'static/logo-full-black.png' : 'static/logo-full-white.png';
+    logoFull.src = 'static/logo-keyboard.png';
     if (logoShort) logoShort.src = isDark ? 'static/logo-black.png' : 'static/logo-white.png';
   }
   if (typeof updateHeroLogo === 'function') updateHeroLogo(!isDark);
@@ -3286,29 +3294,6 @@ document.querySelectorAll('.hero-mini, .hero-pill').forEach(card => {
   });
 });
 
-// Scramble h1 words on mouseover
-const heroH1 = document.getElementById('heroH1');
-if (heroH1) {
-  heroH1.addEventListener('mousemove', e => {
-    const words = heroH1.querySelectorAll('.word:not(.typeword)');
-    words.forEach(w => {
-      const r = w.getBoundingClientRect();
-      const dist = Math.hypot(e.clientX - (r.left + r.width/2), e.clientY - (r.top + r.height/2));
-      if (dist < 100 && !w.dataset.scrambling) {
-        w.dataset.scrambling = '1';
-        const orig = w.textContent;
-        let f = 0, tot = orig.length * 5;
-        const t = setInterval(() => {
-          w.textContent = orig.split('').map((c, i) =>
-            i < Math.floor(f/5) || c === ' ' ? c : CHARS[Math.floor(Math.random()*CHARS.length)]
-          ).join('');
-          f++;
-          if (f > tot) { w.textContent = orig; delete w.dataset.scrambling; clearInterval(t); }
-        }, 55);
-      }
-    });
-  });
-}
 
 // Dark mode logo swap in hero
 function updateHeroLogo(isDark) {
@@ -3425,22 +3410,114 @@ const kbData = {
     tools: ['Claude','OpenAI','LangChain','Pinecone','FastAPI','Docker','AWS','Terraform','Wiz','Vault','Semgrep','Falco'] }
 };
 
-function kbUpdateStrip(color) {
+// tool SVG map
+const toolSVGs = {
+  // Stela tools
+  'Make.com':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#6D00CC"/><path d="M7 12h10M12 7v10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+  'Zapier':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF4A00"/><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  'n8n':        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA4B71"/><circle cx="7" cy="12" r="2.5" fill="white"/><circle cx="17" cy="12" r="2.5" fill="white"/><path d="M9.5 12h5" stroke="white" stroke-width="2"/></svg>',
+  'Notion':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#fff" stroke="#e0e0e0"/><path d="M6 6h8l4 4v8H6V6z" fill="#e8e8e8"/><path d="M14 6v4h4" fill="#ccc"/><path d="M9 11h6M9 14h4" stroke="#666" stroke-width="1.2" stroke-linecap="round"/></svg>',
+  'Airtable':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FCB400"/><rect x="5" y="6" width="14" height="3.5" rx="1" fill="white" opacity="0.9"/><rect x="5" y="11" width="7" height="3.5" rx="1" fill="white" opacity="0.7"/><rect x="14" y="11" width="5" height="3.5" rx="1" fill="white" opacity="0.7"/><rect x="5" y="16" width="5" height="2.5" rx="1" fill="white" opacity="0.5"/></svg>',
+  'Slack':      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9.5 4a2 2 0 0 0-2 2v1.5H6a2 2 0 0 0 0 4h1.5V13H6a2 2 0 0 0 0 4h1.5V18a2 2 0 0 0 4 0v-1.5H13V18a2 2 0 0 0 4 0v-1.5H18a2 2 0 0 0 0-4h-1.5V11H18a2 2 0 0 0 0-4h-1.5V6a2 2 0 0 0-4 0v1.5H11V6a2 2 0 0 0-1.5-2z" fill="#611f69" opacity="0.8"/><rect x="9.5" y="9.5" width="5" height="5" rx="0.5" fill="#ECB22E"/></svg>',
+  'Linear':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#5E6AD2"/><circle cx="12" cy="12" r="5.5" stroke="white" stroke-width="1.5"/><path d="M8 16l8-8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  'GitHub':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#24292E"/><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z" fill="white"/></svg>',
+  'Vercel':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#000"/><path d="M12 4L20 20H4L12 4Z" fill="white"/></svg>',
+  'Supabase':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#3ECF8E"/><path d="M5 17L12 7L19 17" stroke="white" stroke-width="2.5" stroke-linejoin="round"/></svg>',
+  'Jira':       '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0052CC"/><path d="M12 5L19 12L12 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12L12 5" stroke="#4BAAFF" stroke-width="2" stroke-linecap="round"/></svg>',
+  'Confluence': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0052CC"/><path d="M5 17c3-5 6-7 14-7M19 7c-3 5-6 7-14 7" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+  // Mia tools
+  'Google Ads': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><circle cx="9" cy="14" r="4" fill="white" opacity="0.9"/><rect x="13" y="6" width="4" height="12" rx="2" fill="#34A853"/><path d="M4 14l5-8" stroke="#FBBC05" stroke-width="2.5" stroke-linecap="round"/></svg>',
+  'Meta Ads':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1877F2"/><path d="M7 13c0-3 1.5-5 3-5s2.5 1.5 2.5 3.5S14 16 16 16s2-1.5 2-3-1-3-2.5-3" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>',
+  'HubSpot':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF7A59"/><circle cx="15" cy="9" r="3" fill="white"/><circle cx="9" cy="15" r="3" fill="white" opacity="0.7"/><path d="M15 9L9 15" stroke="white" stroke-width="1.5"/></svg>',
+  'Mailchimp':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FFE01B"/><path d="M12 5c3.5 0 6 2 6 5 0 4-3 7-6 7s-6-3-6-7c0-3 2.5-5 6-5z" fill="#241C15"/></svg>',
+  'SEMrush':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF642D"/><path d="M6 18V10l6-4 6 4v8" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/><rect x="9" y="14" width="6" height="4" fill="white" opacity="0.8"/></svg>',
+  'Hotjar':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FD3A5C"/><path d="M12 5c0 0-5 4-5 8a5 5 0 0 0 10 0c0-4-5-8-5-8z" fill="white"/></svg>',
+  'GA4':        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E37400"/><rect x="5" y="14" width="3.5" height="5.5" rx="1" fill="white"/><rect x="10" y="10" width="3.5" height="9.5" rx="1" fill="white" opacity="0.85"/><rect x="15.5" y="4.5" width="3.5" height="15" rx="1" fill="white" opacity="0.7"/></svg>',
+  'Webflow':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4353FF"/><path d="M4 8l5 8 3-5 3 5 5-8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'Canva':      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#7D2AE7"/><circle cx="9" cy="12" r="3" fill="white"/><circle cx="15" cy="12" r="3" fill="white" opacity="0.6"/></svg>',
+  'Buffer':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#168EEA"/><path d="M12 5l7 4v2l-7 4-7-4V9l7-4z" fill="white" opacity="0.9"/><path d="M5 13l7 4 7-4" stroke="white" stroke-width="1.5" fill="none"/></svg>',
+  'Klaviyo':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1A1A1A"/><path d="M6 6h5v12H6V6zm7 0l5 6-5 6" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/></svg>',
+  'Ahrefs':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF8A00"/><path d="M5 18L12 6l7 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M8 14h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+  // Pete tools
+  'Python':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 7 4 7 6v2h5v1H5C3 9 2 10.5 2 13s1 4.5 3 5l1-2.5H7v2C7 20 9 22 12 22s5-2 5-4.5v-2h-5v-1h7c2 0 3-1.5 3-4.5S21 5.5 19 5l-1 2.5H17V5C17 3 15 2 12 2z" fill="#3776AB"/><circle cx="9.5" cy="5.5" r="1" fill="#FFD43B"/><circle cx="14.5" cy="18.5" r="1" fill="#FFD43B"/></svg>',
+  'Pandas':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#150458"/><rect x="6" y="5" width="3" height="14" rx="1.5" fill="#E70488"/><rect x="15" y="5" width="3" height="14" rx="1.5" fill="#00D4FF"/><rect x="9" y="10" width="6" height="4" rx="1" fill="white" opacity="0.3"/></svg>',
+  'SQL':        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#336791"/><ellipse cx="12" cy="8" rx="6" ry="2.5" fill="white" opacity="0.9"/><path d="M6 8v3c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V8" stroke="white" stroke-width="1.2" fill="none"/><path d="M6 11v3c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-3" stroke="white" stroke-width="1.2" fill="none" opacity="0.6"/></svg>',
+  'Tableau':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#E97627"/><path d="M12 4v16M4 12h16M8 8l8 8M16 8l-8 8" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.85"/></svg>',
+  'Looker':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><circle cx="10" cy="10" r="4" stroke="white" stroke-width="1.8" fill="none"/><path d="M13 13l4 4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+  'BigQuery':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#4285F4"/><path d="M12 4l7 4v8l-7 4-7-4V8l7-4z" fill="white" opacity="0.2"/><path d="M12 4l7 4v8l-7 4-7-4V8l7-4z" stroke="white" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" fill="white"/></svg>',
+  'dbt':        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF694A"/><path d="M5 12l7-7 7 7-7 7-7-7z" fill="white" opacity="0.8"/></svg>',
+  'Metabase':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#509EE3"/><rect x="5" y="15" width="3" height="4.5" rx="1" fill="white"/><rect x="10" y="11" width="3" height="8.5" rx="1" fill="white" opacity="0.85"/><rect x="15" y="7" width="3" height="12.5" rx="1" fill="white" opacity="0.7"/></svg>',
+  'Jupyter':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#F37626"/><circle cx="12" cy="12" r="5" fill="white"/><circle cx="5" cy="5" r="2" fill="#9E9E9E"/><circle cx="19" cy="5" r="2" fill="#9E9E9E"/></svg>',
+  'Power BI':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#F2C811"/><rect x="5" y="17" width="3" height="2.5" rx="1" fill="#24292E"/><rect x="10" y="12" width="3" height="7.5" rx="1" fill="#24292E" opacity="0.85"/><rect x="15" y="8" width="3" height="11.5" rx="1" fill="#24292E" opacity="0.7"/></svg>',
+  'Airflow':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#017CEE"/><path d="M5 12c2-4 6-6 10-4M19 12c-2 4-6 6-10 4" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="2.5" fill="white"/></svg>',
+  'Snowflake':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#29B5E8"/><path d="M12 4v16M4 12h16M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  // Jane tools
+  'Instagram':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="url(#igGrad)"/><rect x="5.5" y="5.5" width="13" height="13" rx="4" stroke="white" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3.5" stroke="white" stroke-width="1.5" fill="none"/><circle cx="17" cy="7" r="1" fill="white"/><defs><linearGradient id="igGrad" x1="0" y1="24" x2="24" y2="0"><stop stop-color="#F58529"/><stop offset="0.5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#515BD4"/></linearGradient></defs></svg>',
+  'TikTok':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#010101"/><path d="M16 5c0 0 1 2 3 2.5v2.5c-1 0-3-.5-4-1.5V16a5 5 0 1 1-5-5v2.5a2.5 2.5 0 1 0 2.5 2.5V5H16z" fill="white"/></svg>',
+  'YouTube':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#FF0000"/><path d="M10 8.5l6 3.5-6 3.5V8.5z" fill="white"/></svg>',
+  'CapCut':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1A1A1A"/><path d="M8 6l10 6-10 6V6z" fill="white"/><path d="M6 6v12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+  'ChatGPT':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#19C37D"/><path d="M12 4c-3 0-5 2-5 4 0 1.5 1 2.5 2.5 3C8 12 7 13.5 7 15c0 2.5 2 4 5 4s5-1.5 5-4c0-1.5-1-3-2.5-4C16 10.5 17 9.5 17 8c0-2-2-4-5-4z" fill="white" opacity="0.9"/></svg>',
+  'Substack':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF6719"/><rect x="5" y="6" width="14" height="2.5" rx="1" fill="white"/><rect x="5" y="11" width="14" height="2.5" rx="1" fill="white" opacity="0.8"/><path d="M5 16.5L12 20l7-3.5V14H5v2.5z" fill="white" opacity="0.7"/></svg>',
+  'Loom':       '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#625DF5"/><circle cx="12" cy="12" r="4" fill="white"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg>',
+  'Figma':      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" fill="#F24E1E"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" fill="#FF7262"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" fill="#1ABCFE"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" fill="#0ACF83"/><path d="M5 18.5A3.5 3.5 0 0 1 8.5 15H12v3.5a3.5 3.5 0 1 1-7 0z" fill="#0ACF83"/></svg>',
+  'Framer':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 4h7.2l4.8 8-4.8 8H4l4.8-8L4 4z" fill="#0099FF"/></svg>',
+  // Vicky tools
+  'Apollo.io':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1A1A2E"/><circle cx="12" cy="10" r="4" stroke="#7B6EF6" stroke-width="1.5" fill="none"/><path d="M8 14l-3 6h14l-3-6" stroke="#7B6EF6" stroke-width="1.2" fill="none"/></svg>',
+  'Hunter.io':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#F26A2A"/><path d="M12 4L5 20h14L12 4z" fill="white" opacity="0.85"/></svg>',
+  'Instantly':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#7C3AED"/><path d="M5 12h10M13 8l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  'Lemlist':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#28C5B0"/><path d="M5 8h14l-7 7-7-7z" fill="white" opacity="0.9"/><rect x="5" y="14" width="14" height="2" rx="1" fill="white" opacity="0.5"/></svg>',
+  'LinkedIn':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0077B5"/><path d="M6 9h2v9H6V9zm1-4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm4 4h2v1.2c.4-.7 1.3-1.4 2.6-1.4C18 8.8 19 10.1 19 12.5V18h-2v-5c0-1.4-.5-2-1.6-2-1.2 0-1.9.8-1.9 2.3V18h-2V9z" fill="white"/></svg>',
+  'Clay':       '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2D2D2D"/><circle cx="8.5" cy="12" r="3.5" fill="#A78BFA"/><circle cx="15.5" cy="12" r="3.5" fill="#60A5FA" opacity="0.8"/></svg>',
+  'Reply.io':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0A84FF"/><path d="M19 8H5l7 7 7-7z" fill="white"/><rect x="5" y="13" width="14" height="2" rx="1" fill="white" opacity="0.5"/></svg>',
+  'Snov.io':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1DA462"/><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.85"/></svg>',
+  'Phantombuster': '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#8547FF"/><circle cx="12" cy="9" r="4" fill="white" opacity="0.9"/><path d="M7 19c0-3 2-5 5-5s5 2 5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.7"/></svg>',
+  'Clearbit':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2D9EFF"/><path d="M12 5a7 7 0 0 1 0 14 7 7 0 0 1 0-14zm0 2a5 5 0 1 0 0 10A5 5 0 0 0 12 7z" fill="white"/></svg>',
+  'Mailshake':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#22BC85"/><path d="M5 8h14l-7 6-7-6zm0 0v9h14V8" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg>',
+  // Max tools
+  'Claude':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#CC9B7A"/><path d="M8 16l4-8 4 8M9.5 13h5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'OpenAI':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#000"/><path d="M12 4c4 0 7 3 7 7 0 1.5-.4 2.8-1.2 3.9L20 18h-3l-2-2.5C14 15.8 13 16 12 16c-4 0-7-3-7-7s3-5 7-5z" fill="white" opacity="0.9"/></svg>',
+  'LangChain':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#1C3A5E"/><circle cx="7" cy="12" r="2.5" stroke="#4A9EFF" stroke-width="1.5" fill="none"/><circle cx="17" cy="12" r="2.5" stroke="#4A9EFF" stroke-width="1.5" fill="none"/><path d="M9.5 12h5" stroke="#4A9EFF" stroke-width="1.5"/></svg>',
+  'Pinecone':   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#22C55E"/><path d="M12 3L5 9l7 3 7-3-7-6zm0 6v12M5 9l7 12M19 9l-7 12" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/></svg>',
+  'FastAPI':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#009688"/><path d="M12 4L12 20M4 12L20 12" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>',
+  'Docker':     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2496ED"/><path d="M4 13h16c0 3-2.5 5-5.5 5H9.5C6.5 18 4 16 4 13z" fill="white" opacity="0.9"/><rect x="6" y="10" width="2.5" height="2.5" rx="0.5" fill="white"/><rect x="9.5" y="10" width="2.5" height="2.5" rx="0.5" fill="white"/><rect x="13" y="10" width="2.5" height="2.5" rx="0.5" fill="white"/><rect x="9.5" y="7" width="2.5" height="2.5" rx="0.5" fill="white" opacity="0.7"/></svg>',
+  'AWS':        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FF9900"/><path d="M4 14Q12 8 20 14" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M7 14L5 16M17 14L19 16" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  'Terraform':  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#7B42BC"/><path d="M5 7l5 3v6l-5-3V7zm9-4l5 3v6l-5-3V3zm-4.5 8l5 3v6l-5-3V11z" fill="white" opacity="0.85"/></svg>',
+  'Wiz':        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0D6EFD"/><path d="M7 16l3-8 2 5 2-5 3 8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
+  'Vault':      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#FFCF25"/><rect x="6" y="5" width="12" height="14" rx="2" fill="#1A1A1A"/><circle cx="12" cy="12" r="3" stroke="#FFCF25" stroke-width="1.5" fill="none"/><path d="M12 9v2M12 13v2" stroke="#FFCF25" stroke-width="1" stroke-linecap="round"/></svg>',
+  'Semgrep':    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#09A04D"/><path d="M7 8h10M7 12h7M7 16h5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  'Falco':      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#00AEC7"/><path d="M12 3l8 18H4L12 3z" fill="white" opacity="0.85"/><path d="M10 14l2 4 2-4" stroke="#00AEC7" stroke-width="1.2" fill="none"/></svg>',
+};
+
+const agentIds = {
+  blue: 'agent-stela', purple: 'agent-mia', grey: 'agent-pete',
+  yellow: 'agent-jane', green: 'agent-vicky', black: 'agent-max'
+};
+const agentLinkLabels = {
+  blue: 'Stela', purple: 'Mia', grey: 'Pete',
+  yellow: 'Jane', green: 'Vicky', black: 'Max'
+};
+
+let kbToolIndex = 0;
+
+function kbUpdateStrip(color, toolIdx) {
   const d = kbData[color];
-  const dot = document.getElementById('kbAgentDot');
+  if (toolIdx !== undefined) kbToolIndex = toolIdx;
+  const tool = d.tools[kbToolIndex % d.tools.length];
+  const dot  = document.getElementById('kbAgentDot');
   const name = document.getElementById('kbAgentName');
   const role = document.getElementById('kbAgentRole');
-  const pills = document.getElementById('kbAgentPills');
+  const right = document.getElementById('kbAgentPills');
   if (!dot) return;
   dot.style.background = d.hex;
   dot.style.boxShadow = '0 0 6px ' + d.hex + '88';
   name.textContent = d.agent;
   role.textContent = d.role;
-  pills.innerHTML = d.tools.map(t =>
-    '<span class="kb-agent-pill">' + t + '</span>'
-  ).join('');
+  const svg = toolSVGs[tool] || '';
+  right.innerHTML =
+    '<span class="kb-tool-badge">' + svg + tool + '</span>' +
+    '<a class="kb-agent-link" href="#' + agentIds[color] + '">Zisti viac o ' + agentLinkLabels[color] + ' →</a>';
 }
-kbUpdateStrip('blue');
+kbUpdateStrip('blue', 0);
 
 (function initKbGame() {
   const gameEl  = document.getElementById('kbGame');
@@ -3513,6 +3590,8 @@ kbUpdateStrip('blue');
       if (now - lastCollect > 600) {
         lastCollect = now;
         if (hintEl) hintEl.style.display = 'none';
+        kbToolIndex++;
+        kbUpdateStrip(activeColor, kbToolIndex);
         showMsg(kbData[activeColor].text, kbData[activeColor].hex);
         spawn();
       }
@@ -3552,7 +3631,7 @@ kbUpdateStrip('blue');
     setTimeout(() => { el.style.transform = ''; }, 220);
     document.querySelectorAll('.kb-item').forEach(k => k.classList.remove('kb-active'));
     el.classList.add('kb-active');
-    kbUpdateStrip(type);
+    kbUpdateStrip(type, 0);
   };
 })();
 
@@ -3630,7 +3709,7 @@ if (mockupImgEl) {
     const logoShort = document.getElementById('navLogoShort');
     if (sun) sun.style.display = dark ? 'none' : 'block';
     if (moon) moon.style.display = dark ? 'block' : 'none';
-    if (logoFull) logoFull.src = dark ? 'static/logo-full-white.png' : 'static/logo-full-black.png';
+    if (logoFull) logoFull.src = 'static/logo-keyboard.png';
     if (logoShort) logoShort.src = dark ? 'static/logo-white.png' : 'static/logo-black.png';
     if (typeof updateHeroLogo === 'function') updateHeroLogo(dark);
   };
