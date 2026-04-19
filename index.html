@@ -1345,26 +1345,80 @@ section { padding: 100px 40px; }
 .kb-item.kb-grey .kb-label { color: var(--gray-400); }
 .kb-item.kb-black .kb-label { color: var(--text); }
 
-.keyboard-toast {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  border-radius: 100px;
-  padding: 14px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  z-index: 999;
-  opacity: 0;
-  transition: opacity 0.3s, transform 0.3s;
+/* ===================== KEYBOARD GAME ===================== */
+#kbGame {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: none;
+  border: 1px solid var(--border);
+  margin-top: 8px;
+}
+[data-theme="dark"] #kbGame { background: #0d0d14; border-color: rgba(255,255,255,0.06); }
+#kbGameCanvas {
+  position: absolute; inset: 0;
+  pointer-events: none; width: 100%; height: 100%;
+}
+#kbGameRobot {
+  position: absolute; width: 72px; height: 72px;
   pointer-events: none;
-  box-shadow: var(--shadow-lg);
+  transform: translate(-50%,-50%);
+  z-index: 10; opacity: 0;
+  transition: opacity 0.3s;
 }
-.keyboard-toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+#kbGameKeyboard {
+  position: absolute; width: 64px; height: 64px;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+  z-index: 5; animation: kbFloat 3s ease-in-out infinite;
 }
+@keyframes kbFloat {
+  0%,100% { margin-top:0; filter:drop-shadow(0 8px 16px rgba(0,0,0,0.15)); }
+  50%      { margin-top:-10px; filter:drop-shadow(0 16px 24px rgba(0,0,0,0.08)); }
+}
+.kbgame-msg {
+  position: absolute; top: 20px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-radius: 100px; padding: 10px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 600; white-space: nowrap;
+  z-index: 20; pointer-events: none;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+  animation: kbMsgIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+[data-theme="dark"] .kbgame-msg {
+  background: rgba(18,18,28,0.96); color: #fff;
+  border-color: rgba(255,255,255,0.08);
+}
+@keyframes kbMsgIn {
+  from { opacity:0; transform:translateX(-50%) translateY(12px) scale(0.95); }
+  to   { opacity:1; transform:translateX(-50%) translateY(0) scale(1); }
+}
+.kbgame-hint {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-secondary); opacity: 0.5;
+  pointer-events: none; z-index: 5; white-space: nowrap;
+}
+#kbGameGrid {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none;
+}
+[data-theme="dark"] #kbGameGrid {
+  background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+}
+.kb-item.kb-active { transform: translateY(-6px); }
+.kb-item.kb-active img { filter: brightness(1.1) drop-shadow(0 0 10px rgba(119,186,248,0.5)); }
 
 /* ===================== MOBILE MOCKUPS ===================== */
 #mobile {
@@ -1732,6 +1786,48 @@ section { padding: 100px 40px; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===================== TEAM MEMBERS ===================== */
+.team-members {
+  max-width: 1200px; margin: 0 auto 60px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+@media (max-width: 640px) { .team-members { grid-template-columns: 1fr; } }
+.team-card {
+  border-radius: var(--radius-lg); padding: 32px;
+  background: var(--card-bg); border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 24px;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.team-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg,rgba(119,186,248,0.07) 0%,rgba(193,191,255,0.05) 100%);
+  opacity: 0; transition: opacity 0.3s; border-radius: inherit;
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.team-card:hover::before { opacity: 1; }
+.team-photo {
+  width: 80px; height: 80px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.team-info { flex: 1; position: relative; z-index: 1; }
+.team-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px; font-weight: 700; margin-bottom: 6px;
+}
+.team-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px;
+  display: inline-block; margin-bottom: 10px;
+}
+.team-tag-dev    { background: rgba(119,186,248,0.12); color: var(--blue); }
+.team-tag-design { background: rgba(193,191,255,0.12); color: var(--purple); }
+.team-bio { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
 /* Agent color variants */
 .agent-blue .agent-role { color: var(--blue); }
@@ -2625,42 +2721,6 @@ footer::before {
   </div>
 </section>
 
-<!-- ===================== KEYBOARD INTERACTIVE ===================== -->
-<section id="keyboard-section">
-  <div class="keyboard-section-inner fade-up">
-    <div class="section-label" style="text-align:center">Interaktívna sekcia</div>
-    <h2 class="section-h2" style="text-align:center; margin-bottom:8px">Nástroje, ktoré milujeme.</h2>
-    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:48px">Každý projekt začína pri klávesnici. Klikni na svoju obľúbenú.</p>
-    <div class="keyboards-row">
-      <div class="kb-item kb-blue" onclick="kbClick(this,'blue')">
-        <img src="static/keyboard-blue.png" alt="Blue keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Blue</span>
-      </div>
-      <div class="kb-item kb-purple" onclick="kbClick(this,'purple')">
-        <img src="static/keyboard-purple.png" alt="Purple keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Purple</span>
-      </div>
-      <div class="kb-item kb-grey" onclick="kbClick(this,'grey')">
-        <img src="static/keyboard-grey.png" alt="Grey keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Grey</span>
-      </div>
-      <div class="kb-item kb-yellow" onclick="kbClick(this,'yellow')">
-        <img src="static/keyboard-yellow.png" alt="Yellow keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Yellow</span>
-      </div>
-      <div class="kb-item kb-green" onclick="kbClick(this,'green')">
-        <img src="static/keyboard-green.png" alt="Green keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Green</span>
-      </div>
-      <div class="kb-item kb-black" onclick="kbClick(this,'black')">
-        <img src="static/keyboard-black.png" alt="Black keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Black</span>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="keyboard-toast" id="keyboardToast"></div>
-
 <!-- ===================== MOBILE MOCKUPS ===================== -->
 <section id="mobile">
   <div class="mobile-inner">
@@ -2733,12 +2793,72 @@ footer::before {
   </div>
 </section>
 
+<!-- ===================== KEYBOARD INTERACTIVE ===================== -->
+<section id="keyboard-section">
+  <div class="keyboard-section-inner fade-up">
+    <div class="section-label" style="text-align:center">Interaktívna sekcia</div>
+    <h2 class="section-h2" style="text-align:center; margin-bottom:8px">Nástroje, ktoré milujeme.</h2>
+    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici. Vyber farbu a naveď robota.</p>
+    <div class="keyboards-row" style="margin-bottom:32px">
+      <div class="kb-item kb-blue kb-active" onclick="kbClick(this,'blue')">
+        <img src="static/keyboard-blue.png" alt="Blue keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Blue</span>
+      </div>
+      <div class="kb-item kb-purple" onclick="kbClick(this,'purple')">
+        <img src="static/keyboard-purple.png" alt="Purple keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Purple</span>
+      </div>
+      <div class="kb-item kb-grey" onclick="kbClick(this,'grey')">
+        <img src="static/keyboard-grey.png" alt="Grey keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Grey</span>
+      </div>
+      <div class="kb-item kb-yellow" onclick="kbClick(this,'yellow')">
+        <img src="static/keyboard-yellow.png" alt="Yellow keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Yellow</span>
+      </div>
+      <div class="kb-item kb-green" onclick="kbClick(this,'green')">
+        <img src="static/keyboard-green.png" alt="Green keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Green</span>
+      </div>
+      <div class="kb-item kb-black" onclick="kbClick(this,'black')">
+        <img src="static/keyboard-black.png" alt="Black keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Black</span>
+      </div>
+    </div>
+    <div id="kbGame">
+      <div id="kbGameGrid"></div>
+      <canvas id="kbGameCanvas"></canvas>
+      <img src="static/robot-blue.png" alt="Robot" id="kbGameRobot">
+      <img src="static/keyboard-blue.png" alt="Klávesnica" id="kbGameKeyboard">
+      <div class="kbgame-hint" id="kbGameHint">Navádzaj robota a zbieraj klávesnice...</div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== AI AGENTS ===================== -->
 <section id="agents">
   <div class="agents-header fade-up">
     <div class="section-label">AI Tím</div>
     <h2 class="section-h2">Náš AI tím pracuje non-stop.</h2>
     <p style="font-size:16px; color:var(--text-secondary); margin-top:12px; max-width:480px">Každý agent má špecializáciu. Spoločne tvoria výkonný ekosystém.</p>
+  </div>
+  <div class="team-members fade-up">
+    <div class="team-card">
+      <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="team-photo">
+      <div class="team-info">
+        <div class="team-name">Andrea Kollová</div>
+        <div class="team-tag team-tag-dev">Vývoj</div>
+        <div class="team-bio">Full-stack developer a architektka systémov. Stojí za backendom, AI integráciami a technickým vedením projektov.</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="team-photo">
+      <div class="team-info">
+        <div class="team-name">Natália Fondrková</div>
+        <div class="team-tag team-tag-design">Dizajn</div>
+        <div class="team-bio">UI/UX dizajnérka s citom pre detail. Zodpovedá za vizuálnu identitu, interakčný dizajn a používateľský zážitok.</div>
+      </div>
+    </div>
   </div>
   <div class="agents-grid">
     <!-- Max AI -->
@@ -3239,31 +3359,128 @@ function toggleService(item) {
   if (!isOpen) item.classList.add('open');
 }
 
-// ===================== KEYBOARD INTERACTIVE =====================
+// ===================== KEYBOARD INTERACTIVE GAME =====================
 const kbData = {
-  blue:   { color: '#77BAF8', bg: '#0a1628', text: '🚀 Píšeme kód, ktorý konvertuje.' },
-  purple: { color: '#C1BFFF', bg: '#13102e', text: '🎨 Dizajnujeme zážitky, nie len rozhrania.' },
-  grey:   { color: '#A3A3A3', bg: '#1a1a1a', text: '🤖 AI agenti pracujú 24/7.' },
-  yellow: { color: '#B8F200', bg: '#1a2100', text: '⚡ Rýchlosť je funkcia, nie bonus.' },
-  green:  { color: '#00E57A', bg: '#001a0d', text: '🌱 Každý projekt rastie s nami.' },
-  black:  { color: '#FFFFFF', bg: '#0A0A0A', text: '🖥️ Každý pixel má zmysel.' }
+  blue:   { hex: '#0ea5e9', text: 'Čistý kód je začiatok všetkého.' },
+  purple: { hex: '#a855f7', text: 'Kreativita mení nápady na produkty.' },
+  grey:   { hex: '#6b7280', text: 'Bez štruktúry sa veci rozpadajú.' },
+  yellow: { hex: '#b8f300', text: 'Každý produkt začína ako jednoduchý nápad.' },
+  green:  { hex: '#22c55e', text: 'Výkon nie je funkcia. Je to štandard.' },
+  black:  { hex: '#71717a', text: 'Zložitosť riešime v zákulisí.' }
 };
-const toast = document.getElementById('keyboardToast');
-let toastTimeout;
 
-function kbClick(el, type) {
-  const kb = kbData[type];
-  // bounce animation
-  el.style.transform = 'translateY(-14px) scale(0.95)';
-  setTimeout(() => { el.style.transform = ''; }, 220);
-  // toast
-  clearTimeout(toastTimeout);
-  toast.textContent = kb.text;
-  toast.style.background = kb.bg;
-  toast.style.color = kb.color;
-  toast.classList.add('show');
-  toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
-}
+(function initKbGame() {
+  const gameEl  = document.getElementById('kbGame');
+  const canvasEl = document.getElementById('kbGameCanvas');
+  const robotEl = document.getElementById('kbGameRobot');
+  const kbEl    = document.getElementById('kbGameKeyboard');
+  const hintEl  = document.getElementById('kbGameHint');
+  if (!gameEl) return;
+
+  const ctx2 = canvasEl.getContext('2d');
+  let activeColor = 'blue';
+  let mouse = { x: 0, y: 0 };
+  let robot = { x: 0, y: 0 };
+  let kbPos = { x: 0, y: 0 };
+  let trail = [];
+  let frame, lastCollect = 0;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function resize() {
+    const r = gameEl.getBoundingClientRect();
+    canvasEl.width = r.width; canvasEl.height = r.height;
+  }
+
+  function spawn() {
+    const r = gameEl.getBoundingClientRect();
+    const m = 80;
+    kbPos = { x: m + Math.random() * (r.width - m*2), y: m + Math.random() * (r.height - m*2) };
+    kbEl.style.left = kbPos.x + 'px';
+    kbEl.style.top  = kbPos.y + 'px';
+  }
+
+  function showMsg(text, color) {
+    gameEl.querySelectorAll('.kbgame-msg').forEach(m => m.remove());
+    const d = document.createElement('div');
+    d.className = 'kbgame-msg';
+    d.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';display:inline-block;flex-shrink:0"></span>' + text;
+    gameEl.appendChild(d);
+    setTimeout(() => { d.style.transition = 'opacity 0.4s'; d.style.opacity = '0'; setTimeout(() => d.remove(), 400); }, 3500);
+  }
+
+  function tick() {
+    robot.x = lerp(robot.x, mouse.x, 0.09);
+    robot.y = lerp(robot.y, mouse.y, 0.09);
+    robotEl.style.left = robot.x + 'px';
+    robotEl.style.top  = robot.y + 'px';
+
+    trail.unshift({ x: robot.x, y: robot.y });
+    if (trail.length > 50) trail.pop();
+
+    ctx2.clearRect(0, 0, canvasEl.width, canvasEl.height);
+    if (trail.length > 2) {
+      const c = kbData[activeColor].hex;
+      ctx2.beginPath();
+      ctx2.moveTo(trail[0].x, trail[0].y);
+      for (let i = 1; i < trail.length - 2; i++) {
+        ctx2.quadraticCurveTo(trail[i].x, trail[i].y, (trail[i].x + trail[i+1].x)/2, (trail[i].y + trail[i+1].y)/2);
+      }
+      const g = ctx2.createLinearGradient(trail[0].x, trail[0].y, trail[trail.length-1].x, trail[trail.length-1].y);
+      g.addColorStop(0, c + '55'); g.addColorStop(1, c + '00');
+      ctx2.shadowBlur = 14; ctx2.shadowColor = c + '44';
+      ctx2.strokeStyle = g; ctx2.lineWidth = 26; ctx2.lineCap = 'round'; ctx2.lineJoin = 'round'; ctx2.stroke();
+      ctx2.shadowBlur = 0;
+      ctx2.lineWidth = 1.5; ctx2.strokeStyle = c + 'bb'; ctx2.stroke();
+    }
+
+    const dist = Math.hypot(robot.x - kbPos.x, robot.y - kbPos.y);
+    if (dist < 52) {
+      const now = Date.now();
+      if (now - lastCollect > 600) {
+        lastCollect = now;
+        if (hintEl) hintEl.style.display = 'none';
+        showMsg(kbData[activeColor].text, kbData[activeColor].hex);
+        spawn();
+      }
+    }
+    frame = requestAnimationFrame(tick);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  const r0 = gameEl.getBoundingClientRect();
+  robot.x = mouse.x = r0.width / 2;
+  robot.y = mouse.y = r0.height / 2;
+  spawn();
+
+  gameEl.addEventListener('mouseenter', () => {
+    robotEl.style.opacity = '1';
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(tick);
+  });
+  gameEl.addEventListener('mouseleave', () => {
+    robotEl.style.opacity = '0';
+    cancelAnimationFrame(frame);
+    ctx2.clearRect(0, 0, canvasEl.width, canvasEl.height);
+    trail = [];
+  });
+  gameEl.addEventListener('mousemove', e => {
+    const r = gameEl.getBoundingClientRect();
+    mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+  });
+
+  window.kbClick = function(el, type) {
+    activeColor = type;
+    robotEl.src = 'static/robot-' + type + '.png';
+    kbEl.src    = 'static/keyboard-' + type + '.png';
+    trail = [];
+    el.style.transform = 'translateY(-14px) scale(0.95)';
+    setTimeout(() => { el.style.transform = ''; }, 220);
+    document.querySelectorAll('.kb-item').forEach(k => k.classList.remove('kb-active'));
+    el.classList.add('kb-active');
+  };
+})();
 
 // ===================== MOBILE MOCKUP CAROUSEL =====================
 const mockupImages = [
