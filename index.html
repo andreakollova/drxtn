@@ -432,7 +432,7 @@ nav.scrolled {
 .hero-logo-alt {
   height: 36px;
   margin-bottom: 24px;
-  opacity: 0.7;
+  opacity: 1;
 }
 [data-theme="dark"] .hero-logo-alt { filter: invert(1); }
 
@@ -1854,123 +1854,125 @@ section { padding: 100px 40px; }
 #gradient-cta {
   position: relative;
   overflow: hidden;
-  padding: 120px 40px;
+  padding: 130px 40px;
   text-align: center;
+  background: linear-gradient(125deg, #1a8fe8 0%, #2c9ffa 35%, #6ab4ff 68%, #bac1fe 100%);
 }
 #gradient-cta::before {
   content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('static/gradient-blue-purple.png');
-  background-size: cover;
-  background-position: center;
-  opacity: 1;
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 75% 30%, rgba(186,193,254,0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(44,159,250,0.3) 0%, transparent 50%);
+  pointer-events: none;
 }
 #gradient-cta::after {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background-image: url('static/pattern.png');
-  background-size: 180px;
-  opacity: 0.06;
+  background-size: 200px;
+  opacity: 0.05;
 }
 .gradient-cta-inner {
   position: relative;
   z-index: 1;
-  max-width: 700px;
+  max-width: 780px;
   margin: 0 auto;
 }
 .gradient-cta-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 11px; font-weight: 500;
   letter-spacing: 0.2em;
-  color: rgba(10,10,10,0.5);
+  color: rgba(255,255,255,0.6);
   text-transform: uppercase;
   margin-bottom: 20px;
 }
 .gradient-cta-h2 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(36px, 5vw, 60px);
+  font-size: clamp(38px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.08;
-  color: #0A0A0A;
+  line-height: 1.06;
+  color: #fff;
   margin-bottom: 18px;
 }
 .gradient-cta-sub {
   font-size: 17px;
-  color: rgba(10,10,10,0.6);
-  margin-bottom: 40px;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 0;
   line-height: 1.6;
 }
+/* people row */
+.gcta-team {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; margin: 40px 0 44px;
+}
+.gcta-person {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.gcta-avatar {
+  width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.75);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+}
+.gcta-avatar:hover { transform: scale(1.07); box-shadow: 0 14px 36px rgba(0,0,0,0.22); }
+.gcta-person-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 700; color: #fff;
+}
+.gcta-person-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.gcta-sep {
+  font-size: 22px; color: rgba(255,255,255,0.25);
+  font-weight: 200; padding: 0 4px; margin-bottom: 28px;
+}
+/* buttons */
 .gradient-cta-btns {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 52px;
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 52px;
 }
 .gradient-cta-btn-primary {
-  background: #0A0A0A;
-  color: #fff;
-  border-radius: 100px;
-  padding: 16px 32px;
-  font-size: 15px;
-  font-weight: 700;
-  font-family: inherit;
+  background: #fff; color: #1a6bc7;
+  border-radius: 100px; padding: 16px 36px;
+  font-size: 15px; font-weight: 700; font-family: inherit;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
   display: inline-block;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
 }
-.gradient-cta-btn-primary:hover { transform: scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+.gradient-cta-btn-primary:hover { transform: scale(1.04); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
 .gradient-cta-btn-ghost {
-  background: rgba(255,255,255,0.4);
-  color: #0A0A0A;
-  border-radius: 100px;
-  padding: 16px 32px;
-  font-size: 15px;
-  font-weight: 600;
-  font-family: inherit;
+  background: rgba(255,255,255,0.15); color: #fff;
+  border-radius: 100px; padding: 16px 36px;
+  font-size: 15px; font-weight: 600; font-family: inherit;
   text-decoration: none;
-  border: 1px solid rgba(0,0,0,0.12);
-  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   transition: background 0.2s;
   display: inline-block;
 }
-.gradient-cta-btn-ghost:hover { background: rgba(255,255,255,0.6); }
+.gradient-cta-btn-ghost:hover { background: rgba(255,255,255,0.25); }
+/* stats */
 .gradient-cta-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
+  display: flex; align-items: center; justify-content: center; gap: 0;
 }
 .gradient-cta-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 36px;
+  display: flex; flex-direction: column; align-items: center; padding: 0 36px;
 }
 .gcs-num {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #0A0A0A;
+  font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: #fff;
 }
 .gcs-label {
-  font-size: 12px;
-  color: rgba(10,10,10,0.5);
-  margin-top: 2px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px;
+  text-transform: uppercase; letter-spacing: 0.1em;
   font-family: 'JetBrains Mono', monospace;
 }
-.gradient-cta-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(10,10,10,0.15);
-}
+.gradient-cta-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
 
 /* ===================== CONTACT ===================== */
 #contact {
@@ -2028,6 +2030,25 @@ section { padding: 100px 40px; }
   margin-top: 40px;
 }
 [data-theme="dark"] .contact-info-circle { opacity: 0.03; }
+
+/* Contact team row */
+.contact-team {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 28px;
+}
+.contact-team-avatars { display: flex; }
+.contact-team-avatar {
+  width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
+  border: 2.5px solid var(--bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.contact-team-names {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; font-weight: 700;
+}
+.contact-team-sub {
+  font-size: 13px; color: var(--text-secondary); margin-top: 2px;
+}
 
 /* Meeting toggle */
 .meeting-toggle {
@@ -2391,7 +2412,7 @@ footer::before {
 
 <!-- Page Intro -->
 <div class="page-intro" id="pageIntro">
-  <div class="page-intro-logo">Drixton</div>
+  <img src="static/logo-full-white.png" alt="Drixton" class="page-intro-logo" style="height:40px;width:auto;" onerror="this.outerHTML='<div class=\'page-intro-logo\'>Drixton</div>'">
 </div>
 
 <!-- Custom Cursor -->
@@ -2936,6 +2957,19 @@ footer::before {
     <div class="gradient-cta-label">Drixton Studio</div>
     <h2 class="gradient-cta-h2">Pripravení spustiť<br>váš ďalší projekt?</h2>
     <p class="gradient-cta-sub">Dohodnite si bezplatný 30-minútový discovery call. Bez záväzkov.</p>
+    <div class="gcta-team">
+      <div class="gcta-person">
+        <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="gcta-avatar">
+        <div class="gcta-person-name">Andrea Kollová</div>
+        <div class="gcta-person-role">Vývoj</div>
+      </div>
+      <div class="gcta-sep">&amp;</div>
+      <div class="gcta-person">
+        <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="gcta-avatar">
+        <div class="gcta-person-name">Natália Fondrková</div>
+        <div class="gcta-person-role">Dizajn</div>
+      </div>
+    </div>
     <div class="gradient-cta-btns">
       <a href="#contact" class="gradient-cta-btn-primary">Začnime spoluprácu →</a>
       <a href="#projects" class="gradient-cta-btn-ghost">Pozrieť portfólio</a>
@@ -2982,6 +3016,16 @@ footer::before {
     </div>
 
     <div class="fade-up" style="transition-delay:0.15s">
+      <div class="contact-team">
+        <div class="contact-team-avatars">
+          <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="contact-team-avatar">
+          <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="contact-team-avatar" style="margin-left:-16px">
+        </div>
+        <div class="contact-team-text">
+          <div class="contact-team-names">Andrea &amp; Natália</div>
+          <div class="contact-team-sub">Odpovieme do 24 hodín</div>
+        </div>
+      </div>
       <div class="meeting-toggle">
         <button class="meeting-btn active" onclick="setMeeting(this,'online')">● Online stretnutie</button>
         <button class="meeting-btn" onclick="setMeeting(this,'personal')">○ Osobné stretnutie</button>
