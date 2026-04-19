@@ -493,7 +493,10 @@ nav.scrolled {
 [data-theme="dark"] .hero-h1 .outline-word { -webkit-text-stroke: 2px rgba(255,255,255,0.5); }
 .hero-h1 .typeword {
   display: block;
-  color: #77BAF8;
+  background: linear-gradient(125deg, #1a8fe8 0%, #2c9ffa 35%, #6ab4ff 68%, #bac1fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-right: 0;
   transition: opacity 0.4s, transform 0.4s;
 }
@@ -726,6 +729,7 @@ section { padding: 100px 40px; }
 
 .carousel-wrap {
   position: relative;
+  touch-action: pan-x;
 }
 .carousel {
   display: flex;
@@ -736,6 +740,7 @@ section { padding: 100px 40px; }
   scrollbar-width: none;
   padding: 0 40px 20px;
   cursor: grab;
+  touch-action: pan-x;
 }
 .carousel::-webkit-scrollbar { display: none; }
 .carousel.dragging { cursor: grabbing; scroll-snap-type: none; }
@@ -2069,6 +2074,7 @@ section { padding: 100px 40px; }
   flex-shrink: 0;
 }
 .contact-info-circle {
+  display: none;
   width: 280px;
   opacity: 0.06;
   margin-top: 40px;
@@ -2258,7 +2264,7 @@ section { padding: 100px 40px; }
 
 /* ===================== FOOTER ===================== */
 footer {
-  background: #0A0A0A;
+  background: linear-gradient(135deg, #1a8fe8 0%, #2c9ffa 30%, #6ab4ff 65%, #bac1fe 100%);
   color: rgba(255,255,255,0.7);
   padding: 80px 40px 40px;
   position: relative;
@@ -2290,7 +2296,7 @@ footer::before {
   position: absolute;
   top: -80px; left: 0; right: 0;
   height: 80px;
-  background: linear-gradient(to bottom, transparent, #0A0A0A);
+  background: linear-gradient(to bottom, transparent, #1a8fe8);
   pointer-events: none;
 }
 
@@ -2305,7 +2311,7 @@ footer::before {
 
 .footer-logo-area { }
 .footer-logo {
-  height: 64px;
+  height: 80px;
   margin-bottom: 16px;
   display: block;
 }
@@ -2411,6 +2417,10 @@ footer::before {
 .footer-legal a:hover { color: #fff; }
 
 /* ===================== RESPONSIVE ===================== */
+
+/* --- Tablet (≤900px) already handled inline above --- */
+
+/* --- Mobile (≤768px) --- */
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
   nav.scrolled { padding: 12px 20px; }
@@ -2418,29 +2428,148 @@ footer::before {
   .hamburger { display: flex; }
   .cta-btn.desktop { display: none; }
 
-  section { padding: 60px 20px; }
-  #hero { padding: 100px 20px 60px; }
-  .hero-h1 { font-size: clamp(40px, 8vw, 64px); }
+  /* Hero */
+  section { padding: 56px 20px; }
+  #hero {
+    padding: 0;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+  }
+  .hero-inner { padding: 100px 24px 60px; }
+  .hero-h1 { font-size: clamp(36px, 9vw, 52px); line-height: 1.1; }
+  .hero-sub { font-size: 15px; }
+  .hero-btns { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .hero-btns a { width: 100%; max-width: 300px; text-align: center; justify-content: center; }
   .hero-keyboard { display: none; }
-  .hero-circle { width: 160px; top: 60px; right: 20px; }
+  .hero-circle { display: none; }
+  .hero-bg-text { font-size: clamp(60px, 22vw, 120px); }
+  /* Float stat cards — 2×2 grid around content */
+  .hero-mini {
+    padding: 10px 12px;
+    font-size: 11px;
+    min-width: 100px;
+  }
+  .hero-mini-value { font-size: 20px !important; }
+  .hero-mini-1 { top: 14%; left: 2%; }
+  .hero-mini-2 { top: 14%; right: 2%; }
+  .hero-mini-3 { bottom: 10%; left: 2%; }
+  .hero-mini-4 { bottom: 10%; right: 2%; }
 
+  /* Projects */
   .projects-header { padding: 0 20px; }
-  .carousel { padding: 0 20px 20px; }
+  .carousel { padding: 0 20px 20px; touch-action: pan-x; }
   .carousel-nav { padding: 0 20px; }
+  .project-card { flex: 0 0 82vw; }
 
-  .services-panel { padding: 40px 32px; }
+  /* Services — horizontal swipe carousel on mobile */
+  .services-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    padding-bottom: 0;
+  }
+  .services-grid::-webkit-scrollbar { display: none; }
+  .services-panel {
+    flex: 0 0 92vw;
+    scroll-snap-align: start;
+    min-height: auto !important;
+    padding: 48px 28px 56px;
+    border-radius: 0;
+  }
+  .services-panel + .services-panel { border-left: 1px solid rgba(255,255,255,0.08); }
+  .services-panel-inner { grid-template-columns: 1fr; gap: 32px; }
+  .services-visual { display: none; }
+  .svc-list { grid-template-columns: 1fr; gap: 0; }
+  .svc-entry { padding: 10px 0; }
+  .panel-pills { gap: 6px; }
+  .panel-pill { font-size: 11px; padding: 5px 10px; }
 
-  #agents { padding: 60px 20px; }
-  .agents-header { margin-bottom: 40px; }
+  /* Mobile mockups */
+  .mobile-inner { grid-template-columns: 1fr; }
+  .mobile-mockup-wrap { display: flex; justify-content: center; }
 
-  #contact { padding: 60px 20px; }
+  /* Keyboard section */
+  #keyboard-section { padding: 48px 0 56px; }
+  .keyboard-section-inner { padding: 0 20px; }
+  .keyboards-row {
+    gap: 8px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+  }
+  .keyboards-row::-webkit-scrollbar { display: none; }
+  .kb-item {
+    flex: 0 0 calc(33vw - 16px);
+    min-width: 90px;
+    max-width: 120px;
+    scroll-snap-align: start;
+    padding: 10px 6px 8px;
+  }
+  .kb-item img { width: 60px; height: 60px; }
+  .kb-label { font-size: 10px; }
+  .kb-role { font-size: 9px; }
+  #kbGame {
+    height: 300px;
+    margin: 16px 0 0;
+    border-radius: 20px;
+  }
 
+  /* AI Agents — 2-col compact */
+  #agents { padding: 56px 20px; }
+  .agents-header { margin-bottom: 32px; padding: 0; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .agent-card { padding: 20px 14px 18px; border-radius: 20px; }
+  .agent-robot { width: 64px; height: 64px; margin-bottom: 12px; }
+  .agent-name { font-size: 16px; }
+  .agent-real-name { font-size: 12px; }
+  .agent-role { font-size: 11px; }
+  .agent-desc { font-size: 12px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* Team members */
+  .team-members { grid-template-columns: 1fr; }
+
+  /* Gradient CTA */
+  #gradient-cta { padding: 60px 24px; }
+  .gradient-cta-h2 { font-size: clamp(28px, 7vw, 40px); }
+  .gradient-cta-btns { flex-direction: column; gap: 12px; align-items: center; }
+  .gradient-cta-btn-primary, .gradient-cta-btn-ghost { width: 100%; max-width: 280px; text-align: center; }
+  .gradient-cta-stats { gap: 24px; flex-wrap: wrap; justify-content: center; }
+
+  /* Contact */
+  #contact { padding: 56px 20px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .contact-info-circle { display: none; }
+  .interest-pills { gap: 8px; }
+  .interest-pill { font-size: 13px; padding: 8px 14px; }
+
+  /* Footer */
   footer { padding: 60px 20px 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-logo-area { grid-column: 1 / -1; }
+  .footer-logo { height: 64px; }
 }
 
+/* --- Small mobile (≤480px) --- */
 @media (max-width: 480px) {
-  .project-card { flex: 0 0 85vw; }
-  .hero-h1 { font-size: 38px; }
+  .hero-h1 { font-size: 34px; }
+  .hero-mini { display: none; }
+  .hero-inner { padding: 80px 20px 56px; }
+
+  .agents-grid { grid-template-columns: 1fr; gap: 12px; }
+  .agent-desc { -webkit-line-clamp: 2; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-logo { height: 56px; }
+
+  #kbGame { height: 260px; }
+  .kb-item { flex: 0 0 calc(50vw - 20px); max-width: 140px; }
 }
 
 /* ===================== DARK MODE EXTRAS ===================== */
@@ -2469,10 +2598,11 @@ footer::before {
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#services" onclick="closeMobileMenu()">Čo robíme</a>
-  <a href="#projects" onclick="closeMobileMenu()">Projekty</a>
-  <a href="#agents" onclick="closeMobileMenu()">O nás</a>
-  <a href="#contact" onclick="closeMobileMenu()">Kontakt</a>
+  <a href="#services" onclick="closeMobileMenu()" data-i18n="nav-services">Čo robíme</a>
+  <a href="#projects" onclick="closeMobileMenu()" data-i18n="nav-projects">Projekty</a>
+  <a href="#keyboard-section" onclick="closeMobileMenu()" data-i18n="nav-tools">Nástroje</a>
+  <a href="#agents" onclick="closeMobileMenu()" data-i18n="nav-about">O nás</a>
+  <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav-contact">Kontakt</a>
 </div>
 
 <!-- Navigation -->
@@ -2485,11 +2615,11 @@ footer::before {
     <span class="nav-logo-placeholder" id="navLogoText" style="display:none">Drixton</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#services">Čo robíme</a></li>
-    <li><a href="#projects">Projekty</a></li>
-    <li><a href="#keyboard-section">Nástroje</a></li>
-    <li><a href="#agents">O nás</a></li>
-    <li><a href="#contact">Kontakt</a></li>
+    <li><a href="#services" data-i18n="nav-services">Čo robíme</a></li>
+    <li><a href="#projects" data-i18n="nav-projects">Projekty</a></li>
+    <li><a href="#keyboard-section" data-i18n="nav-tools">Nástroje</a></li>
+    <li><a href="#agents" data-i18n="nav-about">O nás</a></li>
+    <li><a href="#contact" data-i18n="nav-contact">Kontakt</a></li>
   </ul>
   <div class="nav-actions">
     <div class="lang-toggle">
@@ -2551,16 +2681,15 @@ footer::before {
 
   <div class="hero-inner">
     <div class="hero-content">
-      <img src="static/logo-black.png" alt="Drixton" class="hero-logo-alt" id="heroLogoAlt" loading="lazy" onerror="this.style.display='none'">
       <div class="hero-badge fade-up">
         <div class="hero-badge-dot"></div>
-        <span>Web &amp; Dev Studio</span>
+        <span data-i18n="hero-badge">Web &amp; Dev Studio</span>
       </div>
       <h1 class="hero-h1" id="heroH1" aria-label="Tvoríme digitálne produkty, ktoré konvertujú."></h1>
-      <p class="hero-sub" id="heroSub">Dizajn. Vývoj. AI riešenia.<br>Všetko pod jednou strechou.</p>
+      <p class="hero-sub" id="heroSub" data-i18n="hero-sub">Dizajn. Vývoj. AI riešenia.<br>Všetko pod jednou strechou.</p>
       <div class="hero-btns" id="heroBtns">
-        <a href="#projects" class="btn-primary">Pozrieť projekty</a>
-        <a href="#services" class="btn-secondary"><span>Zistiť viac</span><span>→</span></a>
+        <a href="#projects" class="btn-primary" data-i18n="hero-btn-projects">Pozrieť projekty</a>
+        <a href="#services" class="btn-secondary"><span data-i18n="hero-btn-more">Zistiť viac</span><span>→</span></a>
       </div>
     </div>
   </div>
@@ -2569,8 +2698,8 @@ footer::before {
 <!-- ===================== PROJECTS ===================== -->
 <section id="projects">
   <div class="projects-header fade-up">
-    <div class="section-label">Projekty</div>
-    <h2 class="section-h2">Posledné práce, na ktoré sme hrdí.</h2>
+    <div class="section-label" data-i18n="projects-label">Projekty</div>
+    <h2 class="section-h2" data-i18n="projects-h2">Posledné práce, na ktoré sme hrdí.</h2>
   </div>
 
   <div class="carousel-wrap">
@@ -2910,9 +3039,9 @@ footer::before {
 <!-- ===================== AI AGENTS ===================== -->
 <section id="agents">
   <div class="agents-header fade-up">
-    <div class="section-label">AI Tím</div>
-    <h2 class="section-h2">Náš AI tím pracuje non-stop.</h2>
-    <p style="font-size:16px; color:var(--text-secondary); margin-top:12px; max-width:480px">Každý agent má špecializáciu. Spoločne tvoria výkonný ekosystém.</p>
+    <div class="section-label" data-i18n="agents-label">AI Tím</div>
+    <h2 class="section-h2" data-i18n="agents-h2">Náš tím pracuje nonstop.</h2>
+    <p style="font-size:16px; color:var(--text-secondary); margin-top:12px; max-width:480px" data-i18n="agents-sub">Každý agent má špecializáciu. Spoločne tvoria výkonný ekosystém.</p>
   </div>
   <div class="agents-grid">
     <!-- Max AI -->
@@ -2987,12 +3116,12 @@ footer::before {
 <!-- ===================== GRADIENT CTA SECTION ===================== -->
 <section id="gradient-cta">
   <div class="gradient-cta-inner">
-    <div class="gradient-cta-label">Drixton Studio</div>
-    <h2 class="gradient-cta-h2">Pripravení spustiť<br>váš ďalší projekt?</h2>
-    <p class="gradient-cta-sub">Dohodnite si bezplatný 30-minútový discovery call. Bez záväzkov.</p>
+    <div class="gradient-cta-label" data-i18n="cta-label">Drixton Studio</div>
+    <h2 class="gradient-cta-h2" data-i18n="cta-h2">Pripravení spustiť<br>váš ďalší projekt?</h2>
+    <p class="gradient-cta-sub" data-i18n="cta-sub">Dohodnite si bezplatný 30-minútový discovery call. Bez záväzkov.</p>
     <div class="gradient-cta-btns" style="margin-top:40px">
-      <a href="#contact" class="gradient-cta-btn-primary">Začnime spoluprácu →</a>
-      <a href="#projects" class="gradient-cta-btn-ghost">Pozrieť portfólio</a>
+      <a href="#contact" class="gradient-cta-btn-primary" data-i18n="cta-btn-primary">Začnime spoluprácu →</a>
+      <a href="#projects" class="gradient-cta-btn-ghost" data-i18n="cta-btn-ghost">Pozrieť portfólio</a>
     </div>
     <div class="gradient-cta-stats">
       <div class="gradient-cta-stat"><span class="gcs-num">50+</span><span class="gcs-label">projektov</span></div>
@@ -3008,8 +3137,8 @@ footer::before {
 <section id="contact">
   <div class="contact-inner">
     <div class="fade-up">
-      <div class="section-label">Kontakt</div>
-      <h2 class="contact-info" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,4vw,48px); font-weight:700; letter-spacing:-0.02em; line-height:1.1; margin-bottom:20px">
+      <div class="section-label" data-i18n="contact-label">Kontakt</div>
+      <h2 class="contact-info" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,4vw,48px); font-weight:700; letter-spacing:-0.02em; line-height:1.1; margin-bottom:20px" data-i18n="contact-h2">
         Dohodnime si<br>stretnutie.
       </h2>
       <div class="contact-team" style="margin-bottom:20px">
@@ -3022,7 +3151,7 @@ footer::before {
           <div class="contact-team-sub">Odpovieme do 24 hodín</div>
         </div>
       </div>
-      <p style="font-size:16px; color:var(--text-secondary); line-height:1.7; margin-bottom:40px">Online alebo osobne – sme flexibilní. Ozveme sa do 24 hodín.</p>
+      <p style="font-size:16px; color:var(--text-secondary); line-height:1.7; margin-bottom:40px" data-i18n="contact-sub">Online alebo osobne – sme flexibilní. Ozveme sa do 24 hodín.</p>
       <div class="contact-detail">
         <div class="contact-detail-icon">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -3110,7 +3239,7 @@ footer::before {
         <img src="static/logo-keyboard-white.png" alt="Drixton" class="footer-logo"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
         <div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:#fff; margin-bottom:16px; display:none">Drixton</div>
-        <p class="footer-claim">Tvoríme digitálne produkty, ktoré konvertujú. Web & Dev Studio.</p>
+        <p class="footer-claim" data-i18n="footer-claim">Tvoríme digitálne produkty, ktoré konvertujú. Web & Dev Studio.</p>
         <div class="social-links">
           <a href="#" class="social-link" aria-label="Instagram">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -3124,16 +3253,17 @@ footer::before {
         </div>
       </div>
       <div class="footer-col">
-        <h4>Navigácia</h4>
+        <h4 data-i18n="footer-nav-label">Navigácia</h4>
         <ul>
-          <li><a href="#services">Čo robíme</a></li>
-          <li><a href="#projects">Projekty</a></li>
-          <li><a href="#agents">O nás</a></li>
-          <li><a href="#contact">Kontakt</a></li>
+          <li><a href="#services" data-i18n="nav-services">Čo robíme</a></li>
+          <li><a href="#projects" data-i18n="nav-projects">Projekty</a></li>
+          <li><a href="#keyboard-section" data-i18n="nav-tools">Nástroje</a></li>
+          <li><a href="#agents" data-i18n="nav-about">O nás</a></li>
+          <li><a href="#contact" data-i18n="nav-contact">Kontakt</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Kontakt</h4>
+        <h4 data-i18n="footer-contact-label">Kontakt</h4>
         <ul>
           <li><a href="mailto:hello@drixton.sk">hello@drixton.sk</a></li>
           <li><a href="tel:+421000000000">+421 000 000 000</a></li>
@@ -3141,8 +3271,8 @@ footer::before {
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Newsletter</h4>
-        <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; line-height:1.6">Dostávajte novinky zo sveta webu a AI.</p>
+        <h4 data-i18n="footer-newsletter-label">Newsletter</h4>
+        <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; line-height:1.6" data-i18n="footer-newsletter-sub">Dostávajte novinky zo sveta webu a AI.</p>
         <div class="newsletter-input-wrap">
           <input type="email" class="newsletter-input" placeholder="vas@email.sk">
           <button class="newsletter-submit">→</button>
@@ -3150,7 +3280,7 @@ footer::before {
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2025 Drixton. Web & Dev Studio. Všetky práva vyhradené.</span>
+      <span class="footer-copy" data-i18n="footer-copy">© 2026 Drixton. Web & Dev Studio. Všetky práva vyhradené.</span>
       <div class="footer-legal">
         <a href="#">SK | EN</a>
         <a href="#">GDPR</a>
@@ -3216,9 +3346,100 @@ function toggleTheme() {
 }
 
 // ===================== LANG =====================
+const translations = {
+  sk: {
+    'nav-services': 'Čo robíme',
+    'nav-projects': 'Projekty',
+    'nav-tools': 'Nástroje',
+    'nav-about': 'O nás',
+    'nav-contact': 'Kontakt',
+    'hero-badge': 'Web & Dev Studio',
+    'hero-sub': 'Dizajn. Vývoj. AI riešenia.<br>Všetko pod jednou strechou.',
+    'hero-btn-projects': 'Pozrieť projekty',
+    'hero-btn-more': 'Zistiť viac',
+    'projects-label': 'Projekty',
+    'projects-h2': 'Posledné práce, na ktoré sme hrdí.',
+    'services-design-label': 'Dizajn',
+    'services-design-h2': 'Dizajn, ktorý konvertuje.',
+    'services-dev-label': 'Vývoj',
+    'agents-label': 'AI Tím',
+    'agents-h2': 'Náš tím pracuje nonstop.',
+    'agents-sub': 'Každý agent má špecializáciu. Spoločne tvoria výkonný ekosystém.',
+    'cta-label': 'Drixton Studio',
+    'cta-h2': 'Pripravení spustiť<br>váš ďalší projekt?',
+    'cta-sub': 'Dohodnite si bezplatný 30-minútový discovery call. Bez záväzkov.',
+    'cta-btn-primary': 'Začnime spoluprácu →',
+    'cta-btn-ghost': 'Pozrieť portfólio',
+    'contact-label': 'Kontakt',
+    'contact-h2': 'Dohodnime si<br>stretnutie.',
+    'contact-sub': 'Online alebo osobne – sme flexibilní. Ozveme sa do 24 hodín.',
+    'footer-claim': 'Tvoríme digitálne produkty, ktoré konvertujú. Web & Dev Studio.',
+    'footer-nav-label': 'Navigácia',
+    'footer-contact-label': 'Kontakt',
+    'footer-newsletter-label': 'Newsletter',
+    'footer-newsletter-sub': 'Dostávajte novinky zo sveta webu a AI.',
+    'footer-copy': '© 2026 Drixton. Web & Dev Studio. Všetky práva vyhradené.',
+  },
+  en: {
+    'nav-services': 'Services',
+    'nav-projects': 'Projects',
+    'nav-tools': 'Tools',
+    'nav-about': 'About',
+    'nav-contact': 'Contact',
+    'hero-badge': 'Web & Dev Studio',
+    'hero-sub': 'Design. Development. AI solutions.<br>All under one roof.',
+    'hero-btn-projects': 'View projects',
+    'hero-btn-more': 'Learn more',
+    'projects-label': 'Projects',
+    'projects-h2': 'Recent work we\'re proud of.',
+    'services-design-label': 'Design',
+    'services-design-h2': 'Design that converts.',
+    'services-dev-label': 'Development',
+    'agents-label': 'AI Team',
+    'agents-h2': 'Our team works nonstop.',
+    'agents-sub': 'Every agent has a specialization. Together they form a powerful ecosystem.',
+    'cta-label': 'Drixton Studio',
+    'cta-h2': 'Ready to launch<br>your next project?',
+    'cta-sub': 'Schedule a free 30-minute discovery call. No commitment.',
+    'cta-btn-primary': 'Start collaboration →',
+    'cta-btn-ghost': 'View portfolio',
+    'contact-label': 'Contact',
+    'contact-h2': 'Let\'s schedule<br>a meeting.',
+    'contact-sub': 'Online or in person – we\'re flexible. We\'ll get back to you within 24 hours.',
+    'footer-claim': 'We create digital products that convert. Web & Dev Studio.',
+    'footer-nav-label': 'Navigation',
+    'footer-contact-label': 'Contact',
+    'footer-newsletter-label': 'Newsletter',
+    'footer-newsletter-sub': 'Get the latest news from the world of web and AI.',
+    'footer-copy': '© 2026 Drixton. Web & Dev Studio. All rights reserved.',
+  }
+};
+
+const typeWordsSK = ['konvertujú.', 'predávajú.', 'rastú.', 'inšpirujú.'];
+const typeWordsEN = ['convert.', 'sell.', 'grow.', 'inspire.'];
+
 function setLang(lang) {
   document.getElementById('btnSK').classList.toggle('active', lang === 'sk');
   document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = t[key];
+      } else {
+        el.innerHTML = t[key];
+      }
+    }
+  });
+  // Update typewriter words
+  window._currentTypeWords = lang === 'en' ? typeWordsEN : typeWordsSK;
+  const tw = document.getElementById('typeWord');
+  if (tw) {
+    const idx = typeIdx % window._currentTypeWords.length;
+    tw.textContent = window._currentTypeWords[idx];
+  }
 }
 
 // ===================== MOBILE MENU =====================
@@ -3258,17 +3479,17 @@ function animateHero() {
   }, 60);
 }
 
-const typeWords = ['konvertujú.', 'predávajú.', 'rastú.', 'inšpirujú.'];
+window._currentTypeWords = ['konvertujú.', 'predávajú.', 'rastú.', 'inšpirujú.'];
 let typeIdx = 0;
 function startTypewriter() {
   setInterval(() => {
-    typeIdx = (typeIdx + 1) % typeWords.length;
+    typeIdx = (typeIdx + 1) % window._currentTypeWords.length;
     const el = document.getElementById('typeWord');
     if (!el) return;
     el.style.opacity = '0';
     el.style.transform = 'translateY(10px)';
     setTimeout(() => {
-      el.textContent = typeWords[typeIdx];
+      el.textContent = window._currentTypeWords[typeIdx];
       el.style.transition = 'opacity 0.4s, transform 0.4s';
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
@@ -3623,6 +3844,24 @@ kbUpdateStrip('blue', 0);
   gameEl.addEventListener('mousemove', e => {
     const r = gameEl.getBoundingClientRect();
     mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+  });
+  gameEl.addEventListener('touchstart', e => {
+    e.preventDefault();
+    robotEl.style.opacity = '1';
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(tick);
+  }, { passive: false });
+  gameEl.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    const r = gameEl.getBoundingClientRect();
+    mouse = { x: t.clientX - r.left, y: t.clientY - r.top };
+  }, { passive: false });
+  gameEl.addEventListener('touchend', () => {
+    robotEl.style.opacity = '0';
+    cancelAnimationFrame(frame);
+    ctx2.clearRect(0, 0, canvasEl.width, canvasEl.height);
+    trail = [];
   });
 
   window.kbClick = function(el, type) {
