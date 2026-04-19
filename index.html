@@ -588,8 +588,11 @@ nav.scrolled {
   letter-spacing: -0.02em;
 }
 .hero-mini-sub { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
-.hero-mini-1 { top: 32%; left: 6%; animation: floatB 6s ease-in-out infinite; pointer-events: auto; }
-.hero-mini-2 { top: 20%; right: 5%; animation: floatC 7s ease-in-out infinite 1s; pointer-events: auto; }
+.hero-mini-1 { top: 28%; left: 8%; animation: floatB 6s ease-in-out infinite; pointer-events: auto; }
+.hero-mini-2 { top: 18%; right: 7%; animation: floatC 7s ease-in-out infinite 0.8s; pointer-events: auto; }
+.hero-mini-3 { bottom: 26%; left: 9%; animation: floatA 6.5s ease-in-out infinite 1.4s; pointer-events: auto; }
+.hero-mini-4 { bottom: 20%; right: 8%; animation: floatB 7.5s ease-in-out infinite 2s; pointer-events: auto; }
+.hero-mini-5 { top: 52%; left: 5%; animation: floatC 5.8s ease-in-out infinite 0.3s; pointer-events: auto; }
 .hero-mini:hover { box-shadow: 0 8px 30px rgba(119,186,248,0.15); border-color: rgba(119,186,248,0.35); }
 
 /* AI pill */
@@ -605,7 +608,7 @@ nav.scrolled {
   font-family: 'JetBrains Mono', monospace;
   color: rgba(119,186,248,0.9);
   position: absolute;
-  bottom: 24%; right: 7%;
+  top: 44%; right: 6%;
   animation: floatA 5s ease-in-out infinite 2s;
   pointer-events: auto;
   cursor: default;
@@ -2368,6 +2371,21 @@ footer::before {
     <div class="hero-mini-value" data-scramble="98">98</div>
     <div class="hero-mini-sub">Performance score</div>
   </div>
+  <div class="hero-mini hero-mini-3">
+    <div class="hero-mini-label">Projekty 2024</div>
+    <div class="hero-mini-value" data-scramble="50+">50+</div>
+    <div class="hero-mini-sub">dokončených projektov</div>
+  </div>
+  <div class="hero-mini hero-mini-4">
+    <div class="hero-mini-label">Spokojnosť</div>
+    <div class="hero-mini-value" data-scramble="98%">98%</div>
+    <div class="hero-mini-sub">klientov odporúča</div>
+  </div>
+  <div class="hero-mini hero-mini-5">
+    <div class="hero-mini-label">Odpoveď do</div>
+    <div class="hero-mini-value" data-scramble="24h">24h</div>
+    <div class="hero-mini-sub">každý pracovný deň</div>
+  </div>
   <div class="hero-pill" id="heroPill">
     <div class="hero-pill-dot"></div>
     <span data-scramble="AI agenti online">AI agenti online</span>
@@ -3116,17 +3134,17 @@ if (heroH1) {
     words.forEach(w => {
       const r = w.getBoundingClientRect();
       const dist = Math.hypot(e.clientX - (r.left + r.width/2), e.clientY - (r.top + r.height/2));
-      if (dist < 80 && !w.dataset.scrambling) {
+      if (dist < 100 && !w.dataset.scrambling) {
         w.dataset.scrambling = '1';
         const orig = w.textContent;
-        let f = 0, tot = orig.length * 3;
+        let f = 0, tot = orig.length * 5;
         const t = setInterval(() => {
           w.textContent = orig.split('').map((c, i) =>
-            i < Math.floor(f/3) || c === ' ' ? c : CHARS[Math.floor(Math.random()*CHARS.length)]
+            i < Math.floor(f/5) || c === ' ' ? c : CHARS[Math.floor(Math.random()*CHARS.length)]
           ).join('');
           f++;
           if (f > tot) { w.textContent = orig; delete w.dataset.scrambling; clearInterval(t); }
-        }, 25);
+        }, 55);
       }
     });
   });
