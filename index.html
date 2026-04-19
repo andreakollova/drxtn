@@ -1380,6 +1380,17 @@ section { padding: 100px 40px; }
 .kb-item.kb-grey .kb-label { color: var(--gray-400); }
 .kb-item.kb-black .kb-label { color: var(--text); }
 
+.kb-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-top: -4px;
+}
+.kb-item.kb-active .kb-role { opacity: 1; color: var(--text-secondary); }
+
 /* ===================== KEYBOARD GAME ===================== */
 #kbGame {
   position: relative;
@@ -2852,38 +2863,34 @@ footer::before {
     <div class="keyboards-row" style="margin-bottom:32px">
       <div class="kb-item kb-blue kb-active" onclick="kbClick(this,'blue')">
         <img src="static/keyboard-blue.png" alt="Stela AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Stela</span>
+        <span class="kb-label">Stela AI</span>
+        <span class="kb-role">Operations &amp; Automation</span>
       </div>
       <div class="kb-item kb-purple" onclick="kbClick(this,'purple')">
         <img src="static/keyboard-purple.png" alt="Mia AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Mia</span>
+        <span class="kb-label">Mia AI</span>
+        <span class="kb-role">Growth &amp; Marketing</span>
       </div>
       <div class="kb-item kb-grey" onclick="kbClick(this,'grey')">
         <img src="static/keyboard-grey.png" alt="Pete AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Pete</span>
+        <span class="kb-label">Pete AI</span>
+        <span class="kb-role">Data &amp; Insights</span>
       </div>
       <div class="kb-item kb-yellow" onclick="kbClick(this,'yellow')">
         <img src="static/keyboard-yellow.png" alt="Jane AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Jane</span>
+        <span class="kb-label">Jane AI</span>
+        <span class="kb-role">Content &amp; Social</span>
       </div>
       <div class="kb-item kb-green" onclick="kbClick(this,'green')">
         <img src="static/keyboard-green.png" alt="Vicky AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Vicky</span>
+        <span class="kb-label">Vicky AI</span>
+        <span class="kb-role">Partner Outreach</span>
       </div>
       <div class="kb-item kb-black" onclick="kbClick(this,'black')">
         <img src="static/keyboard-black.png" alt="Max AI" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Max</span>
+        <span class="kb-label">Max AI</span>
+        <span class="kb-role">AI Security</span>
       </div>
-    </div>
-    <div class="kb-agent-strip" id="kbAgentStrip">
-      <div class="kb-agent-left">
-        <div class="kb-agent-dot" id="kbAgentDot"></div>
-        <div>
-          <div class="kb-agent-name" id="kbAgentName">Stela AI</div>
-          <div class="kb-agent-role" id="kbAgentRole">Operations &amp; Automation Manager</div>
-        </div>
-      </div>
-      <div class="kb-agent-pills" id="kbAgentPills"></div>
     </div>
     <div id="kbGame">
       <div id="kbGameGrid"></div>
@@ -3505,22 +3512,7 @@ const agentLinkLabels = {
 let kbToolIndex = 0;
 
 function kbUpdateStrip(color, toolIdx) {
-  const d = kbData[color];
   if (toolIdx !== undefined) kbToolIndex = toolIdx;
-  const tool = d.tools[kbToolIndex % d.tools.length];
-  const dot  = document.getElementById('kbAgentDot');
-  const name = document.getElementById('kbAgentName');
-  const role = document.getElementById('kbAgentRole');
-  const right = document.getElementById('kbAgentPills');
-  if (!dot) return;
-  dot.style.background = d.hex;
-  dot.style.boxShadow = '0 0 6px ' + d.hex + '88';
-  name.textContent = d.agent;
-  role.textContent = d.role;
-  const svg = toolSVGs[tool] || '';
-  right.innerHTML =
-    '<span class="kb-tool-badge">' + svg + tool + '</span>' +
-    '<a class="kb-agent-link" href="#' + agentIds[color] + '">Zisti viac o ' + agentLinkLabels[color] + ' →</a>';
 }
 kbUpdateStrip('blue', 0);
 
@@ -3555,11 +3547,11 @@ kbUpdateStrip('blue', 0);
     kbEl.style.top  = kbPos.y + 'px';
   }
 
-  function showMsg(text, color) {
+  function showMsg(html, color) {
     gameEl.querySelectorAll('.kbgame-msg').forEach(m => m.remove());
     const d = document.createElement('div');
     d.className = 'kbgame-msg';
-    d.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';display:inline-block;flex-shrink:0"></span>' + text;
+    d.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';display:inline-block;flex-shrink:0"></span>' + html;
     gameEl.appendChild(d);
     setTimeout(() => { d.style.transition = 'opacity 0.4s'; d.style.opacity = '0'; setTimeout(() => d.remove(), 400); }, 3500);
   }
@@ -3596,8 +3588,9 @@ kbUpdateStrip('blue', 0);
         lastCollect = now;
         if (hintEl) hintEl.style.display = 'none';
         kbToolIndex++;
-        kbUpdateStrip(activeColor, kbToolIndex);
-        showMsg(kbData[activeColor].text, kbData[activeColor].hex);
+        const toolName = kbData[activeColor].tools[kbToolIndex % kbData[activeColor].tools.length];
+        const toolSvg = toolSVGs[toolName] || '';
+        showMsg(toolSvg + toolName, kbData[activeColor].hex);
         spawn();
       }
     }
