@@ -323,12 +323,13 @@ nav.scrolled {
 /* ===================== HERO ===================== */
 #hero {
   min-height: 88vh;
-  background: #06060c;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
 }
+[data-theme="dark"] #hero { background: #06060c; }
 
 /* Noise grain overlay */
 #hero::before {
@@ -346,7 +347,7 @@ nav.scrolled {
   position: absolute;
   top: -200px; right: -200px;
   width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(119,186,248,0.15) 0%, rgba(193,191,255,0.08) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(119,186,248,0.18) 0%, rgba(193,191,255,0.1) 40%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
@@ -355,7 +356,7 @@ nav.scrolled {
   position: absolute;
   bottom: -150px; left: -100px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(193,191,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(193,191,255,0.14) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
@@ -366,11 +367,16 @@ nav.scrolled {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(119,186,248,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(119,186,248,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
+}
+[data-theme="dark"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(119,186,248,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(119,186,248,0.05) 1px, transparent 1px);
 }
 
 /* Cursor spotlight */
@@ -378,7 +384,7 @@ nav.scrolled {
   position: absolute;
   width: 600px; height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(119,186,248,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(119,186,248,0.08) 0%, transparent 70%);
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 0;
@@ -394,13 +400,14 @@ nav.scrolled {
   font-size: clamp(120px, 18vw, 280px);
   font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  -webkit-text-stroke: 1px rgba(0,0,0,0.04);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
   z-index: 0;
   letter-spacing: -0.04em;
 }
+[data-theme="dark"] .hero-bg-text { -webkit-text-stroke: 1px rgba(255,255,255,0.04); }
 
 /* Main inner grid */
 .hero-inner {
@@ -456,10 +463,11 @@ nav.scrolled {
   font-weight: 800;
   line-height: 1.0;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 28px;
   text-align: left;
 }
+[data-theme="dark"] .hero-h1 { color: #fff; }
 .hero-h1 .word {
   display: inline-block;
   opacity: 0;
@@ -470,8 +478,9 @@ nav.scrolled {
 .hero-h1 .word.visible { opacity: 1; transform: translateY(0); }
 .hero-h1 .outline-word {
   color: transparent;
-  -webkit-text-stroke: 2px rgba(255,255,255,0.5);
+  -webkit-text-stroke: 2px rgba(0,0,0,0.2);
 }
+[data-theme="dark"] .hero-h1 .outline-word { -webkit-text-stroke: 2px rgba(255,255,255,0.5); }
 .hero-h1 .typeword {
   display: block;
   color: #77BAF8;
@@ -483,7 +492,7 @@ nav.scrolled {
 
 .hero-sub {
   font-size: 17px;
-  color: rgba(255,255,255,0.5);
+  color: var(--text-secondary);
   margin-bottom: 40px;
   font-weight: 400;
   line-height: 1.65;
@@ -518,8 +527,8 @@ nav.scrolled {
   max-width: 520px;
   aspect-ratio: 4/3;
   border-radius: 28px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
   backdrop-filter: blur(8px);
   position: relative;
   overflow: hidden;
@@ -529,7 +538,7 @@ nav.scrolled {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(119,186,248,0.12) 0%, rgba(193,191,255,0.08) 50%, transparent 100%);
+  background: linear-gradient(135deg, rgba(119,186,248,0.1) 0%, rgba(193,191,255,0.07) 50%, transparent 100%);
 }
 .hero-visual-keyboard {
   position: absolute;
@@ -551,18 +560,19 @@ nav.scrolled {
 /* Small floating stat cards on top of visual */
 .hero-mini {
   position: absolute;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 12px 16px;
   backdrop-filter: blur(12px);
   pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 .hero-mini-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-secondary);
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -570,10 +580,10 @@ nav.scrolled {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
-.hero-mini-sub { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.hero-mini-sub { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
 .hero-mini-1 { top: -20px; left: -30px; animation: floatB 6s ease-in-out infinite; }
 .hero-mini-2 { bottom: 10px; right: -20px; animation: floatC 7s ease-in-out infinite 1s; }
 
@@ -606,7 +616,7 @@ nav.scrolled {
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid var(--border);
   margin-top: auto;
 }
 @media (max-width: 640px) {
@@ -614,21 +624,21 @@ nav.scrolled {
 }
 .hero-stat-item {
   padding: 24px 40px;
-  border-right: 1px solid rgba(255,255,255,0.07);
+  border-right: 1px solid var(--border);
 }
 .hero-stat-item:last-child { border-right: none; }
 .hero-stat-num {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(22px, 2.5vw, 32px);
   font-weight: 800;
-  color: #fff;
+  color: var(--text);
   letter-spacing: -0.03em;
   line-height: 1;
   margin-bottom: 4px;
 }
 .hero-stat-label {
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-secondary);
   font-weight: 400;
 }
 
