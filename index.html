@@ -2156,6 +2156,21 @@ section { padding: 100px 40px; }
   display: flex; align-items: center; gap: 14px;
   margin-bottom: 28px;
 }
+.contact-person {
+  display: flex; align-items: center; gap: 12px;
+}
+.contact-person-info { display: flex; flex-direction: column; gap: 2px; }
+.contact-person-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; font-weight: 700; color: var(--text);
+}
+.contact-person-role {
+  font-size: 12px; color: var(--text-secondary); font-weight: 500;
+}
+.contact-person-email {
+  font-size: 12px; color: var(--blue); text-decoration: none; font-family: 'JetBrains Mono', monospace;
+}
+.contact-person-email:hover { text-decoration: underline; }
 .contact-team-avatars { display: flex; }
 .contact-team-avatar {
   width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
@@ -3233,14 +3248,22 @@ footer::before {
       <h2 class="contact-info" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,4vw,48px); font-weight:700; letter-spacing:-0.02em; line-height:1.1; margin-bottom:20px" data-i18n="contact-h2">
         Dohodnime si<br>stretnutie.
       </h2>
-      <div class="contact-team" style="margin-bottom:20px">
-        <div class="contact-team-avatars">
+      <div class="contact-team" style="margin-bottom:24px; flex-direction:column; align-items:flex-start; gap:12px;">
+        <div class="contact-person">
           <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="contact-team-avatar">
-          <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="contact-team-avatar" style="margin-left:-16px">
+          <div class="contact-person-info">
+            <div class="contact-person-name">Andrea Kollová</div>
+            <div class="contact-person-role">Vývoj</div>
+            <a href="mailto:kollova@drixton.com" class="contact-person-email">kollova@drixton.com</a>
+          </div>
         </div>
-        <div class="contact-team-text">
-          <div class="contact-team-names" data-i18n="contact-team-names">Andrea &amp; Natália</div>
-          <div class="contact-team-sub" data-i18n="contact-team-sub">Odpovieme do 24 hodín</div>
+        <div class="contact-person">
+          <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="contact-team-avatar">
+          <div class="contact-person-info">
+            <div class="contact-person-name">Natália Fondrková</div>
+            <div class="contact-person-role">Dizajn</div>
+            <a href="mailto:fondrkova@drixton.com" class="contact-person-email">fondrkova@drixton.com</a>
+          </div>
         </div>
       </div>
       <p style="font-size:16px; color:var(--text-secondary); line-height:1.7; margin-bottom:40px" data-i18n="contact-sub">Online alebo osobne – sme flexibilní. Ozveme sa do 24 hodín.</p>
