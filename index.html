@@ -2497,38 +2497,40 @@ footer::before {
   .hamburger { display: flex; }
   .cta-btn.desktop { display: none; }
 
+  /* General spacing */
+  section { padding: 48px 20px; }
+
   /* Hero */
-  section { padding: 56px 20px; }
   #hero {
     padding: 0;
     min-height: 100svh;
     display: flex;
     align-items: center;
   }
-  .hero-inner { padding: 100px 24px 60px; }
-  .hero-h1 { font-size: clamp(36px, 9vw, 52px); line-height: 1.1; }
-  .hero-sub { font-size: 15px; }
-  .hero-btns { flex-direction: column; gap: 12px; align-items: flex-start; }
-  .hero-btns a { width: 100%; max-width: 300px; text-align: center; justify-content: center; }
+  .hero-inner { padding: 96px 24px 56px; }
+  .hero-h1 { font-size: clamp(34px, 9vw, 50px); line-height: 1.1; }
+  .hero-sub { font-size: 14px; }
+  .hero-btns { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .hero-btns a { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
   .hero-keyboard { display: none; }
   .hero-circle { display: none; }
-  .hero-bg-text { font-size: clamp(60px, 22vw, 120px); }
-  /* Float stat cards — 2×2 grid around content */
-  .hero-mini {
-    padding: 10px 12px;
-    font-size: 11px;
-    min-width: 100px;
-  }
-  .hero-mini-value { font-size: 20px !important; }
-  .hero-mini-1 { top: 14%; left: 2%; }
-  .hero-mini-2 { top: 14%; right: 2%; }
-  .hero-mini-3 { bottom: 10%; left: 2%; }
-  .hero-mini-4 { bottom: 10%; right: 2%; }
+  .hero-bg-text { font-size: clamp(56px, 20vw, 110px); }
+  /* Pill smaller */
+  .hero-pill { font-size: 9px; padding: 4px 10px; gap: 5px; top: auto; bottom: 20px; left: 50%; right: auto; transform: translateX(-50%); }
+  /* Stat cards — corners, very compact */
+  .hero-mini { padding: 7px 9px; font-size: 10px; min-width: 78px; max-width: 110px; }
+  .hero-mini-value { font-size: 16px !important; }
+  .hero-mini-label { font-size: 9px; }
+  .hero-mini-sub { font-size: 9px; }
+  .hero-mini-1 { top: 7%; left: 2%; }
+  .hero-mini-2 { top: 7%; right: 2%; }
+  .hero-mini-3 { bottom: 8%; left: 2%; }
+  .hero-mini-4 { bottom: 8%; right: 2%; }
 
   /* Projects */
-  #projects { padding-top: 40px !important; padding-bottom: 40px; }
-  .projects-header { padding: 0 20px; }
-  .carousel { padding: 0 20px 20px; touch-action: pan-x; }
+  #projects { padding-top: 36px !important; padding-bottom: 36px; }
+  .projects-header { padding: 0 20px; margin-bottom: 28px; }
+  .carousel { padding: 0 20px 16px; touch-action: pan-x; }
   .carousel-nav { padding: 0 20px; }
   .project-card { flex: 0 0 82vw; }
 
@@ -2555,7 +2557,16 @@ footer::before {
   .services-panel-inner { grid-template-columns: 1fr; gap: 28px; }
   .services-visual { display: none; }
   .svc-list { grid-template-columns: 1fr; gap: 0; }
-  .svc-entry { padding: 10px 0; }
+  .svc-entry { padding: 0; border-bottom: 1px solid rgba(0,0,0,0.07); cursor: pointer; }
+  .services-panel-dark .svc-entry { border-bottom-color: rgba(255,255,255,0.08); }
+  .svc-entry-name {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 0; font-size: 13px; font-weight: 500; gap: 8px;
+  }
+  .svc-entry-name::after { content: '+'; font-size: 15px; opacity: 0.4; flex-shrink: 0; }
+  .svc-entry.open .svc-entry-name::after { content: '−'; opacity: 0.7; }
+  .svc-entry-desc { display: none; padding: 0 0 10px; font-size: 12px; opacity: 0.6; }
+  .svc-entry.open .svc-entry-desc { display: block; }
   .panel-pills { gap: 6px; flex-wrap: wrap; }
   .panel-pill { font-size: 11px; padding: 5px 10px; }
 
@@ -2567,8 +2578,9 @@ footer::before {
   .mobile-mockup-wrap { display: flex; justify-content: center; }
 
   /* Keyboard section */
-  #keyboard-section { padding: 48px 0 56px; }
+  #keyboard-section { padding: 40px 0 48px; }
   .keyboard-section-inner { padding: 0 20px; }
+  .keyboard-section-inner h2 { font-size: clamp(24px, 7vw, 36px); }
   .keyboards-row {
     gap: 8px;
     justify-content: flex-start;
@@ -2580,71 +2592,71 @@ footer::before {
   }
   .keyboards-row::-webkit-scrollbar { display: none; }
   .kb-item {
-    flex: 0 0 calc(33vw - 16px);
-    min-width: 90px;
-    max-width: 120px;
+    flex: 0 0 calc(33vw - 14px);
+    min-width: 88px;
+    max-width: 116px;
     scroll-snap-align: start;
     padding: 10px 6px 8px;
   }
-  .kb-item img { width: 60px; height: 60px; }
+  .kb-item img { width: 56px; height: 56px; }
   .kb-label { font-size: 10px; }
   .kb-role { font-size: 9px; }
   #kbGame {
-    height: 300px;
-    margin: 16px 0 0;
-    border-radius: 20px;
+    height: 280px;
+    margin: 14px 0 0;
+    border-radius: 18px;
   }
 
   /* AI Agents — 2-col compact */
-  #agents { padding: 56px 20px; }
-  .agents-header { margin-bottom: 32px; padding: 0; }
-  .agents-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .agent-card { padding: 20px 14px 18px; border-radius: 20px; }
-  .agent-robot { width: 64px; height: 64px; margin-bottom: 12px; }
-  .agent-name { font-size: 16px; }
-  .agent-real-name { font-size: 12px; }
-  .agent-role { font-size: 11px; }
-  .agent-desc { font-size: 12px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  #agents { padding: 48px 20px; }
+  .agents-header { margin-bottom: 28px; padding: 0; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .agent-card { padding: 18px 12px 16px; border-radius: 18px; }
+  .agent-robot { width: 56px; height: 56px; margin-bottom: 10px; }
+  .agent-name { font-size: 15px; }
+  .agent-real-name { font-size: 11px; }
+  .agent-role { font-size: 10px; }
+  .agent-desc { font-size: 11px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .agent-cta { display: none; }
 
   /* Team members */
   .team-members { grid-template-columns: 1fr; }
 
   /* Gradient CTA */
-  #gradient-cta { padding: 60px 24px; }
-  .gradient-cta-h2 { font-size: clamp(28px, 7vw, 40px); }
-  .gradient-cta-btns { flex-direction: column; gap: 12px; align-items: center; }
+  #gradient-cta { padding: 52px 24px; }
+  .gradient-cta-h2 { font-size: clamp(26px, 7vw, 38px); }
+  .gradient-cta-btns { flex-direction: column; gap: 10px; align-items: center; }
   .gradient-cta-btn-primary, .gradient-cta-btn-ghost { width: 100%; max-width: 280px; text-align: center; }
-  .gradient-cta-stats { gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .gradient-cta-stats { gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
 
   /* Contact */
-  #contact { padding: 56px 20px; }
-  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  #contact { padding: 48px 20px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 36px; }
   .contact-info-circle { display: none; }
-  .interest-pills { gap: 8px; }
-  .interest-pill { font-size: 13px; padding: 8px 14px; }
+  .interest-pills { gap: 7px; }
+  .interest-pill { font-size: 12px; padding: 7px 12px; }
 
   /* Footer */
-  footer { padding: 60px 20px 40px; }
-  .footer-keyboard { display: none; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  footer { padding: 56px 20px 36px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
   .footer-logo-area { grid-column: 1 / -1; }
-  .footer-logo { height: 64px; }
+  .footer-logo { height: 60px; }
 }
 
 /* --- Small mobile (≤480px) --- */
 @media (max-width: 480px) {
-  .hero-h1 { font-size: 34px; }
-  .hero-mini { display: none; }
-  .hero-inner { padding: 80px 20px 56px; }
+  .hero-h1 { font-size: 32px; }
+  .hero-inner { padding: 80px 20px 52px; }
+  /* keep mini cards but hide on very small screens if needed */
+  .hero-mini { padding: 6px 8px; min-width: 70px; }
+  .hero-mini-value { font-size: 14px !important; }
 
-  .agents-grid { grid-template-columns: 1fr; gap: 12px; }
-  .agent-desc { -webkit-line-clamp: 2; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-logo { height: 52px; }
 
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .footer-logo { height: 56px; }
-
-  #kbGame { height: 260px; }
-  .kb-item { flex: 0 0 calc(50vw - 20px); max-width: 140px; }
+  #kbGame { height: 250px; }
+  .kb-item { flex: 0 0 calc(50vw - 18px); max-width: 130px; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
 }
 
 /* ===================== DARK MODE EXTRAS ===================== */
@@ -2786,7 +2798,7 @@ footer::before {
           <div class="project-name">Projekt Alpha</div>
           <div class="project-desc">Moderný e-shop s AI odporúčaniami produktov.</div>
         </div>
-        <a href="#" class="project-link">↗</a>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:1">
         <img src="static/projekt-2.png" alt="Projekt 2" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#C1BFFF,#B8F200)'">
@@ -2795,7 +2807,7 @@ footer::before {
           <div class="project-name">Projekt Beta</div>
           <div class="project-desc">B2B platforma s automatizáciou procesov.</div>
         </div>
-        <a href="#" class="project-link">↗</a>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:2">
         <img src="static/projekt-3.png" alt="Projekt 3" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#B8F200,#00E57A)'">
@@ -2804,7 +2816,7 @@ footer::before {
           <div class="project-name">Projekt Gamma</div>
           <div class="project-desc">Natívna iOS/Android aplikácia pre retail.</div>
         </div>
-        <a href="#" class="project-link">↗</a>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:3">
         <img src="static/projekt-4.png" alt="Projekt 4" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#00E57A,#77BAF8)'">
@@ -2813,7 +2825,7 @@ footer::before {
           <div class="project-name">Projekt Delta</div>
           <div class="project-desc">Kompletný redesign s UX auditom a testovaním.</div>
         </div>
-        <a href="#" class="project-link">↗</a>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:4">
         <img src="static/projekt-5.png" alt="Projekt 5" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#77BAF8,#0A0A0A)'">
@@ -2822,7 +2834,7 @@ footer::before {
           <div class="project-name">Projekt Epsilon</div>
           <div class="project-desc">Integrácia ERP systému s e-commerce platformou.</div>
         </div>
-        <a href="#" class="project-link">↗</a>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
     </div>
   </div>
@@ -3897,6 +3909,16 @@ function toggleService(item) {
   item.closest('.service-items').querySelectorAll('.service-item').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
+
+// Mobile accordion for svc-entry items
+document.querySelectorAll('.svc-entry').forEach(entry => {
+  entry.addEventListener('click', () => {
+    if (window.innerWidth > 768) return;
+    const isOpen = entry.classList.contains('open');
+    entry.closest('.svc-list').querySelectorAll('.svc-entry.open').forEach(e => e.classList.remove('open'));
+    if (!isOpen) entry.classList.add('open');
+  });
+});
 
 // Services swipe dots on mobile
 (function() {
