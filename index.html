@@ -112,12 +112,12 @@ nav.scrolled {
 }
 .nav-logo {
   position: relative;
-  height: 32px;
+  height: 44px;
   cursor: pointer;
   text-decoration: none;
 }
 .nav-logo img {
-  height: 32px;
+  height: 44px;
   position: absolute;
   top: 0; left: 0;
   transition: opacity 0.3s, transform 0.3s;
@@ -128,11 +128,11 @@ nav.scrolled {
 .nav-logo:hover .logo-short { opacity: 1; transform: scale(1); }
 .nav-logo-placeholder {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.5px;
-  line-height: 32px;
+  line-height: 44px;
   white-space: nowrap;
 }
 
@@ -409,7 +409,7 @@ nav.scrolled {
 
 .hero-h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(52px, 7vw, 96px);
+  font-size: clamp(38px, 5vw, 68px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -553,8 +553,8 @@ section { padding: 100px 40px; }
 .carousel.dragging { cursor: grabbing; scroll-snap-type: none; }
 
 .project-card {
-  flex: 0 0 380px;
-  height: 280px;
+  flex: 0 0 480px;
+  height: 300px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
@@ -577,16 +577,23 @@ section { padding: 100px 40px; }
 .project-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
-  transform: translateY(40px);
-  opacity: 0;
-  transition: opacity 0.3s, transform 0.3s;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
   padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  opacity: 1;
+  transform: none;
 }
-.project-card:hover .project-overlay { opacity: 1; transform: translateY(0); }
+.project-overlay .project-desc {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.project-card:hover .project-overlay .project-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .project-tag {
   font-family: 'JetBrains Mono', monospace;
@@ -689,7 +696,7 @@ section { padding: 100px 40px; }
 @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
 
 .services-panel {
-  padding: 60px 56px;
+  padding: 56px 52px;
   position: relative;
   overflow: hidden;
 }
@@ -698,11 +705,31 @@ section { padding: 100px 40px; }
   color: #fff;
 }
 .services-panel-light {
-  background: var(--bg-secondary);
+  background: #FAFAFA;
   color: var(--text);
 }
-[data-theme="dark"] .services-panel-light {
-  background: #141414;
+[data-theme="dark"] .services-panel-light { background: #141414; }
+
+/* Design panel deco: faint purple gradient blob */
+.services-panel-light::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(193,191,255,0.35) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* Dev panel deco: faint blue gradient blob */
+.services-panel-dark::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(119,186,248,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
 }
 
 .panel-keyboard {
@@ -711,59 +738,109 @@ section { padding: 100px 40px; }
   width: 200px;
   opacity: 0.06;
   pointer-events: none;
+  z-index: 0;
+}
+
+/* Design panel deco shapes */
+.design-deco {
+  position: absolute;
+  top: 40px; right: 44px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+.design-deco-circle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+.design-deco-rect {
+  width: 36px; height: 64px;
+  border-radius: 10px;
+  background: var(--blue);
+}
+.design-deco-sq {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--yellow);
+}
+
+/* Dev panel code snippet deco */
+.code-deco {
+  position: absolute;
+  bottom: 28px; right: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  line-height: 1.7;
+  color: rgba(119,186,248,0.28);
+  pointer-events: none;
+  z-index: 0;
+  text-align: left;
+  white-space: pre;
 }
 
 .services-panel h3 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(26px, 3vw, 38px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
 }
 .services-panel-dark h3 span { color: var(--blue); }
 .services-panel-light h3 span { color: var(--purple); }
+
+.panel-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.services-panel-light .panel-label { color: var(--purple); }
+.services-panel-dark .panel-label { color: var(--blue); }
 
 .service-item {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 0;
+  padding: 15px 0;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   cursor: pointer;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
-.services-panel-light .service-item {
-  border-bottom-color: var(--border);
-}
+.services-panel-light .service-item { border-bottom-color: var(--border); }
 .service-item:last-child { border-bottom: none; }
 
-.service-item-inner {
-  flex: 1;
-  overflow: hidden;
-}
+.service-item-inner { flex: 1; overflow: hidden; }
 .service-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   transition: color 0.2s;
 }
 .services-panel-dark .service-name { color: rgba(255,255,255,0.8); }
 .service-desc {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--gray-400);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
   opacity: 0;
   margin-top: 0;
+  line-height: 1.5;
 }
-.service-item.open .service-desc {
-  max-height: 60px;
-  opacity: 1;
-  margin-top: 6px;
-}
+.service-item.open .service-desc { max-height: 60px; opacity: 1; margin-top: 5px; }
 
 .services-panel-dark .service-item:hover .service-name,
 .services-panel-dark .service-item.open .service-name { color: var(--blue); }
@@ -771,7 +848,7 @@ section { padding: 100px 40px; }
 .services-panel-light .service-item.open .service-name { color: var(--purple); }
 
 .service-icon {
-  width: 36px; height: 36px;
+  width: 34px; height: 34px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -781,10 +858,10 @@ section { padding: 100px 40px; }
 }
 .services-panel-dark .service-icon { background: rgba(255,255,255,0.06); }
 .services-panel-dark .service-item:hover .service-icon,
-.services-panel-dark .service-item.open .service-icon { background: rgba(119,186,248,0.15); }
-.services-panel-light .service-icon { background: var(--gray-100); }
+.services-panel-dark .service-item.open .service-icon { background: rgba(119,186,248,0.18); }
+.services-panel-light .service-icon { background: rgba(193,191,255,0.12); }
 .services-panel-light .service-item:hover .service-icon,
-.services-panel-light .service-item.open .service-icon { background: rgba(193,191,255,0.2); }
+.services-panel-light .service-item.open .service-icon { background: rgba(193,191,255,0.28); }
 
 .service-active-dot {
   width: 6px; height: 6px;
@@ -810,9 +887,25 @@ section { padding: 100px 40px; }
   background: var(--bg);
   text-align: center;
   padding: 80px 40px;
+  position: relative;
+  overflow: hidden;
 }
-.keyboard-wrap {
-  max-width: 600px;
+#keyboard-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('static/gradient-blue-purple.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  pointer-events: none;
+}
+[data-theme="dark"] #keyboard-section::before { opacity: 0.1; }
+
+.keyboard-section-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .keyboard-hint {
@@ -821,49 +914,53 @@ section { padding: 100px 40px; }
   letter-spacing: 0.15em;
   color: var(--text-secondary);
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 }
-.keyboard-interactive {
-  position: relative;
-  display: inline-block;
+.keyboards-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.kb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
 }
-.keyboard-img {
-  width: 360px;
-  max-width: 100%;
-  transition: transform 0.15s;
-  position: relative;
-  z-index: 1;
+.kb-item:hover { transform: translateY(-8px) scale(1.04); }
+.kb-item:active { transform: translateY(-4px) scale(0.98); }
+
+.kb-item img {
+  width: 160px;
   display: block;
+  transition: filter 0.2s, transform 0.15s;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
 }
-.keyboard-img-overlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.keyboard-img-overlay img {
-  width: 360px;
-  max-width: 100%;
-}
-.keyboard-img-overlay.active { opacity: 1; }
+[data-theme="dark"] .kb-item img { filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5)); }
+.kb-item:active img { transform: translateY(-4px); }
 
-.keyboard-interactive:active .keyboard-img {
-  transform: translateY(-6px) scale(0.97);
+.kb-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  transition: color 0.2s;
 }
+.kb-item:hover .kb-label { color: var(--text); }
 
-.keyboard-badge {
-  position: absolute;
-  top: -16px; right: -16px;
-  background: var(--black);
-  color: #fff;
-  border-radius: 100px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  animation: float 3s ease-in-out infinite;
-}
-[data-theme="dark"] .keyboard-badge { background: #fff; color: #000; }
+.kb-item.kb-blue .kb-label { color: var(--blue); }
+.kb-item.kb-purple .kb-label { color: var(--purple); }
+.kb-item.kb-yellow .kb-label { color: #8ca800; }
+[data-theme="dark"] .kb-item.kb-yellow .kb-label { color: var(--yellow); }
+.kb-item.kb-green .kb-label { color: var(--green); }
+.kb-item.kb-grey .kb-label { color: var(--gray-400); }
+.kb-item.kb-black .kb-label { color: var(--text); }
 
 .keyboard-toast {
   position: fixed;
@@ -890,105 +987,139 @@ section { padding: 100px 40px; }
 #mobile {
   background: var(--bg-secondary);
   overflow: hidden;
+  padding: 100px 40px;
+  position: relative;
 }
 [data-theme="dark"] #mobile { background: #111; }
-
-.mockups-scroll {
-  display: flex;
-  gap: 40px;
-  overflow-x: auto;
-  padding: 40px 40px 20px;
-  scrollbar-width: none;
+#mobile::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 400px; height: 400px;
+  background-image: url('static/gradient-blue.png');
+  background-size: cover;
+  opacity: 0.08;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(40px);
 }
-.mockups-scroll::-webkit-scrollbar { display: none; }
 
-.mockup-item {
-  flex: 0 0 260px;
-  display: flex;
-  flex-direction: column;
+.mobile-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
   align-items: center;
-  gap: 20px;
 }
+@media (max-width: 860px) {
+  .mobile-inner { grid-template-columns: 1fr; }
+  .mobile-mockup-wrap { display: flex; justify-content: center; }
+}
+
+.mobile-text-side { }
+.mobile-mockup-side { position: relative; }
+
 .iphone-frame {
-  width: 220px;
-  height: 440px;
-  border-radius: 36px;
-  border: 10px solid var(--black);
-  background: var(--gray-100);
+  width: 260px;
+  height: 520px;
+  border-radius: 44px;
+  border: 11px solid #0A0A0A;
+  background: #f0f0f0;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.2), inset 0 0 0 2px rgba(255,255,255,0.1);
-  transition: transform 0.15s;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.22), inset 0 0 0 2px rgba(255,255,255,0.15);
+  transition: transform 0.2s;
   transform-style: preserve-3d;
-  perspective: 800px;
 }
 .iphone-notch {
   position: absolute;
-  top: 8px; left: 50%;
+  top: 10px; left: 50%;
   transform: translateX(-50%);
-  width: 80px; height: 22px;
-  background: var(--black);
+  width: 90px; height: 24px;
+  background: #0A0A0A;
   border-radius: 20px;
   z-index: 2;
 }
 .iphone-screen {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  bottom: 0;
+  inset: 0;
   overflow: hidden;
 }
 .iphone-screen img {
   width: 100%;
-  animation: scrollDown 10s linear infinite;
+  display: block;
+  animation: scrollDown 12s linear infinite;
 }
 @keyframes scrollDown {
   0% { transform: translateY(0); }
-  90% { transform: translateY(-60%); }
+  85% { transform: translateY(-60%); }
   100% { transform: translateY(0); }
 }
 
-.mockup-info { text-align: center; }
-.mockup-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
+/* Mockup carousel */
+.mockup-carousel {
+  position: relative;
 }
-.mockup-desc {
-  font-size: 13px;
+.mockup-slides {
+  position: relative;
+  overflow: hidden;
+}
+.mockup-slide {
+  display: none;
+  align-items: center;
+  gap: 60px;
+}
+.mockup-slide.active { display: flex; }
+@media (max-width: 860px) {
+  .mockup-slide { flex-direction: column; gap: 32px; }
+}
+.mockup-slide-text { flex: 1; }
+.mockup-slide-frame { flex-shrink: 0; }
+
+.mockup-slide-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.mockup-slide-desc {
+  font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 10px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  max-width: 420px;
 }
 .mockup-tags {
   display: flex;
-  gap: 6px;
-  justify-content: center;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .mockup-tag {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   background: var(--border);
   border-radius: 100px;
-  padding: 3px 10px;
+  padding: 4px 12px;
   color: var(--text-secondary);
 }
 .mockup-langs {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 .mockup-btns {
   display: flex;
-  gap: 8px;
-  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .mockup-btn {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   font-family: inherit;
-  padding: 7px 14px;
+  padding: 10px 20px;
   border-radius: 100px;
   cursor: pointer;
   transition: var(--transition);
@@ -1005,13 +1136,69 @@ section { padding: 100px 40px; }
   color: var(--text);
   border: 1.5px solid var(--border);
 }
-.mockup-btn:hover { transform: scale(1.05); }
+.mockup-btn:hover { transform: scale(1.04); }
+
+.mockup-carousel-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 36px;
+}
+.mockup-carousel-dots { display: flex; gap: 6px; }
+.mockup-carousel-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.mockup-carousel-dot.active {
+  width: 24px;
+  border-radius: 3px;
+  background: var(--text);
+}
+.mockup-carousel-arrow {
+  width: 40px; height: 40px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 15px;
+  transition: var(--transition);
+}
+.mockup-carousel-arrow:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
 
 /* ===================== AI AGENTS ===================== */
 #agents {
   background: var(--bg);
   padding: 100px 40px;
+  position: relative;
+  overflow: hidden;
 }
+#agents::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background-image: url('static/gradient-blue-purple.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.07;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+[data-theme="dark"] #agents::before { opacity: 0.12; }
 .agents-header { max-width: 1200px; margin: 0 auto 60px; }
 
 .agents-grid {
@@ -1726,101 +1913,31 @@ footer::before {
   </div>
 
   <div class="services-grid">
-    <!-- Dark panel: Dev -->
-    <div class="services-panel services-panel-dark fade-up">
-      <img src="static/keyboard-blue.png" alt="" class="panel-keyboard" loading="lazy"
-           onerror="this.style.display='none'">
-      <h3>Vývoj &amp;<br><span>Programovanie</span></h3>
-      <div class="service-items" id="devItems">
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">AI na mieru</div>
-            <div class="service-desc">Vlastné AI modely, chatboty a agenti prispôsobení vašim processom.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">B2B riešenie na mieru</div>
-            <div class="service-desc">Komplexné platformy pre B2B spoluprácu, portály a intranety.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">E-shop na mieru</div>
-            <div class="service-desc">Vlastné e-commerce riešenia optimalizované pre konverzie.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Integrácia s ERP</div>
-            <div class="service-desc">Prepojenie webových riešení s ERP, CRM a ďalšími systémami.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Prevádzka a support</div>
-            <div class="service-desc">Dlhodobá správa, monitoring a technická podpora vašich produktov.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Webstránka na mieru</div>
-            <div class="service-desc">Prezentačné weby, landingpages a microsite s najvyšším dizajnom.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
+    <!-- Light panel: Design/UX — FIRST -->
+    <div class="services-panel services-panel-light fade-up">
+      <div class="design-deco">
+        <div class="design-deco-sq"></div>
+        <div class="design-deco-circle"></div>
+        <div class="design-deco-rect"></div>
       </div>
-    </div>
-
-    <!-- Light panel: Design/UX -->
-    <div class="services-panel services-panel-light fade-up" style="transition-delay:0.15s">
-      <img src="static/keyboard-purple.png" alt="" class="panel-keyboard" loading="lazy"
-           onerror="this.style.display='none'">
-      <h3>UX &amp; Customer<br><span style="color:var(--purple)">Experience</span></h3>
+      <img src="static/keyboard-purple.png" alt="" class="panel-keyboard" loading="lazy" onerror="this.style.display='none'">
+      <div class="panel-label">Dizajn</div>
+      <h3>UX &amp; Customer<br><span>Experience</span></h3>
       <div class="service-items" id="designItems">
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           </div>
           <div class="service-item-inner">
-            <div class="service-name">Accessibility WCAG 2.2</div>
-            <div class="service-desc">Audity a implementácia prístupnosti pre všetkých používateľov.</div>
+            <div class="service-name">UX & UI Design</div>
+            <div class="service-desc">Wireframy, prototypy a finálny dizajn zameraný na konverzie a radosť z používania.</div>
           </div>
           <div class="service-active-dot"></div>
           <div class="service-expand-icon">+</div>
         </div>
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
           </div>
           <div class="service-item-inner">
             <div class="service-name">Customer Experience</div>
@@ -1831,7 +1948,7 @@ footer::before {
         </div>
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <div class="service-item-inner">
             <div class="service-name">CRO – Optimalizácia konverzií</div>
@@ -1842,10 +1959,10 @@ footer::before {
         </div>
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M3 17c0-3 2.5-5 6-5s6 2 6 5"/><path d="M17 12a5 5 0 010 10"/></svg>
+            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
           </div>
           <div class="service-item-inner">
-            <div class="service-name">Grafický dizajn</div>
+            <div class="service-name">Grafický dizajn & Branding</div>
             <div class="service-desc">Brand identity, vizuálna komunikácia a marketingové materiály.</div>
           </div>
           <div class="service-active-dot"></div>
@@ -1853,7 +1970,7 @@ footer::before {
         </div>
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
           <div class="service-item-inner">
             <div class="service-name">Motion design</div>
@@ -1864,11 +1981,87 @@ footer::before {
         </div>
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
-            <svg width="16" height="16" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
           <div class="service-item-inner">
-            <div class="service-name">Usability testovanie</div>
-            <div class="service-desc">Moderované testy, eye-tracking a výskum používateľov.</div>
+            <div class="service-name">Accessibility WCAG 2.2</div>
+            <div class="service-desc">Audity a implementácia prístupnosti pre všetkých používateľov.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark panel: Dev — SECOND -->
+    <div class="services-panel services-panel-dark fade-up" style="transition-delay:0.15s">
+      <div class="code-deco">const app = await&#10;  build&#40;{&#10;    ai: true,&#10;    erp: true,&#10;    ux: 100&#10;  }&#41;</div>
+      <img src="static/keyboard-blue.png" alt="" class="panel-keyboard" loading="lazy" onerror="this.style.display='none'">
+      <div class="panel-label">Vývoj</div>
+      <h3>Vývoj &amp;<br><span>Programovanie</span></h3>
+      <div class="service-items" id="devItems">
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">AI na mieru</div>
+            <div class="service-desc">Vlastné AI modely, chatboty a agenti prispôsobení vašim processom.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Webstránka & App na mieru</div>
+            <div class="service-desc">Prezentačné weby, SaaS platformy a mobilné aplikácie s čistým kódom.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">E-shop na mieru</div>
+            <div class="service-desc">Vlastné e-commerce riešenia optimalizované pre maximálne konverzie.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">B2B riešenie na mieru</div>
+            <div class="service-desc">Komplexné platformy pre B2B spoluprácu, portály a intranety.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Integrácia s ERP / CRM</div>
+            <div class="service-desc">Prepojenie webových riešení s ERP, CRM a ďalšími systémami.</div>
+          </div>
+          <div class="service-active-dot"></div>
+          <div class="service-expand-icon">+</div>
+        </div>
+        <div class="service-item" onclick="toggleService(this)">
+          <div class="service-icon">
+            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="service-item-inner">
+            <div class="service-name">Prevádzka a support</div>
+            <div class="service-desc">Dlhodobá správa, monitoring a technická podpora vašich produktov.</div>
           </div>
           <div class="service-active-dot"></div>
           <div class="service-expand-icon">+</div>
@@ -1880,15 +2073,35 @@ footer::before {
 
 <!-- ===================== KEYBOARD INTERACTIVE ===================== -->
 <section id="keyboard-section">
-  <div class="keyboard-wrap fade-up">
+  <div class="keyboard-section-inner fade-up">
     <div class="section-label" style="text-align:center">Interaktívna sekcia</div>
     <h2 class="section-h2" style="text-align:center; margin-bottom:8px">Nástroje, ktoré milujeme.</h2>
-    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici.</p>
-    <div class="keyboard-hint">↓ Klikni na klávesnicu ↓</div>
-    <div class="keyboard-interactive" id="keyboardInteractive" onclick="clickKeyboard()">
-      <img src="static/keyboard-grey.png" alt="Keyboard" class="keyboard-img" id="keyboardBase"
-           onerror="this.src=''; this.alt='⌨️'; this.style.fontSize='120px'">
-      <div class="keyboard-badge">Stlač ma!</div>
+    <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:48px">Každý projekt začína pri klávesnici. Klikni na svoju obľúbenú.</p>
+    <div class="keyboards-row">
+      <div class="kb-item kb-blue" onclick="kbClick(this,'blue')">
+        <img src="static/keyboard-blue.png" alt="Blue keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Blue</span>
+      </div>
+      <div class="kb-item kb-purple" onclick="kbClick(this,'purple')">
+        <img src="static/keyboard-purple.png" alt="Purple keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Purple</span>
+      </div>
+      <div class="kb-item kb-grey" onclick="kbClick(this,'grey')">
+        <img src="static/keyboard-grey.png" alt="Grey keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Grey</span>
+      </div>
+      <div class="kb-item kb-yellow" onclick="kbClick(this,'yellow')">
+        <img src="static/keyboard-yellow.png" alt="Yellow keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Yellow</span>
+      </div>
+      <div class="kb-item kb-green" onclick="kbClick(this,'green')">
+        <img src="static/keyboard-green.png" alt="Green keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Green</span>
+      </div>
+      <div class="kb-item kb-black" onclick="kbClick(this,'black')">
+        <img src="static/keyboard-black.png" alt="Black keyboard" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Black</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1896,81 +2109,69 @@ footer::before {
 
 <!-- ===================== MOBILE MOCKUPS ===================== -->
 <section id="mobile">
-  <div style="max-width:1200px; margin:0 auto 0; padding:0 40px 0" class="fade-up">
-    <div class="section-label">Mobilné aplikácie</div>
-    <h2 class="section-h2">Produkty, ktoré žijú vo vreckách<br>vašich zákazníkov.</h2>
-    <p style="font-size:16px; color:var(--text-secondary); max-width:540px; margin-top:12px">Navrhujeme a vyvíjame mobilné aplikácie s ohľadom na konverzie a používateľský zážitok.</p>
-  </div>
-  <div class="mockups-scroll">
-    <div class="mockup-item fade-up">
-      <div class="iphone-frame" id="mock1">
-        <div class="iphone-notch"></div>
-        <div class="iphone-screen">
-          <img src="static/projekt-1.png" alt="App 1" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#77BAF8,#C1BFFF)'">
+  <div class="mobile-inner">
+    <!-- Carousel text + nav -->
+    <div class="mobile-text-side fade-up">
+      <div class="section-label">Mobilné aplikácie</div>
+      <h2 class="section-h2">Produkty, ktoré žijú vo vreckách vašich zákazníkov.</h2>
+      <p style="font-size:15px; color:var(--text-secondary); margin-top:12px; line-height:1.7; max-width:420px">Navrhujeme a vyvíjame mobilné aplikácie s ohľadom na konverzie a používateľský zážitok.</p>
+
+      <div class="mockup-carousel" style="margin-top:40px">
+        <!-- Slide 1 -->
+        <div class="mockup-slide active" id="mslide-0">
+          <div class="mockup-slide-text">
+            <div class="mockup-slide-title">Kondela.sk</div>
+            <div class="mockup-slide-desc">Komplexný redesign e-shopu s nábytkom. Optimalizácia UX, konverzného pomeru a mobilného zážitku pre jedného z popredných SK predajcov nábytku.</div>
+            <div class="mockup-tags">
+              <span class="mockup-tag">E-commerce</span>
+              <span class="mockup-tag">UX Redesign</span>
+              <span class="mockup-tag">CRO</span>
+            </div>
+            <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇨🇿 CZ</div>
+            <div class="mockup-btns">
+              <a href="#" class="mockup-btn mockup-btn-filled">Pozrieť projekt</a>
+              <a href="#contact" class="mockup-btn mockup-btn-outline">Viac info →</a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="mockup-info">
-        <div class="mockup-name">ShopSmart AI</div>
-        <div class="mockup-desc">AI-powered nákupný asistent s personalizáciou.</div>
-        <div class="mockup-tags"><span class="mockup-tag">AI Recommender</span><span class="mockup-tag">E-commerce</span></div>
-        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN &nbsp;|&nbsp; 🇩🇪 DE</div>
-        <div class="mockup-btns">
-          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
-          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+        <!-- Slide 2 -->
+        <div class="mockup-slide" id="mslide-1">
+          <div class="mockup-slide-text">
+            <div class="mockup-slide-title">Dedoles AI</div>
+            <div class="mockup-slide-desc">AI-powered odporúčací systém pre e-shop Dedoles. Personalizácia produktov na základe správania používateľa zvýšila konverzie o 23 %.</div>
+            <div class="mockup-tags">
+              <span class="mockup-tag">AI Recommender</span>
+              <span class="mockup-tag">E-commerce</span>
+              <span class="mockup-tag">ML</span>
+            </div>
+            <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN &nbsp;|&nbsp; 🇩🇪 DE</div>
+            <div class="mockup-btns">
+              <a href="#" class="mockup-btn mockup-btn-filled">Pozrieť projekt</a>
+              <a href="#contact" class="mockup-btn mockup-btn-outline">Viac info →</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="mockup-item fade-up" style="transition-delay:0.1s">
-      <div class="iphone-frame" id="mock2">
-        <div class="iphone-notch"></div>
-        <div class="iphone-screen">
-          <img src="static/projekt-2.png" alt="App 2" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#C1BFFF,#B8F200)'">
-        </div>
-      </div>
-      <div class="mockup-info">
-        <div class="mockup-name">DataFlow Pro</div>
-        <div class="mockup-desc">Real-time analytická platforma pre B2B manažérov.</div>
-        <div class="mockup-tags"><span class="mockup-tag">Analytics</span><span class="mockup-tag">B2B</span></div>
-        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN</div>
-        <div class="mockup-btns">
-          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
-          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
-        </div>
-      </div>
-    </div>
-    <div class="mockup-item fade-up" style="transition-delay:0.2s">
-      <div class="iphone-frame" id="mock3">
-        <div class="iphone-notch"></div>
-        <div class="iphone-screen">
-          <img src="static/projekt-3.png" alt="App 3" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#B8F200,#00E57A)'">
-        </div>
-      </div>
-      <div class="mockup-info">
-        <div class="mockup-name">GreenTrack</div>
-        <div class="mockup-desc">Sledovanie uhlíkovej stopy a ESG reportovanie.</div>
-        <div class="mockup-tags"><span class="mockup-tag">ESG</span><span class="mockup-tag">UX Redesign</span></div>
-        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN &nbsp;|&nbsp; 🇩🇪 DE</div>
-        <div class="mockup-btns">
-          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
-          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+
+        <!-- Carousel nav -->
+        <div class="mockup-carousel-nav">
+          <button class="mockup-carousel-arrow" onclick="mockupPrev()">←</button>
+          <div class="mockup-carousel-dots">
+            <button class="mockup-carousel-dot active" onclick="goMockup(0)"></button>
+            <button class="mockup-carousel-dot" onclick="goMockup(1)"></button>
+          </div>
+          <button class="mockup-carousel-arrow" onclick="mockupNext()">→</button>
         </div>
       </div>
     </div>
-    <div class="mockup-item fade-up" style="transition-delay:0.3s">
-      <div class="iphone-frame" id="mock4">
+
+    <!-- iPhone mockup frame (right side) -->
+    <div class="mobile-mockup-side fade-up" style="transition-delay:0.15s; display:flex; justify-content:center;">
+      <div class="iphone-frame" id="mainMockup">
         <div class="iphone-notch"></div>
-        <div class="iphone-screen">
-          <img src="static/projekt-4.png" alt="App 4" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(180deg,#00E57A,#77BAF8)'">
-        </div>
-      </div>
-      <div class="mockup-info">
-        <div class="mockup-name">LoyaltyHub</div>
-        <div class="mockup-desc">Vernostný program s gamifikáciou pre retail.</div>
-        <div class="mockup-tags"><span class="mockup-tag">Retail</span><span class="mockup-tag">Gamification</span></div>
-        <div class="mockup-langs">🇸🇰 SK &nbsp;|&nbsp; 🇬🇧 EN</div>
-        <div class="mockup-btns">
-          <a href="#" class="mockup-btn mockup-btn-filled">App Store</a>
-          <a href="#" class="mockup-btn mockup-btn-outline">Viac info →</a>
+        <div class="iphone-screen" id="mockupScreen">
+          <img id="mockupImg"
+               src="https://www.ui42.sk/buxus/images/cache/layouts.device_mockup_phone_450w_b3c22cab507486a23019bb2fe94b24df/kondela_HP_Scroll.svg"
+               alt="Kondela.sk mockup">
         </div>
       </div>
     </div>
@@ -2041,15 +2242,15 @@ footer::before {
       <a href="#contact" class="agent-cta">Porozprávajte sa s Jane →</a>
     </div>
     <!-- Stela AI -->
-    <div class="agent-card agent-blue fade-up" style="transition-delay:0.4s; filter: hue-rotate(200deg) saturate(0.8)">
-      <img src="static/robot-black.png" alt="Stela AI" class="agent-robot" loading="lazy" style="filter:brightness(0.9) sepia(0.2)"
+    <div class="agent-card agent-blue fade-up" style="transition-delay:0.4s">
+      <img src="static/robot-blue.png" alt="Stela AI" class="agent-robot" loading="lazy"
            onerror="this.src=''; this.style.fontSize='80px'; this.textContent='🤖'">
       <div class="agent-status"><div class="agent-status-dot"></div> Online</div>
       <div class="agent-name">Stela AI</div>
       <div class="agent-real-name">Stela</div>
-      <div class="agent-role" style="filter:none">Operations & Automation Manager</div>
-      <div class="agent-desc" style="filter:none">Optimalizuje interné procesy, automatizuje workflow a stará sa o operatívnu efektivitu.</div>
-      <a href="#contact" class="agent-cta" style="filter:none; color:var(--blue)">Porozprávajte sa so Stelou →</a>
+      <div class="agent-role">Operations & Automation Manager</div>
+      <div class="agent-desc">Optimalizuje interné procesy, automatizuje workflow a stará sa o operatívnu efektivitu.</div>
+      <a href="#contact" class="agent-cta">Porozprávajte sa so Stelou →</a>
     </div>
   </div>
 </section>
@@ -2379,28 +2580,23 @@ function toggleService(item) {
 }
 
 // ===================== KEYBOARD INTERACTIVE =====================
-const keyboards = [
-  { src: 'static/keyboard-blue.png', color: '#77BAF8', bg: '#0a1628', text: '🚀 Píšeme kód, ktorý konvertuje.' },
-  { src: 'static/keyboard-purple.png', color: '#C1BFFF', bg: '#13102e', text: '🎨 Dizajnujeme zážitky, nie len rozhrania.' },
-  { src: 'static/keyboard-yellow.png', color: '#B8F200', bg: '#1a2100', text: '⚡ Rýchlosť je funkcia, nie bonus.' },
-  { src: 'static/keyboard-black.png', color: '#FFFFFF', bg: '#0A0A0A', text: '🖥️ Každý pixel má zmysel.' },
-  { src: 'static/keyboard-grey.png', color: '#A3A3A3', bg: '#1a1a1a', text: '🤖 AI agenti pracujú 24/7.' }
-];
-let kbIndex = 0;
-const kbBase = document.getElementById('keyboardBase');
+const kbData = {
+  blue:   { color: '#77BAF8', bg: '#0a1628', text: '🚀 Píšeme kód, ktorý konvertuje.' },
+  purple: { color: '#C1BFFF', bg: '#13102e', text: '🎨 Dizajnujeme zážitky, nie len rozhrania.' },
+  grey:   { color: '#A3A3A3', bg: '#1a1a1a', text: '🤖 AI agenti pracujú 24/7.' },
+  yellow: { color: '#B8F200', bg: '#1a2100', text: '⚡ Rýchlosť je funkcia, nie bonus.' },
+  green:  { color: '#00E57A', bg: '#001a0d', text: '🌱 Každý projekt rastie s nami.' },
+  black:  { color: '#FFFFFF', bg: '#0A0A0A', text: '🖥️ Každý pixel má zmysel.' }
+};
 const toast = document.getElementById('keyboardToast');
 let toastTimeout;
 
-function clickKeyboard() {
-  const kb = keyboards[kbIndex % keyboards.length];
-  kbIndex++;
-  kbBase.src = kb.src;
-
-  // Keystroke animation
-  kbBase.style.transform = 'translateY(-6px) scale(0.96)';
-  setTimeout(() => { kbBase.style.transform = ''; }, 200);
-
-  // Toast
+function kbClick(el, type) {
+  const kb = kbData[type];
+  // bounce animation
+  el.style.transform = 'translateY(-14px) scale(0.95)';
+  setTimeout(() => { el.style.transform = ''; }, 220);
+  // toast
   clearTimeout(toastTimeout);
   toast.textContent = kb.text;
   toast.style.background = kb.bg;
@@ -2409,18 +2605,42 @@ function clickKeyboard() {
   toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// ===================== MOBILE MOCKUP TILT =====================
-document.querySelectorAll('.iphone-frame').forEach(frame => {
-  frame.addEventListener('mousemove', e => {
-    const rect = frame.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const rx = ((e.clientY - cy) / rect.height) * 12;
-    const ry = ((e.clientX - cx) / rect.width) * -12;
-    frame.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+// ===================== MOBILE MOCKUP CAROUSEL =====================
+const mockupImages = [
+  'https://www.ui42.sk/buxus/images/cache/layouts.device_mockup_phone_450w_b3c22cab507486a23019bb2fe94b24df/kondela_HP_Scroll.svg',
+  'https://www.ui42.sk/buxus/images/cache/layouts.device_mockup_phone_450w_59ec9568fe03dad261cdb6e563b07ccf/dedoles_ai_recommender_mock_up.svg'
+];
+let currentMockup = 0;
+
+function goMockup(idx) {
+  document.getElementById('mslide-' + currentMockup).classList.remove('active');
+  document.querySelectorAll('.mockup-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  currentMockup = idx;
+  document.getElementById('mslide-' + currentMockup).classList.add('active');
+  const img = document.getElementById('mockupImg');
+  img.style.opacity = '0';
+  img.style.transform = 'translateY(10px)';
+  setTimeout(() => {
+    img.src = mockupImages[currentMockup];
+    img.style.transition = 'opacity 0.4s, transform 0.4s';
+    img.style.opacity = '1';
+    img.style.transform = 'translateY(0)';
+  }, 200);
+}
+function mockupNext() { goMockup((currentMockup + 1) % mockupImages.length); }
+function mockupPrev() { goMockup((currentMockup - 1 + mockupImages.length) % mockupImages.length); }
+
+// Tilt on main mockup
+const mainMock = document.getElementById('mainMockup');
+if (mainMock) {
+  mainMock.addEventListener('mousemove', e => {
+    const rect = mainMock.getBoundingClientRect();
+    const rx = ((e.clientY - rect.top - rect.height/2) / rect.height) * 12;
+    const ry = ((e.clientX - rect.left - rect.width/2) / rect.width) * -12;
+    mainMock.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
-  frame.addEventListener('mouseleave', () => { frame.style.transform = ''; });
-});
+  mainMock.addEventListener('mouseleave', () => { mainMock.style.transform = ''; });
+}
 
 // ===================== MEETING TOGGLE =====================
 function setMeeting(btn, type) {
