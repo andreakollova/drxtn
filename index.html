@@ -123,10 +123,10 @@ nav.scrolled {
   top: 0; left: 0;
   transition: opacity 0.3s, transform 0.3s;
 }
-.nav-logo .logo-full { opacity: 1; }
-.nav-logo .logo-short { opacity: 0; transform: scale(0.9); }
-.nav-logo:hover .logo-full { opacity: 0; transform: scale(0.9); }
-.nav-logo:hover .logo-short { opacity: 1; transform: scale(1); }
+.nav-logo .logo-full { opacity: 0; transform: scale(0.9); }
+.nav-logo .logo-short { opacity: 1; transform: scale(1); }
+.nav-logo:hover .logo-full { opacity: 1; transform: scale(1); }
+.nav-logo:hover .logo-short { opacity: 0; transform: scale(0.9); }
 .nav-logo-placeholder {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 22px;
@@ -322,130 +322,172 @@ nav.scrolled {
 
 /* ===================== HERO ===================== */
 #hero {
-  min-height: 100vh;
+  min-height: 88vh;
+  background: #06060c;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 40px 80px;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
-  text-align: center;
-}
-@media (max-width: 900px) {
-  #hero { padding: 120px 24px 60px; }
-  .hero-card { display: none; }
 }
 
-.hero-pattern {
+/* Noise grain overlay */
+#hero::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background-image: url('static/pattern.png');
-  background-size: 200px;
-  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
   pointer-events: none;
-}
-.hero-blob {
-  position: absolute;
-  top: -80px; right: -120px;
-  width: 700px; height: 700px;
-  background-image: url('static/gradient-blue-purple.png');
-  background-size: cover;
-  border-radius: 50%;
-  opacity: 0.18;
-  filter: blur(80px);
-  pointer-events: none;
-  transition: transform 0.15s ease;
-}
-.hero-blob2 {
-  position: absolute;
-  bottom: -100px; left: -80px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(119,186,248,0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(60px);
-}
-.hero-circle {
-  position: absolute;
-  top: 80px; right: 100px;
-  width: 280px; height: 280px;
-  background-image: url('static/pattern-circle.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.05;
-  animation: spin 20s linear infinite;
-  pointer-events: none;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  z-index: 0;
 }
 
-.hero-center {
-  position: relative;
-  z-index: 2;
-  max-width: 720px;
-  width: 100%;
+/* Background glow blobs */
+.hero-glow {
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(119,186,248,0.15) 0%, rgba(193,191,255,0.08) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
 }
+.hero-glow2 {
+  position: absolute;
+  bottom: -150px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(193,191,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle grid */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(119,186,248,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(119,186,248,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cursor spotlight */
+.hero-spotlight {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(119,186,248,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.3s;
+}
+
+/* Oversized background text */
+.hero-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(120px, 18vw, 280px);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+}
+
+/* Main inner grid */
+.hero-inner {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 120px 80px 60px;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; padding: 120px 24px 40px; gap: 40px; }
+}
+
+/* Left: content */
+.hero-content { display: flex; flex-direction: column; align-items: flex-start; }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 6px 14px;
   border-radius: 100px;
-  background: transparent;
-  border: 1.5px solid var(--border);
-  font-size: 12px;
+  border: 1px solid rgba(119,186,248,0.3);
+  background: rgba(119,186,248,0.08);
+  font-size: 11px;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  color: var(--text-secondary);
-  margin-bottom: 28px;
-  letter-spacing: 0.02em;
-  position: relative;
-  overflow: hidden;
+  color: rgba(119,186,248,0.9);
+  margin-bottom: 32px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
-.hero-badge::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(119,186,248,0.12), rgba(193,191,255,0.12));
-  opacity: 0;
-  transition: opacity 0.3s;
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #77BAF8;
+  animation: pulse 2s ease-in-out infinite;
 }
-.hero-badge:hover::before { opacity: 1; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
 
 .hero-h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(38px, 4.5vw, 64px);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  margin-bottom: 20px;
-  color: var(--text);
+  font-size: clamp(42px, 5.5vw, 80px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin-bottom: 28px;
+  text-align: left;
 }
 .hero-h1 .word {
   display: inline-block;
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(50px);
   transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-  margin-right: 0.22em;
+  margin-right: 0.2em;
 }
 .hero-h1 .word.visible { opacity: 1; transform: translateY(0); }
+.hero-h1 .outline-word {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255,255,255,0.5);
+}
 .hero-h1 .typeword {
   display: block;
-  color: var(--blue);
+  color: #77BAF8;
+  margin-right: 0;
   transition: opacity 0.4s, transform 0.4s;
 }
+.hero-h1 .typeword.fade-out { opacity: 0; transform: translateY(-12px); }
+.hero-h1 .typeword.fade-in { opacity: 1; transform: translateY(0); }
 
 .hero-sub {
   font-size: 17px;
-  color: var(--text-secondary);
-  margin: 0 auto 36px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 40px;
   font-weight: 400;
-  line-height: 1.6;
-  max-width: 480px;
+  line-height: 1.65;
+  max-width: 460px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s ease 0.8s, transform 0.7s ease 0.8s;
@@ -456,69 +498,143 @@ nav.scrolled {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s ease 1s, transform 0.7s ease 1s;
 }
 .hero-btns.visible { opacity: 1; transform: translateY(0); }
 
-/* Floating cards — scattered around the centered title */
-.hero-card {
+/* Right: visual box */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 900px) { .hero-visual { display: none; } }
+
+.hero-visual-box {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 4/3;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  animation: floatA 7s ease-in-out infinite;
+}
+.hero-visual-box::before {
+  content: '';
   position: absolute;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 18px 22px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.07);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(119,186,248,0.12) 0%, rgba(193,191,255,0.08) 50%, transparent 100%);
+}
+.hero-visual-keyboard {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  filter: drop-shadow(0 20px 60px rgba(119,186,248,0.3));
+}
+.hero-visual-glow {
+  position: absolute;
+  top: 20%; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(119,186,248,0.25), transparent 70%);
+  border-radius: 50%;
+}
+
+/* Small floating stat cards on top of visual */
+.hero-mini {
+  position: absolute;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 12px 16px;
+  backdrop-filter: blur(12px);
   pointer-events: none;
-  will-change: transform;
 }
-[data-theme="dark"] .hero-card {
-  background: rgba(20,20,24,0.85);
-  border-color: rgba(255,255,255,0.08);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+.hero-mini-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
-/* top-left: conversion card — big, prominent */
-.hero-card-main {
-  top: 14%; left: 2%;
-  width: 230px;
-  animation: floatA 6s ease-in-out infinite;
+.hero-mini-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
-/* top-right far: lighthouse */
-.hero-card-stat {
-  top: 10%; right: 4%;
-  width: 148px;
-  animation: floatB 7s ease-in-out infinite 0.6s;
+.hero-mini-sub { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.hero-mini-1 { top: -20px; left: -30px; animation: floatB 6s ease-in-out infinite; }
+.hero-mini-2 { bottom: 10px; right: -20px; animation: floatC 7s ease-in-out infinite 1s; }
+
+/* AI pill */
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(119,186,248,0.1);
+  border: 1px solid rgba(119,186,248,0.25);
+  border-radius: 100px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(119,186,248,0.9);
+  position: absolute;
+  top: -12px; right: 20px;
+  animation: floatA 5s ease-in-out infinite 2s;
 }
-/* mid-right: response time */
-.hero-card-response {
-  top: 52%; right: 3%;
-  width: 164px;
-  animation: floatC 5.8s ease-in-out infinite 1.1s;
+.hero-pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #77BAF8;
+  animation: pulse 1.5s ease-in-out infinite;
 }
-/* mid-left-low: projects */
-.hero-card-projects {
-  bottom: 26%; left: 4%;
-  width: 186px;
-  animation: floatA 6.8s ease-in-out infinite 1.8s;
+
+/* Stats bar at bottom of hero */
+.hero-stats-bar {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: auto;
 }
-/* bottom-right: AI online pill */
-.hero-card-tag {
-  bottom: 14%; right: 8%;
-  animation: floatB 6s ease-in-out infinite 2.4s;
+@media (max-width: 640px) {
+  .hero-stats-bar { grid-template-columns: repeat(2, 1fr); }
 }
-/* bottom-left-far: satisfaction */
-.hero-card-sat {
-  bottom: 10%; left: 14%;
-  width: 158px;
-  animation: floatC 7.2s ease-in-out infinite 0.4s;
+.hero-stat-item {
+  padding: 24px 40px;
+  border-right: 1px solid rgba(255,255,255,0.07);
 }
+.hero-stat-item:last-child { border-right: none; }
+.hero-stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+}
+
 @keyframes floatA {
   0%, 100% { transform: translateY(0px) rotate(-1deg); }
-  50% { transform: translateY(-14px) rotate(1deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
 }
 @keyframes floatB {
   0%, 100% { transform: translateY(0px) rotate(1.5deg); }
@@ -526,93 +642,7 @@ nav.scrolled {
 }
 @keyframes floatC {
   0%, 100% { transform: translateY(0px) rotate(0.5deg); }
-  50% { transform: translateY(-16px) rotate(-1.5deg); }
-}
-.hero-card-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.hero-card-value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
-}
-.hero-card-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
-.hero-card-bar {
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  margin-top: 12px;
-  overflow: hidden;
-}
-.hero-card-bar-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--blue), var(--purple));
-  width: 0%;
-  transition: width 1.8s cubic-bezier(0.16,1,0.3,1) 1.5s;
-}
-.hero-card-bar-fill.animate { width: 78%; }
-
-.hero-stat-num {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, var(--blue), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; line-height: 1.4; }
-
-.hero-pill-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0,229,122,0.1);
-  border: 1px solid rgba(0,229,122,0.2);
-  border-radius: 100px;
-  padding: 7px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green);
-  white-space: nowrap;
-}
-.hero-pill-dot {
-  width: 6px; height: 6px;
-  background: var(--green);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* Orbit circles — centered around hero */
-.hero-orbit {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px; height: 700px;
-  border: 1px dashed rgba(119,186,248,0.1);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: spin 40s linear infinite reverse;
-}
-.hero-orbit2 {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 480px; height: 480px;
-  border: 1px dashed rgba(193,191,255,0.09);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: spin 28s linear infinite;
+  50% { transform: translateY(-14px) rotate(-1.5deg); }
 }
 
 .btn-primary {
@@ -721,9 +751,7 @@ section { padding: 100px 40px; }
 .carousel.dragging { cursor: grabbing; scroll-snap-type: none; }
 
 .project-card {
-  flex: 0 0 min(72vw, 640px);
-  height: auto;
-  aspect-ratio: 16/10;
+  flex: 0 0 min(68vw, 560px);
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
@@ -736,10 +764,8 @@ section { padding: 100px 40px; }
 .project-card:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); }
 
 .project-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  height: auto;
   display: block;
   transition: transform 0.5s;
 }
@@ -842,34 +868,57 @@ section { padding: 100px 40px; }
 }
 
 /* ===================== SERVICES ===================== */
-#services {
-  padding: 100px 0;
-  overflow: hidden;
-}
+#services { padding: 0; overflow: hidden; }
 .services-header {
   max-width: 1200px;
-  margin: 0 auto 60px;
-  padding: 0 40px;
+  margin: 0 auto;
+  padding: 80px 60px 60px;
 }
 .services-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 1400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  margin: 0;
   gap: 0;
   overflow: hidden;
 }
-@media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
-
 .services-panel {
-  padding: 56px 52px;
+  padding: 80px max(60px, 7vw);
   position: relative;
   overflow: hidden;
-  min-height: 640px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 .services-panel-dark { background: #070709; color: #fff; }
 .services-panel-light { background: #F8F7FF; color: var(--text); }
 [data-theme="dark"] .services-panel-light { background: #0d0c18; }
+
+/* inner 2-col layout */
+.services-panel-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .services-panel-inner { grid-template-columns: 1fr; gap: 48px; }
+  .services-panel { padding: 60px 28px; min-height: auto; }
+  .services-visual { display: none; }
+}
+.services-content { position: relative; z-index: 1; }
+.services-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
 
 /* grid lines on dark panel */
 .services-panel-dark::before {
@@ -885,9 +934,9 @@ section { padding: 100px 40px; }
 
 /* ---- DESIGN CANVAS (right side of design panel) ---- */
 .design-canvas {
-  position: absolute;
-  top: 48px; right: 36px;
-  width: 200px;
+  position: relative;
+  top: auto; right: auto;
+  width: 240px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -993,9 +1042,9 @@ section { padding: 100px 40px; }
 
 /* ---- CODE EDITOR (right side of dev panel) ---- */
 .code-editor {
-  position: absolute;
-  top: 44px; right: 28px;
-  width: 230px;
+  position: relative;
+  top: auto; right: auto;
+  width: 260px;
   background: #0d1117;
   border: 1px solid rgba(119,186,248,0.15);
   border-radius: 14px;
@@ -1047,9 +1096,9 @@ section { padding: 100px 40px; }
 
 /* Terminal below code editor */
 .code-terminal {
-  position: absolute;
-  bottom: 32px; right: 28px;
-  width: 210px;
+  position: relative;
+  bottom: auto; right: auto;
+  width: 260px;
   background: #0d1117;
   border: 1px solid rgba(0,229,122,0.15);
   border-radius: 12px;
@@ -2237,70 +2286,69 @@ footer::before {
 
 <!-- ===================== HERO ===================== -->
 <section id="hero">
-  <div class="hero-pattern"></div>
-  <div class="hero-blob" id="heroBlob"></div>
-  <div class="hero-blob2"></div>
-  <div class="hero-circle"></div>
-  <div class="hero-orbit"></div>
-  <div class="hero-orbit2"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-spotlight" id="heroSpotlight"></div>
+  <div class="hero-bg-text">DRIXTON</div>
 
-  <!-- CENTERED CONTENT -->
-  <div class="hero-center">
-    <div class="hero-badge fade-up">
-      <span>✦</span>
-      <span>Web &amp; Dev Studio</span>
+  <div class="hero-inner">
+    <!-- LEFT: content -->
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <div class="hero-badge-dot"></div>
+        <span>Web &amp; Dev Studio</span>
+      </div>
+      <h1 class="hero-h1" id="heroH1" aria-label="Tvoríme digitálne produkty, ktoré konvertujú."></h1>
+      <p class="hero-sub" id="heroSub">Dizajn. Vývoj. AI riešenia.<br>Všetko pod jednou strechou.</p>
+      <div class="hero-btns" id="heroBtns">
+        <a href="#projects" class="btn-primary">Pozrieť projekty</a>
+        <a href="#services" class="btn-secondary"><span>Zistiť viac</span><span>→</span></a>
+      </div>
     </div>
-    <h1 class="hero-h1" id="heroH1" aria-label="Tvoríme digitálne produkty, ktoré konvertujú."></h1>
-    <p class="hero-sub" id="heroSub">Dizajn. Vývoj. AI riešenia. Všetko pod jednou strechou.</p>
-    <div class="hero-btns" id="heroBtns">
-      <a href="#projects" class="btn-primary">Pozrieť projekty</a>
-      <a href="#services" class="btn-secondary"><span>Zistiť viac</span><span>→</span></a>
-    </div>
-  </div>
 
-  <!-- FLOATING CARDS — 6 cards, asymmetric -->
-
-  <!-- top-left: conversion rate (biggest, most prominent) -->
-  <div class="hero-card hero-card-main">
-    <div class="hero-card-label">Konverzný pomer</div>
-    <div class="hero-card-value">+247%</div>
-    <div class="hero-card-sub">vs. predchádzajúce riešenie</div>
-    <div class="hero-card-bar"><div class="hero-card-bar-fill" id="heroBarFill"></div></div>
-  </div>
-
-  <!-- top-right: lighthouse score -->
-  <div class="hero-card hero-card-stat">
-    <div class="hero-stat-num">98</div>
-    <div class="hero-stat-label">Lighthouse<br>Performance</div>
-  </div>
-
-  <!-- mid-right: response time -->
-  <div class="hero-card hero-card-response">
-    <div class="hero-card-label">Odpoveď do</div>
-    <div class="hero-card-value" style="font-size:22px">24 hod</div>
-    <div class="hero-card-sub">každý pracovný deň</div>
-  </div>
-
-  <!-- mid-left-low: projects -->
-  <div class="hero-card hero-card-projects">
-    <div class="hero-card-label">Projekty 2024</div>
-    <div class="hero-card-value" style="font-size:22px">50+</div>
-    <div class="hero-card-sub">dokončených projektov</div>
-  </div>
-
-  <!-- bottom-right: AI online pill -->
-  <div class="hero-card hero-card-tag">
-    <div class="hero-pill-tag">
-      <span class="hero-pill-dot"></span>
-      AI agenti online
+    <!-- RIGHT: visual -->
+    <div class="hero-visual">
+      <div class="hero-visual-box">
+        <div class="hero-visual-glow"></div>
+        <img src="static/keyboard-blue.png" alt="" class="hero-visual-keyboard" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <!-- mini floating cards -->
+      <div class="hero-mini hero-mini-1">
+        <div class="hero-mini-label">Konverzný pomer</div>
+        <div class="hero-mini-value">+247%</div>
+        <div class="hero-mini-sub">vs. predošlé riešenie</div>
+      </div>
+      <div class="hero-mini hero-mini-2">
+        <div class="hero-mini-label">Lighthouse</div>
+        <div class="hero-mini-value">98</div>
+        <div class="hero-mini-sub">Performance score</div>
+      </div>
+      <div class="hero-pill">
+        <div class="hero-pill-dot"></div>
+        AI agenti online
+      </div>
     </div>
   </div>
 
-  <!-- bottom-left: satisfaction -->
-  <div class="hero-card hero-card-sat">
-    <div class="hero-card-label">Spokojnosť</div>
-    <div class="hero-stat-num" style="font-size:28px">98%</div>
-    <div class="hero-card-sub">klientov odporúča</div>
+  <!-- Stats bar -->
+  <div class="hero-stats-bar">
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">50+</div>
+      <div class="hero-stat-label">Dokončených projektov</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">98%</div>
+      <div class="hero-stat-label">Spokojnosť klientov</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">24h</div>
+      <div class="hero-stat-label">Odpoveď do 24 hodín</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">6+</div>
+      <div class="hero-stat-label">Rokov skúseností</div>
+    </div>
   </div>
 </section>
 
@@ -2378,46 +2426,11 @@ footer::before {
   <div class="services-grid">
     <!-- ══════ DESIGN PANEL ══════ -->
     <div class="services-panel services-panel-light fade-up">
-
-      <!-- Figma-style design canvas (decorative, right side) -->
-      <div class="design-canvas">
-        <!-- Color palette card -->
-        <div class="dc-frame">
-          <div class="dc-frame-title">Brand palette</div>
-          <div class="dc-palette">
-            <div class="dc-swatch" style="background:#77BAF8" title="Blue"></div>
-            <div class="dc-swatch" style="background:#C1BFFF" title="Purple"></div>
-            <div class="dc-swatch" style="background:#B8F200" title="Yellow"></div>
-            <div class="dc-swatch" style="background:#00E57A" title="Green"></div>
-            <div class="dc-swatch" style="background:#0A0A0A" title="Black"></div>
-          </div>
-          <div class="dc-typo">
-            <div class="dc-typo-h">Aa — Space Grotesk</div>
-            <div class="dc-typo-b">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
-          </div>
-        </div>
-        <!-- Wireframe card -->
-        <div class="dc-wire">
-          <div class="dc-frame-title" style="margin-bottom:8px">Wireframe</div>
-          <div class="dc-wire-bar"></div>
-          <div class="dc-wire-bar" style="width:80%"></div>
-          <div class="dc-wire-grid">
-            <div class="dc-wire-block"></div>
-            <div class="dc-wire-block"></div>
-            <div class="dc-wire-block"></div>
-          </div>
-        </div>
-        <!-- Component badge -->
-        <div class="dc-component">
-          <div class="dc-component-dot"></div>
-          <span class="dc-component-label">Components ready</span>
-        </div>
-      </div>
-
-      <img src="static/keyboard-purple.png" alt="" class="panel-keyboard" loading="lazy" onerror="this.style.display='none'">
-      <div class="panel-label">Dizajn</div>
-      <h3>UX &amp; Customer<br><span>Experience</span></h3>
-      <div class="service-items" id="designItems">
+      <div class="services-panel-inner">
+        <div class="services-content">
+          <div class="panel-label">Dizajn</div>
+          <h3>UX &amp; Customer<br><span>Experience</span></h3>
+          <div class="service-items" id="designItems">
         <div class="service-item" onclick="toggleService(this)">
           <div class="service-icon">
             <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
@@ -2485,112 +2498,148 @@ footer::before {
           <div class="service-expand-icon">+</div>
         </div>
       </div>
+        </div><!-- /services-content -->
+        <div class="services-visual">
+          <div class="design-canvas">
+            <div class="dc-frame">
+              <div class="dc-frame-title">Brand palette</div>
+              <div class="dc-palette">
+                <div class="dc-swatch" style="background:#77BAF8" title="Blue"></div>
+                <div class="dc-swatch" style="background:#C1BFFF" title="Purple"></div>
+                <div class="dc-swatch" style="background:#B8F200" title="Yellow"></div>
+                <div class="dc-swatch" style="background:#00E57A" title="Green"></div>
+                <div class="dc-swatch" style="background:#0A0A0A" title="Black"></div>
+              </div>
+              <div class="dc-typo">
+                <div class="dc-typo-h">Aa — Space Grotesk</div>
+                <div class="dc-typo-b">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+              </div>
+            </div>
+            <div class="dc-wire">
+              <div class="dc-frame-title" style="margin-bottom:8px">Wireframe</div>
+              <div class="dc-wire-bar"></div>
+              <div class="dc-wire-bar" style="width:80%"></div>
+              <div class="dc-wire-grid">
+                <div class="dc-wire-block"></div>
+                <div class="dc-wire-block"></div>
+                <div class="dc-wire-block"></div>
+              </div>
+            </div>
+            <div class="dc-component">
+              <div class="dc-component-dot"></div>
+              <span class="dc-component-label">Components ready</span>
+            </div>
+          </div>
+        </div><!-- /services-visual -->
+      </div><!-- /services-panel-inner -->
     </div>
 
     <!-- ══════ DEV PANEL ══════ -->
     <div class="services-panel services-panel-dark fade-up" style="transition-delay:0.15s">
-
-      <!-- Code editor mockup -->
-      <div class="code-editor">
-        <div class="ce-titlebar">
-          <span class="ce-dot ce-dot-r"></span>
-          <span class="ce-dot ce-dot-y"></span>
-          <span class="ce-dot ce-dot-g"></span>
-          <span class="ce-filename">drixton.config.ts</span>
-        </div>
-        <div class="ce-body">
-          <div class="ce-line"><span class="ce-ln">1</span><span class="ce-k">import</span> <span class="ce-p">{ </span><span class="ce-n">Drixton</span><span class="ce-p"> }</span></div>
-          <div class="ce-line"><span class="ce-ln">2</span></div>
-          <div class="ce-line"><span class="ce-ln">3</span><span class="ce-k">const</span> <span class="ce-n">app</span> <span class="ce-p">=</span> <span class="ce-k">new</span> <span class="ce-f">Drixton</span><span class="ce-p">({</span></div>
-          <div class="ce-line"><span class="ce-ln">4</span>&nbsp;&nbsp;<span class="ce-n">ai</span><span class="ce-p">:</span> <span class="ce-k">true</span><span class="ce-p">,</span></div>
-          <div class="ce-line"><span class="ce-ln">5</span>&nbsp;&nbsp;<span class="ce-n">stack</span><span class="ce-p">:</span> <span class="ce-s">"Next.js"</span><span class="ce-p">,</span></div>
-          <div class="ce-line"><span class="ce-ln">6</span>&nbsp;&nbsp;<span class="ce-n">performance</span><span class="ce-p">:</span> <span class="ce-n">98</span><span class="ce-p">,</span></div>
-          <div class="ce-line"><span class="ce-ln">7</span><span class="ce-p">})</span></div>
-          <div class="ce-line"><span class="ce-ln">8</span></div>
-          <div class="ce-line"><span class="ce-ln">9</span><span class="ce-c">// 🚀 build &amp; deploy</span></div>
-          <div class="ce-line"><span class="ce-ln">10</span><span class="ce-k">await</span> <span class="ce-n">app</span><span class="ce-p">.</span><span class="ce-f">launch</span><span class="ce-p">()</span><span class="ce-cursor"></span></div>
-        </div>
-      </div>
-
-      <!-- Terminal -->
-      <div class="code-terminal">
-        <div><span class="ct-prompt">$ </span><span class="ct-cmd">npm run build</span></div>
-        <div><span class="ct-out">▶ compiled in 1.2s</span></div>
-        <div><span class="ct-out">▶ optimizing...</span></div>
-        <div><span class="ct-success">✓ ready in 847ms</span></div>
-      </div>
-
-      <img src="static/keyboard-blue.png" alt="" class="panel-keyboard" loading="lazy" onerror="this.style.display='none'">
-      <div class="panel-label">Vývoj</div>
-      <h3>Vývoj &amp;<br><span>Programovanie</span></h3>
-      <div class="service-items" id="devItems">
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/></svg>
+      <div class="services-panel-inner">
+        <div class="services-content">
+          <div class="panel-label">Vývoj</div>
+          <h3>Vývoj &amp;<br><span>Programovanie</span></h3>
+          <div class="service-items" id="devItems">
+            <div class="service-item" onclick="toggleService(this)">
+              <div class="service-icon">
+                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/></svg>
+              </div>
+              <div class="service-item-inner">
+                <div class="service-name">AI na mieru</div>
+                <div class="service-desc">Vlastné AI modely, chatboty a agenti prispôsobení vašim processom.</div>
+              </div>
+              <div class="service-active-dot"></div>
+              <div class="service-expand-icon">+</div>
+            </div>
+            <div class="service-item" onclick="toggleService(this)">
+              <div class="service-icon">
+                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="service-item-inner">
+                <div class="service-name">Webstránka & App na mieru</div>
+                <div class="service-desc">Prezentačné weby, SaaS platformy a mobilné aplikácie s čistým kódom.</div>
+              </div>
+              <div class="service-active-dot"></div>
+              <div class="service-expand-icon">+</div>
+            </div>
+            <div class="service-item" onclick="toggleService(this)">
+              <div class="service-icon">
+                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              </div>
+              <div class="service-item-inner">
+                <div class="service-name">E-shop na mieru</div>
+                <div class="service-desc">Vlastné e-commerce riešenia optimalizované pre maximálne konverzie.</div>
+              </div>
+              <div class="service-active-dot"></div>
+              <div class="service-expand-icon">+</div>
+            </div>
+            <div class="service-item" onclick="toggleService(this)">
+              <div class="service-icon">
+                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="service-item-inner">
+                <div class="service-name">B2B riešenie na mieru</div>
+                <div class="service-desc">Komplexné platformy pre B2B spoluprácu, portály a intranety.</div>
+              </div>
+              <div class="service-active-dot"></div>
+              <div class="service-expand-icon">+</div>
+            </div>
+            <div class="service-item" onclick="toggleService(this)">
+              <div class="service-icon">
+                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div class="service-item-inner">
+                <div class="service-name">Integrácia s ERP / CRM</div>
+                <div class="service-desc">Prepojenie webových riešení s ERP, CRM a ďalšími systémami.</div>
+              </div>
+              <div class="service-active-dot"></div>
+              <div class="service-expand-icon">+</div>
+            </div>
+            <div class="service-item" onclick="toggleService(this)">
+              <div class="service-icon">
+                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="service-item-inner">
+                <div class="service-name">Prevádzka a support</div>
+                <div class="service-desc">Dlhodobá správa, monitoring a technická podpora vašich produktov.</div>
+              </div>
+              <div class="service-active-dot"></div>
+              <div class="service-expand-icon">+</div>
+            </div>
           </div>
-          <div class="service-item-inner">
-            <div class="service-name">AI na mieru</div>
-            <div class="service-desc">Vlastné AI modely, chatboty a agenti prispôsobení vašim processom.</div>
+        </div><!-- /services-content -->
+        <div class="services-visual">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="code-editor">
+              <div class="ce-titlebar">
+                <span class="ce-dot ce-dot-r"></span>
+                <span class="ce-dot ce-dot-y"></span>
+                <span class="ce-dot ce-dot-g"></span>
+                <span class="ce-filename">drixton.config.ts</span>
+              </div>
+              <div class="ce-body">
+                <div class="ce-line"><span class="ce-ln">1</span><span class="ce-k">import</span> <span class="ce-p">{ </span><span class="ce-n">Drixton</span><span class="ce-p"> }</span></div>
+                <div class="ce-line"><span class="ce-ln">2</span></div>
+                <div class="ce-line"><span class="ce-ln">3</span><span class="ce-k">const</span> <span class="ce-n">app</span> <span class="ce-p">=</span> <span class="ce-k">new</span> <span class="ce-f">Drixton</span><span class="ce-p">({</span></div>
+                <div class="ce-line"><span class="ce-ln">4</span>&nbsp;&nbsp;<span class="ce-n">ai</span><span class="ce-p">:</span> <span class="ce-k">true</span><span class="ce-p">,</span></div>
+                <div class="ce-line"><span class="ce-ln">5</span>&nbsp;&nbsp;<span class="ce-n">stack</span><span class="ce-p">:</span> <span class="ce-s">"Next.js"</span><span class="ce-p">,</span></div>
+                <div class="ce-line"><span class="ce-ln">6</span>&nbsp;&nbsp;<span class="ce-n">performance</span><span class="ce-p">:</span> <span class="ce-n">98</span><span class="ce-p">,</span></div>
+                <div class="ce-line"><span class="ce-ln">7</span><span class="ce-p">})</span></div>
+                <div class="ce-line"><span class="ce-ln">8</span></div>
+                <div class="ce-line"><span class="ce-ln">9</span><span class="ce-c">// 🚀 build &amp; deploy</span></div>
+                <div class="ce-line"><span class="ce-ln">10</span><span class="ce-k">await</span> <span class="ce-n">app</span><span class="ce-p">.</span><span class="ce-f">launch</span><span class="ce-p">()</span><span class="ce-cursor"></span></div>
+              </div>
+            </div>
+            <div class="code-terminal">
+              <div><span class="ct-prompt">$ </span><span class="ct-cmd">npm run build</span></div>
+              <div><span class="ct-out">▶ compiled in 1.2s</span></div>
+              <div><span class="ct-out">▶ optimizing...</span></div>
+              <div><span class="ct-success">✓ ready in 847ms</span></div>
+            </div>
           </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Webstránka & App na mieru</div>
-            <div class="service-desc">Prezentačné weby, SaaS platformy a mobilné aplikácie s čistým kódom.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">E-shop na mieru</div>
-            <div class="service-desc">Vlastné e-commerce riešenia optimalizované pre maximálne konverzie.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">B2B riešenie na mieru</div>
-            <div class="service-desc">Komplexné platformy pre B2B spoluprácu, portály a intranety.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Integrácia s ERP / CRM</div>
-            <div class="service-desc">Prepojenie webových riešení s ERP, CRM a ďalšími systémami.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Prevádzka a support</div>
-            <div class="service-desc">Dlhodobá správa, monitoring a technická podpora vašich produktov.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-      </div>
+        </div><!-- /services-visual -->
+      </div><!-- /services-panel-inner -->
     </div>
   </div>
 </section>
@@ -3023,22 +3072,21 @@ function closeMobileMenu() {
 
 // ===================== HERO ANIMATION =====================
 function animateHero() {
+  const words = ['Tvoríme', 'digitálne', 'produkty,', 'ktoré'];
   const h1 = document.getElementById('heroH1');
-  // Build headline with typewriter word
-  const before = ['Tvoríme', 'digitálne', 'produkty,', 'ktoré'];
-  h1.innerHTML = before.map((w, i) =>
-    `<span class="word" style="transition-delay:${i * 90}ms">${w}</span>`
-  ).join(' ') + '<br><span class="word typeword" id="typeWord" style="transition-delay:' + (before.length * 90) + 'ms">konvertujú.</span>';
+  if (h1) {
+    h1.innerHTML = words.map((w, i) =>
+      `<span class="word" style="transition-delay:${i * 80}ms">${w}</span>`
+    ).join(' ') + '<br><span class="word typeword" id="typeWord" style="transition-delay:' + (words.length * 80) + 'ms">konvertujú.</span>';
+    setTimeout(() => {
+      h1.querySelectorAll('.word').forEach(w => w.classList.add('visible'));
+    }, 200);
+  }
   setTimeout(() => {
-    h1.querySelectorAll('.word').forEach(w => w.classList.add('visible'));
     document.getElementById('heroSub').classList.add('visible');
     document.getElementById('heroBtns').classList.add('visible');
-    document.querySelector('.hero-badge').classList.add('visible');
-    // animate bar
-    setTimeout(() => {
-      const bar = document.getElementById('heroBarFill');
-      if (bar) bar.classList.add('animate');
-    }, 400);
+    const badge = document.querySelector('.hero-badge');
+    if (badge) badge.classList.add('visible');
     // start typewriter
     startTypewriter();
   }, 60);
@@ -3064,24 +3112,11 @@ function startTypewriter() {
 
 // ===================== PARALLAX HERO =====================
 document.addEventListener('mousemove', e => {
-  const nx = (e.clientX / window.innerWidth - 0.5);
-  const ny = (e.clientY / window.innerHeight - 0.5);
-  // blob follows mouse
-  const blob = document.getElementById('heroBlob');
-  if (blob) blob.style.transform = `translate(${nx * 40}px, ${ny * 40}px)`;
-  // each card moves at different parallax depth for 3D feel
-  const cardDepths = [
-    ['.hero-card-main',     20,  16],
-    ['.hero-card-stat',    -24, -18],
-    ['.hero-card-response', 14, -22],
-    ['.hero-card-projects',-16,  20],
-    ['.hero-card-tag',      28,  14],
-    ['.hero-card-sat',     -12, -26],
-  ];
-  cardDepths.forEach(([sel, dx, dy]) => {
-    const el = document.querySelector(sel);
-    if (el) el.style.transform = `translate(${nx * dx}px, ${ny * dy}px)`;
-  });
+  const spotlight = document.getElementById('heroSpotlight');
+  if (spotlight) {
+    spotlight.style.left = e.clientX + 'px';
+    spotlight.style.top = e.clientY + 'px';
+  }
 });
 
 // ===================== INTERSECTION OBSERVER =====================
