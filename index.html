@@ -322,17 +322,17 @@ nav.scrolled {
 /* ===================== HERO ===================== */
 #hero {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   align-items: center;
-  padding: 120px 80px 80px;
+  justify-content: center;
+  padding: 120px 40px 80px;
   position: relative;
   overflow: hidden;
-  gap: 60px;
+  text-align: center;
 }
 @media (max-width: 900px) {
-  #hero { grid-template-columns: 1fr; padding: 120px 24px 60px; text-align: center; }
-  .hero-right { display: none; }
+  #hero { padding: 120px 24px 60px; }
+  .hero-card { display: none; }
 }
 
 .hero-pattern {
@@ -381,16 +381,11 @@ nav.scrolled {
   50% { transform: translateY(-12px); }
 }
 
-.hero-left {
+.hero-center {
   position: relative;
   z-index: 2;
-}
-.hero-right {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 720px;
+  width: 100%;
 }
 
 .hero-badge {
@@ -446,7 +441,7 @@ nav.scrolled {
 .hero-sub {
   font-size: 17px;
   color: var(--text-secondary);
-  margin-bottom: 36px;
+  margin: 0 auto 36px;
   font-weight: 400;
   line-height: 1.6;
   max-width: 480px;
@@ -460,45 +455,65 @@ nav.scrolled {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s ease 1s, transform 0.7s ease 1s;
 }
 .hero-btns.visible { opacity: 1; transform: translateY(0); }
 
-/* Hero right: floating cards */
-.hero-visual {
-  position: relative;
-  width: 420px;
-  height: 460px;
-}
+/* Floating cards — scattered around the centered title */
 .hero-card {
   position: absolute;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 20px 22px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-  backdrop-filter: blur(12px);
-  transition: transform 0.15s;
+  padding: 18px 22px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  pointer-events: none;
+  will-change: transform;
 }
 [data-theme="dark"] .hero-card {
-  background: rgba(255,255,255,0.04);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  background: rgba(20,20,24,0.85);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
 }
+/* top-left: conversion card */
 .hero-card-main {
-  top: 40px; left: 20px;
-  width: 260px;
-  animation: float 5s ease-in-out infinite;
+  top: 22%; left: 4%;
+  width: 240px;
+  animation: floatA 6s ease-in-out infinite;
 }
+/* top-right: lighthouse */
 .hero-card-stat {
-  bottom: 60px; right: 10px;
-  width: 180px;
-  animation: float 5s ease-in-out infinite 1.5s;
+  top: 18%; right: 5%;
+  width: 160px;
+  animation: floatB 7s ease-in-out infinite 0.8s;
 }
+/* bottom-left: projects */
+.hero-card-projects {
+  bottom: 22%; left: 5%;
+  width: 190px;
+  animation: floatC 5.5s ease-in-out infinite 1.4s;
+}
+/* bottom-right: AI online pill */
 .hero-card-tag {
-  top: 10px; right: 30px;
-  animation: float 5s ease-in-out infinite 0.8s;
+  bottom: 24%; right: 4%;
+  animation: floatA 6.5s ease-in-out infinite 2s;
+}
+@keyframes floatA {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50% { transform: translateY(-14px) rotate(1deg); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px) rotate(1.5deg); }
+  50% { transform: translateY(-10px) rotate(-0.5deg); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translateY(0px) rotate(0.5deg); }
+  50% { transform: translateY(-16px) rotate(-1.5deg); }
 }
 .hero-card-label {
   font-family: 'JetBrains Mono', monospace;
@@ -565,26 +580,26 @@ nav.scrolled {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Orbit decorative circle */
+/* Orbit circles — centered around hero */
 .hero-orbit {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 380px; height: 380px;
-  border: 1px dashed rgba(119,186,248,0.15);
+  width: 700px; height: 700px;
+  border: 1px dashed rgba(119,186,248,0.1);
   border-radius: 50%;
   pointer-events: none;
-  animation: spin 30s linear infinite reverse;
+  animation: spin 40s linear infinite reverse;
 }
 .hero-orbit2 {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 280px; height: 280px;
-  border: 1px dashed rgba(193,191,255,0.12);
+  width: 480px; height: 480px;
+  border: 1px dashed rgba(193,191,255,0.09);
   border-radius: 50%;
   pointer-events: none;
-  animation: spin 20s linear infinite;
+  animation: spin 28s linear infinite;
 }
 
 .btn-primary {
@@ -2151,48 +2166,50 @@ footer::before {
   <div class="hero-blob" id="heroBlob"></div>
   <div class="hero-blob2"></div>
   <div class="hero-circle"></div>
+  <div class="hero-orbit"></div>
+  <div class="hero-orbit2"></div>
 
-  <!-- LEFT -->
-  <div class="hero-left">
+  <!-- CENTERED CONTENT -->
+  <div class="hero-center">
     <div class="hero-badge fade-up">
       <span>✦</span>
       <span>Web &amp; Dev Studio</span>
     </div>
     <h1 class="hero-h1" id="heroH1" aria-label="Tvoríme digitálne produkty, ktoré konvertujú."></h1>
-    <p class="hero-sub" id="heroSub">Dizajn. Vývoj. AI riešenia.<br>Všetko pod jednou strechou.</p>
+    <p class="hero-sub" id="heroSub">Dizajn. Vývoj. AI riešenia. Všetko pod jednou strechou.</p>
     <div class="hero-btns" id="heroBtns">
       <a href="#projects" class="btn-primary">Pozrieť projekty</a>
       <a href="#services" class="btn-secondary"><span>Zistiť viac</span><span>→</span></a>
     </div>
   </div>
 
-  <!-- RIGHT: floating cards -->
-  <div class="hero-right">
-    <div class="hero-visual" id="heroVisual">
-      <div class="hero-orbit"></div>
-      <div class="hero-orbit2"></div>
+  <!-- FLOATING CARDS (absolute, scattered around) -->
+  <!-- top-left: conversion -->
+  <div class="hero-card hero-card-main">
+    <div class="hero-card-label">Konverzný pomer</div>
+    <div class="hero-card-value">+247%</div>
+    <div class="hero-card-sub">vs. predchádzajúce riešenie</div>
+    <div class="hero-card-bar"><div class="hero-card-bar-fill" id="heroBarFill"></div></div>
+  </div>
 
-      <!-- Main conversion card -->
-      <div class="hero-card hero-card-main">
-        <div class="hero-card-label">Konverzný pomer</div>
-        <div class="hero-card-value">+247%</div>
-        <div class="hero-card-sub">vs. predchádzajúce riešenie</div>
-        <div class="hero-card-bar"><div class="hero-card-bar-fill" id="heroBarFill"></div></div>
-      </div>
+  <!-- top-right: lighthouse -->
+  <div class="hero-card hero-card-stat">
+    <div class="hero-stat-num">98</div>
+    <div class="hero-stat-label">Lighthouse<br>Performance</div>
+  </div>
 
-      <!-- Stat card -->
-      <div class="hero-card hero-card-stat">
-        <div class="hero-stat-num">98</div>
-        <div class="hero-stat-label">Lighthouse skóre<br>Performance</div>
-      </div>
+  <!-- bottom-left: projects count -->
+  <div class="hero-card hero-card-projects">
+    <div class="hero-card-label">Dokončené projekty</div>
+    <div class="hero-card-value" style="font-size:24px">50+</div>
+    <div class="hero-card-sub">spokojných klientov</div>
+  </div>
 
-      <!-- Online pill -->
-      <div class="hero-card hero-card-tag">
-        <div class="hero-pill-tag">
-          <span class="hero-pill-dot"></span>
-          AI agenti online
-        </div>
-      </div>
+  <!-- bottom-right: AI online -->
+  <div class="hero-card hero-card-tag">
+    <div class="hero-pill-tag">
+      <span class="hero-pill-dot"></span>
+      AI agenti online
     </div>
   </div>
 </section>
@@ -2908,11 +2925,22 @@ function startTypewriter() {
 
 // ===================== PARALLAX HERO =====================
 document.addEventListener('mousemove', e => {
+  const nx = (e.clientX / window.innerWidth - 0.5);
+  const ny = (e.clientY / window.innerHeight - 0.5);
+  // blob follows mouse
   const blob = document.getElementById('heroBlob');
-  if (!blob) return;
-  const x = (e.clientX / window.innerWidth - 0.5) * 30;
-  const y = (e.clientY / window.innerHeight - 0.5) * 30;
-  blob.style.transform = `translate(${x}px, ${y}px)`;
+  if (blob) blob.style.transform = `translate(${nx * 40}px, ${ny * 40}px)`;
+  // each floating card moves at different depth
+  const cardDepths = [
+    ['.hero-card-main', 18],
+    ['.hero-card-stat', -22],
+    ['.hero-card-projects', -14],
+    ['.hero-card-tag', 26],
+  ];
+  cardDepths.forEach(([sel, depth]) => {
+    const el = document.querySelector(sel);
+    if (el) el.style.transform = `translate(${nx * depth}px, ${ny * depth}px)`;
+  });
 });
 
 // ===================== INTERSECTION OBSERVER =====================
