@@ -1502,15 +1502,15 @@ section { padding: 100px 40px; }
   50%      { margin-top:-10px; filter:drop-shadow(0 16px 24px rgba(0,0,0,0.08)); }
 }
 .kbgame-msg {
-  position: absolute; top: 20px; left: 50%;
-  transform: translateX(-50%);
+  position: absolute;
+  transform: translate(-50%, -150%);
   background: rgba(255,255,255,0.95);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-radius: 100px; padding: 10px 20px;
+  border-radius: 100px; padding: 8px 16px;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px; font-weight: 600; white-space: nowrap;
+  font-size: 13px; font-weight: 600; white-space: nowrap;
   z-index: 20; pointer-events: none;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 7px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   border: 1px solid rgba(0,0,0,0.05);
   animation: kbMsgIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
@@ -4114,10 +4114,12 @@ kbUpdateStrip('blue', 0);
     kbEl.style.top  = kbPos.y + 'px';
   }
 
-  function showMsg(html, color) {
+  function showMsg(html, color, x, y) {
     gameEl.querySelectorAll('.kbgame-msg').forEach(m => m.remove());
     const d = document.createElement('div');
     d.className = 'kbgame-msg';
+    d.style.left = x + 'px';
+    d.style.top = y + 'px';
     d.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';display:inline-block;flex-shrink:0"></span>' + html;
     gameEl.appendChild(d);
     setTimeout(() => { d.style.transition = 'opacity 0.4s'; d.style.opacity = '0'; setTimeout(() => d.remove(), 400); }, 3500);
@@ -4157,7 +4159,7 @@ kbUpdateStrip('blue', 0);
         kbToolIndex++;
         const toolName = kbData[activeColor].tools[kbToolIndex % kbData[activeColor].tools.length];
         const toolSvg = toolSVGs[toolName] || '';
-        showMsg(toolSvg + toolName, kbData[activeColor].hex);
+        showMsg(toolSvg + toolName, kbData[activeColor].hex, kbPos.x, kbPos.y);
         spawn();
       }
     }
