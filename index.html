@@ -1714,7 +1714,11 @@ section { padding: 100px 40px; }
   filter: blur(60px);
 }
 [data-theme="dark"] #agents::before { opacity: 0.12; }
-.agents-header { max-width: 1200px; margin: 0 auto 60px; }
+.agents-header { max-width: 1200px; margin: 0 auto 60px; padding: 0 40px; }
+#agent-max .agent-role { color: #0A0A0A; }
+[data-theme="dark"] #agent-max .agent-role { color: #fff; }
+#agent-max .agent-cta { color: #0A0A0A; }
+[data-theme="dark"] #agent-max .agent-cta { color: #fff; }
 
 .agents-grid {
   max-width: 1200px;
@@ -2301,7 +2305,7 @@ footer::before {
 
 .footer-logo-area { }
 .footer-logo {
-  height: 40px;
+  height: 64px;
   margin-bottom: 16px;
   display: block;
 }
@@ -2483,6 +2487,7 @@ footer::before {
   <ul class="nav-links">
     <li><a href="#services">Čo robíme</a></li>
     <li><a href="#projects">Projekty</a></li>
+    <li><a href="#keyboard-section">Nástroje</a></li>
     <li><a href="#agents">O nás</a></li>
     <li><a href="#contact">Kontakt</a></li>
   </ul>
@@ -2919,7 +2924,7 @@ footer::before {
       <div class="agent-real-name">Maximilián</div>
       <div class="agent-role">AI Security Engineer</div>
       <div class="agent-desc">Chráni vaše systémy, detekuje hrozby a zabezpečuje bezpečnosť AI riešení 24/7.</div>
-      <a href="#contact" class="agent-cta">Porozprávajte sa s Maxom →</a>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-black'),'black')">Viac o Maxovi →</a>
     </div>
     <!-- Vicky AI -->
     <div class="agent-card agent-green fade-up" id="agent-vicky" style="transition-delay:0.08s">
@@ -2930,7 +2935,7 @@ footer::before {
       <div class="agent-real-name">Viktória</div>
       <div class="agent-role">Partner Outreach & Email Specialist</div>
       <div class="agent-desc">Rieši partnerstvá, automatizuje outreach kampane a personalizuje emailovú komunikáciu.</div>
-      <a href="#contact" class="agent-cta">Porozprávajte sa s Vicky →</a>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-green'),'green')">Viac o Vicky →</a>
     </div>
     <!-- Pete AI -->
     <div class="agent-card agent-gray fade-up" id="agent-pete" style="transition-delay:0.16s">
@@ -2941,7 +2946,7 @@ footer::before {
       <div class="agent-real-name">Peter</div>
       <div class="agent-role">Junior Data & Insights Analyst</div>
       <div class="agent-desc">Analyzuje dáta, generuje reporty a objavuje vzory, ktoré pomáhajú pri rozhodovaní.</div>
-      <a href="#contact" class="agent-cta">Porozprávajte sa s Petom →</a>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-grey'),'grey')">Viac o Petovi →</a>
     </div>
     <!-- Mia AI -->
     <div class="agent-card agent-purple fade-up" id="agent-mia" style="transition-delay:0.24s">
@@ -2952,7 +2957,7 @@ footer::before {
       <div class="agent-real-name">Majka</div>
       <div class="agent-role">Senior Growth & Marketing Manager</div>
       <div class="agent-desc">Strategicky riadi rast, SEO, performance marketing a marketingovú automatizáciu.</div>
-      <a href="#contact" class="agent-cta">Porozprávajte sa s Miou →</a>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-purple'),'purple')">Viac o Mii →</a>
     </div>
     <!-- Jane AI -->
     <div class="agent-card agent-yellow fade-up" id="agent-jane" style="transition-delay:0.32s">
@@ -2963,7 +2968,7 @@ footer::before {
       <div class="agent-real-name">Janka</div>
       <div class="agent-role">Product, Social Media & Content Specialist</div>
       <div class="agent-desc">Tvorí obsah, spravuje sociálne siete a koordinuje produktovú komunikáciu.</div>
-      <a href="#contact" class="agent-cta">Porozprávajte sa s Jane →</a>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-yellow'),'yellow')">Viac o Jane →</a>
     </div>
     <!-- Stela AI -->
     <div class="agent-card agent-blue fade-up" id="agent-stela" style="transition-delay:0.4s">
@@ -2974,7 +2979,7 @@ footer::before {
       <div class="agent-real-name">Stela</div>
       <div class="agent-role">Operations & Automation Manager</div>
       <div class="agent-desc">Optimalizuje interné procesy, automatizuje workflow a stará sa o operatívnu efektivitu.</div>
-      <a href="#contact" class="agent-cta">Porozprávajte sa so Stelou →</a>
+      <a href="#keyboard-section" class="agent-cta" onclick="kbClick(document.querySelector('.kb-blue'),'blue')">Viac o Stele →</a>
     </div>
   </div>
 </section>
