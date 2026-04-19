@@ -3750,15 +3750,14 @@ function buildHeroH1(lang) {
 }
 
 function animateHero() {
-  const h1 = document.getElementById('heroH1');
   buildHeroH1('sk');
-  if (h1) {
   setTimeout(() => {
-    document.getElementById('heroSub').classList.add('visible');
-    document.getElementById('heroBtns').classList.add('visible');
+    const heroSub = document.getElementById('heroSub');
+    const heroBtns = document.getElementById('heroBtns');
     const badge = document.querySelector('.hero-badge');
+    if (heroSub) heroSub.classList.add('visible');
+    if (heroBtns) heroBtns.classList.add('visible');
     if (badge) badge.classList.add('visible');
-    // start typewriter
     startTypewriter();
   }, 60);
 }
