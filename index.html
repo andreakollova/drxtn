@@ -588,8 +588,8 @@ nav.scrolled {
   letter-spacing: -0.02em;
 }
 .hero-mini-sub { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
-.hero-mini-1 { top: 18%; left: 3%; animation: floatB 6s ease-in-out infinite; pointer-events: auto; }
-.hero-mini-2 { top: 14%; right: 4%; animation: floatC 7s ease-in-out infinite 1s; pointer-events: auto; }
+.hero-mini-1 { top: 32%; left: 6%; animation: floatB 6s ease-in-out infinite; pointer-events: auto; }
+.hero-mini-2 { top: 20%; right: 5%; animation: floatC 7s ease-in-out infinite 1s; pointer-events: auto; }
 .hero-mini:hover { box-shadow: 0 8px 30px rgba(119,186,248,0.15); border-color: rgba(119,186,248,0.35); }
 
 /* AI pill */
@@ -605,7 +605,7 @@ nav.scrolled {
   font-family: 'JetBrains Mono', monospace;
   color: rgba(119,186,248,0.9);
   position: absolute;
-  bottom: 20%; left: 4%;
+  bottom: 24%; right: 7%;
   animation: floatA 5s ease-in-out infinite 2s;
   pointer-events: auto;
   cursor: default;
@@ -1226,6 +1226,35 @@ section { padding: 100px 40px; }
   position: absolute; bottom: -20px; right: -20px;
   width: 180px; opacity: 0.04; pointer-events: none; z-index: 0;
 }
+
+/* Service list (new style) */
+.svc-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 36px;
+  position: relative; z-index: 1;
+}
+@media (max-width: 600px) { .svc-list { grid-template-columns: 1fr; } }
+.svc-entry {
+  padding: 14px 16px;
+  border-radius: 10px;
+  transition: background 0.2s;
+  cursor: default;
+}
+.services-panel-dark .svc-entry:hover { background: rgba(119,186,248,0.07); }
+.services-panel-light .svc-entry:hover { background: rgba(193,191,255,0.12); }
+.svc-entry-name {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: -0.01em; margin-bottom: 3px;
+}
+.services-panel-dark .svc-entry-name { color: rgba(255,255,255,0.85); }
+.services-panel-light .svc-entry-name { color: var(--text); }
+.svc-entry-desc {
+  font-size: 11.5px; line-height: 1.5;
+}
+.services-panel-dark .svc-entry-desc { color: rgba(255,255,255,0.3); }
+.services-panel-light .svc-entry-desc { color: var(--text-secondary); }
 
 /* ===================== KEYBOARD INTERACTIVE ===================== */
 #keyboard-section {
@@ -2427,94 +2456,45 @@ footer::before {
 
 <!-- ===================== SERVICES ===================== -->
 <section id="services">
-  <div class="services-header fade-up">
-    <div class="section-label">Čo robíme</div>
-    <h2 class="section-h2">Dizajn, ktorý zaujme.<br>Kód, ktorý funguje.</h2>
-  </div>
-
   <div class="services-grid">
     <!-- ══════ DESIGN PANEL ══════ -->
     <div class="services-panel services-panel-light fade-up">
       <div class="services-panel-inner">
         <div class="services-content">
-          <div class="panel-label">Dizajn</div>
-          <h3>Design, ktorý<br><span>konvertuje.</span></h3>
-          <p class="panel-tagline">Vytvárame rozhrania, ktoré nie sú len krásne — ale aj funkčné a zamerané na výsledky.</p>
+          <div class="section-label" style="color:var(--purple)">Dizajn</div>
+          <h2 class="section-h2" style="margin-bottom:14px">Dizajn, ktorý<br><span style="color:var(--purple)">konvertuje.</span></h2>
+          <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:440px;margin-bottom:32px">Vytvárame digitálne produkty, ktoré nie sú len krásne — ale predovšetkým funkčné, rýchle a zamerané na výsledky. Od prvého wireframu po finálne pixely.</p>
+
+          <div class="svc-list">
+            <div class="svc-entry"><div class="svc-entry-name">UX &amp; UI Design</div><div class="svc-entry-desc">Wireframy, prototypy, finálny dizajn.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Brand Identity &amp; Logo</div><div class="svc-entry-desc">Vizuálna identita, logotyp, manuál.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Design System</div><div class="svc-entry-desc">Konzistentné komponentové knižnice.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Motion Design</div><div class="svc-entry-desc">UI animácie, micro-interactions, Lottie.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">CRO &amp; A/B testovanie</div><div class="svc-entry-desc">Heatmapy, A/B testy, optimalizácia.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">User Research</div><div class="svc-entry-desc">Rozhovory, user testing, customer journey.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Accessibility WCAG 2.2</div><div class="svc-entry-desc">Audity a implementácia prístupnosti.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Prototypovanie</div><div class="svc-entry-desc">Interaktívne prototypy pre stakeholderov.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Copywriting &amp; Content</div><div class="svc-entry-desc">Texty, tonalita, content stratégia.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
+          </div>
+
+          <div class="section-label" style="color:var(--purple);margin-bottom:12px">Nástroje</div>
           <div class="panel-pills">
             <span class="panel-pill">Figma</span>
             <span class="panel-pill">Framer</span>
             <span class="panel-pill">After Effects</span>
             <span class="panel-pill">Principle</span>
-            <span class="panel-pill">WCAG 2.2</span>
+            <span class="panel-pill">Protopie</span>
+            <span class="panel-pill">Spline</span>
+            <span class="panel-pill">Webflow</span>
+            <span class="panel-pill">Lottie</span>
+            <span class="panel-pill">Zeplin</span>
+            <span class="panel-pill">Storybook</span>
+            <span class="panel-pill">Maze</span>
+            <span class="panel-pill">Hotjar</span>
+            <span class="panel-pill">Adobe CC</span>
+            <span class="panel-pill">Notion</span>
           </div>
-          <div class="service-items" id="designItems">
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">UX & UI Design</div>
-            <div class="service-desc">Wireframy, prototypy a finálny dizajn zameraný na konverzie a radosť z používania.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Grafický dizajn & Branding</div>
-            <div class="service-desc">Brand identity, vizuálna komunikácia, logotyp a dizajn systém.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Motion design</div>
-            <div class="service-desc">Animácie UI, micro-interactions a video content pre web aj sociálne siete.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">CRO & A/B testovanie</div>
-            <div class="service-desc">Heatmapy, A/B testy a datami podložená optimalizácia konverzií.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Usability & Customer Experience</div>
-            <div class="service-desc">Výskum používateľov, zákaznícka cesta a testovanie s reálnymi ľuďmi.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-        <div class="service-item" onclick="toggleService(this)">
-          <div class="service-icon">
-            <svg width="15" height="15" fill="none" stroke="#C1BFFF" stroke-width="1.5" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <div class="service-item-inner">
-            <div class="service-name">Accessibility WCAG 2.2</div>
-            <div class="service-desc">Audity a implementácia prístupnosti — dizajn pre každého.</div>
-          </div>
-          <div class="service-active-dot"></div>
-          <div class="service-expand-icon">+</div>
-        </div>
-      </div>
         </div><!-- /services-content -->
         <div class="services-visual">
           <div class="design-canvas">
@@ -2555,84 +2535,45 @@ footer::before {
     <div class="services-panel services-panel-dark fade-up" style="transition-delay:0.15s">
       <div class="services-panel-inner">
         <div class="services-content">
-          <div class="panel-label">Vývoj</div>
-          <h3>Kód, ktorý<br><span>škáluje.</span></h3>
-          <p class="panel-tagline">Píšeme čistý, rýchly a udržiavateľný kód — s AI na palube a nasadením do 24 hodín.</p>
+          <div class="section-label" style="color:var(--blue)">Vývoj</div>
+          <h2 class="section-h2" style="color:#fff;margin-bottom:14px">Kód, ktorý<br><span style="color:var(--blue)">škáluje.</span></h2>
+          <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:440px;margin-bottom:32px">Píšeme čistý, rýchly a udržiavateľný kód s AI nástrojmi na palube. Od MVP po enterprise — nasadenie do 24 hodín.</p>
+
+          <div class="svc-list">
+            <div class="svc-entry"><div class="svc-entry-name">AI Agenti &amp; Chatboty</div><div class="svc-entry-desc">Vlastné LLM agenti, RAG systémy, chatboty.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Web &amp; SaaS na mieru</div><div class="svc-entry-desc">Prezentačné weby, SaaS platformy, portály.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">E-shop na mieru</div><div class="svc-entry-desc">Headless commerce, custom checkout, PIM.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Mobilné aplikácie</div><div class="svc-entry-desc">React Native iOS &amp; Android aplikácie.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">B2B Platformy &amp; Portály</div><div class="svc-entry-desc">Intranety, objednávkové systémy, dashboardy.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">API &amp; Integrácie</div><div class="svc-entry-desc">ERP, CRM, platobné brány, third-party API.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Performance Optimalizácia</div><div class="svc-entry-desc">Core Web Vitals, Lighthouse 98+, CDN.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Security Audit</div><div class="svc-entry-desc">OWASP, pentesting, bezpečnostné hardening.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
+            <div class="svc-entry"><div class="svc-entry-name">Prevádzka &amp; Support</div><div class="svc-entry-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
+          </div>
+
+          <div class="section-label" style="color:var(--blue);margin-bottom:12px">Technológie</div>
           <div class="panel-pills">
             <span class="panel-pill">Next.js</span>
-            <span class="panel-pill">TypeScript</span>
             <span class="panel-pill">React</span>
+            <span class="panel-pill">TypeScript</span>
             <span class="panel-pill">Node.js</span>
+            <span class="panel-pill">Python</span>
+            <span class="panel-pill">FastAPI</span>
             <span class="panel-pill">Supabase</span>
-            <span class="panel-pill">AI/LLM</span>
-          </div>
-          <div class="service-items" id="devItems">
-            <div class="service-item" onclick="toggleService(this)">
-              <div class="service-icon">
-                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/></svg>
-              </div>
-              <div class="service-item-inner">
-                <div class="service-name">AI na mieru</div>
-                <div class="service-desc">Vlastné AI modely, chatboty a agenti prispôsobení vašim processom.</div>
-              </div>
-              <div class="service-active-dot"></div>
-              <div class="service-expand-icon">+</div>
-            </div>
-            <div class="service-item" onclick="toggleService(this)">
-              <div class="service-icon">
-                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              </div>
-              <div class="service-item-inner">
-                <div class="service-name">Webstránka & App na mieru</div>
-                <div class="service-desc">Prezentačné weby, SaaS platformy a mobilné aplikácie s čistým kódom.</div>
-              </div>
-              <div class="service-active-dot"></div>
-              <div class="service-expand-icon">+</div>
-            </div>
-            <div class="service-item" onclick="toggleService(this)">
-              <div class="service-icon">
-                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-              </div>
-              <div class="service-item-inner">
-                <div class="service-name">E-shop na mieru</div>
-                <div class="service-desc">Vlastné e-commerce riešenia optimalizované pre maximálne konverzie.</div>
-              </div>
-              <div class="service-active-dot"></div>
-              <div class="service-expand-icon">+</div>
-            </div>
-            <div class="service-item" onclick="toggleService(this)">
-              <div class="service-icon">
-                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              </div>
-              <div class="service-item-inner">
-                <div class="service-name">B2B riešenie na mieru</div>
-                <div class="service-desc">Komplexné platformy pre B2B spoluprácu, portály a intranety.</div>
-              </div>
-              <div class="service-active-dot"></div>
-              <div class="service-expand-icon">+</div>
-            </div>
-            <div class="service-item" onclick="toggleService(this)">
-              <div class="service-icon">
-                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div class="service-item-inner">
-                <div class="service-name">Integrácia s ERP / CRM</div>
-                <div class="service-desc">Prepojenie webových riešení s ERP, CRM a ďalšími systémami.</div>
-              </div>
-              <div class="service-active-dot"></div>
-              <div class="service-expand-icon">+</div>
-            </div>
-            <div class="service-item" onclick="toggleService(this)">
-              <div class="service-icon">
-                <svg width="15" height="15" fill="none" stroke="#77BAF8" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div class="service-item-inner">
-                <div class="service-name">Prevádzka a support</div>
-                <div class="service-desc">Dlhodobá správa, monitoring a technická podpora vašich produktov.</div>
-              </div>
-              <div class="service-active-dot"></div>
-              <div class="service-expand-icon">+</div>
-            </div>
+            <span class="panel-pill">PostgreSQL</span>
+            <span class="panel-pill">Prisma</span>
+            <span class="panel-pill">Redis</span>
+            <span class="panel-pill">GraphQL</span>
+            <span class="panel-pill">Tailwind</span>
+            <span class="panel-pill">GSAP</span>
+            <span class="panel-pill">Docker</span>
+            <span class="panel-pill">Vercel</span>
+            <span class="panel-pill">AWS</span>
+            <span class="panel-pill">Stripe</span>
+            <span class="panel-pill">OpenAI API</span>
+            <span class="panel-pill">LangChain</span>
+            <span class="panel-pill">GitHub Actions</span>
           </div>
         </div><!-- /services-content -->
         <div class="services-visual">
@@ -3167,6 +3108,30 @@ document.querySelectorAll('.hero-mini, .hero-pill').forEach(card => {
   });
 });
 
+// Scramble h1 words on mouseover
+const heroH1 = document.getElementById('heroH1');
+if (heroH1) {
+  heroH1.addEventListener('mousemove', e => {
+    const words = heroH1.querySelectorAll('.word:not(.typeword)');
+    words.forEach(w => {
+      const r = w.getBoundingClientRect();
+      const dist = Math.hypot(e.clientX - (r.left + r.width/2), e.clientY - (r.top + r.height/2));
+      if (dist < 80 && !w.dataset.scrambling) {
+        w.dataset.scrambling = '1';
+        const orig = w.textContent;
+        let f = 0, tot = orig.length * 3;
+        const t = setInterval(() => {
+          w.textContent = orig.split('').map((c, i) =>
+            i < Math.floor(f/3) || c === ' ' ? c : CHARS[Math.floor(Math.random()*CHARS.length)]
+          ).join('');
+          f++;
+          if (f > tot) { w.textContent = orig; delete w.dataset.scrambling; clearInterval(t); }
+        }, 25);
+      }
+    });
+  });
+}
+
 // Dark mode logo swap in hero
 function updateHeroLogo(isDark) {
   const logo = document.getElementById('heroLogoAlt');
@@ -3227,6 +3192,14 @@ carousel.addEventListener('scroll', () => {
     d.classList.toggle('active', j === idx);
   });
 });
+
+// Prevent carousel from hijacking vertical page scroll
+carousel.addEventListener('wheel', e => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    e.preventDefault();
+    window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+  }
+}, { passive: false });
 
 // Drag scroll
 let isDragging = false, startX, scrollLeft;
