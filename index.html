@@ -2007,7 +2007,7 @@ section { padding: 100px 40px; }
 }
 .gradient-cta-h2 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(38px, 5vw, 64px);
+  font-size: clamp(30px, 4vw, 48px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.06;
@@ -3694,6 +3694,8 @@ function setLang(lang) {
       }
     }
   });
+  // Rebuild hero h1 with correct language words
+  buildHeroH1(lang);
   // Update typewriter words
   window._currentTypeWords = lang === 'en' ? typeWordsEN : typeWordsSK;
   const tw = document.getElementById('typeWord');
@@ -3719,17 +3721,26 @@ function closeMobileMenu() {
 }
 
 // ===================== HERO ANIMATION =====================
-function animateHero() {
-  const words = ['Tvoríme', 'digitálne', 'produkty,', 'ktoré'];
+const heroWordsSK = ['Tvoríme', 'digitálne', 'produkty,', 'ktoré'];
+const heroWordsEN = ['We', 'create', 'digital', 'products', 'that'];
+
+function buildHeroH1(lang) {
+  const words = lang === 'en' ? heroWordsEN : heroWordsSK;
+  const firstTypeWord = lang === 'en' ? 'convert.' : 'konvertujú.';
   const h1 = document.getElementById('heroH1');
+  if (!h1) return;
+  h1.innerHTML = words.map((w, i) =>
+    `<span class="word" style="transition-delay:${i * 80}ms">${w}</span>`
+  ).join(' ') + '<br><span class="word typeword" id="typeWord" style="transition-delay:' + (words.length * 80) + 'ms">' + firstTypeWord + '</span>';
+  setTimeout(() => {
+    h1.querySelectorAll('.word').forEach(w => w.classList.add('visible'));
+  }, 200);
+}
+
+function animateHero() {
+  const h1 = document.getElementById('heroH1');
+  buildHeroH1('sk');
   if (h1) {
-    h1.innerHTML = words.map((w, i) =>
-      `<span class="word" style="transition-delay:${i * 80}ms">${w}</span>`
-    ).join(' ') + '<br><span class="word typeword" id="typeWord" style="transition-delay:' + (words.length * 80) + 'ms">konvertujú.</span>';
-    setTimeout(() => {
-      h1.querySelectorAll('.word').forEach(w => w.classList.add('visible'));
-    }, 200);
-  }
   setTimeout(() => {
     document.getElementById('heroSub').classList.add('visible');
     document.getElementById('heroBtns').classList.add('visible');
