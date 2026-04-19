@@ -1298,33 +1298,60 @@ section { padding: 100px 40px; }
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: nowrap;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 0 24px 8px;
   scrollbar-width: none;
 }
 .keyboards-row::-webkit-scrollbar { display: none; }
-.kb-item img { width: 140px; }
 .kb-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+  flex-shrink: 0;
 }
 .kb-item:hover { transform: translateY(-8px) scale(1.04); }
 .kb-item:active { transform: translateY(-4px) scale(0.98); }
 
 .kb-item img {
-  width: 160px;
+  width: 110px;
   display: block;
   transition: filter 0.2s, transform 0.15s;
   filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
 }
 [data-theme="dark"] .kb-item img { filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5)); }
 .kb-item:active img { transform: translateY(-4px); }
+
+/* Agent info strip */
+.kb-agent-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 16px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.kb-agent-left { display: flex; align-items: center; gap: 12px; }
+.kb-agent-dot { width: 8px; height: 8px; border-radius: 50%; transition: background 0.3s; }
+.kb-agent-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px; font-weight: 700;
+}
+.kb-agent-role { font-size: 13px; color: var(--text-secondary); }
+.kb-agent-pills { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 60%; }
+.kb-agent-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.04em;
+  padding: 3px 10px; border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: border-color 0.3s, color 0.3s;
+}
+.kb-agent-pill.active-color { color: var(--accent); border-color: var(--accent); }
 
 .kb-label {
   font-family: 'JetBrains Mono', monospace;
@@ -1866,13 +1893,7 @@ section { padding: 100px 40px; }
     radial-gradient(ellipse at 10% 80%, rgba(44,159,250,0.3) 0%, transparent 50%);
   pointer-events: none;
 }
-#gradient-cta::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: url('static/pattern.png');
-  background-size: 200px;
-  opacity: 0.05;
-}
+#gradient-cta::after { display: none; }
 .gradient-cta-inner {
   position: relative;
   z-index: 1;
@@ -2822,29 +2843,39 @@ footer::before {
     <p style="text-align:center; color:var(--text-secondary); font-size:16px; margin-bottom:40px">Každý projekt začína pri klávesnici. Vyber farbu a naveď robota.</p>
     <div class="keyboards-row" style="margin-bottom:32px">
       <div class="kb-item kb-blue kb-active" onclick="kbClick(this,'blue')">
-        <img src="static/keyboard-blue.png" alt="Blue keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Blue</span>
+        <img src="static/keyboard-blue.png" alt="Stela AI" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Stela</span>
       </div>
       <div class="kb-item kb-purple" onclick="kbClick(this,'purple')">
-        <img src="static/keyboard-purple.png" alt="Purple keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Purple</span>
+        <img src="static/keyboard-purple.png" alt="Mia AI" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Mia</span>
       </div>
       <div class="kb-item kb-grey" onclick="kbClick(this,'grey')">
-        <img src="static/keyboard-grey.png" alt="Grey keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Grey</span>
+        <img src="static/keyboard-grey.png" alt="Pete AI" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Pete</span>
       </div>
       <div class="kb-item kb-yellow" onclick="kbClick(this,'yellow')">
-        <img src="static/keyboard-yellow.png" alt="Yellow keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Yellow</span>
+        <img src="static/keyboard-yellow.png" alt="Jane AI" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Jane</span>
       </div>
       <div class="kb-item kb-green" onclick="kbClick(this,'green')">
-        <img src="static/keyboard-green.png" alt="Green keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Green</span>
+        <img src="static/keyboard-green.png" alt="Vicky AI" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Vicky</span>
       </div>
       <div class="kb-item kb-black" onclick="kbClick(this,'black')">
-        <img src="static/keyboard-black.png" alt="Black keyboard" loading="lazy" onerror="this.style.display='none'">
-        <span class="kb-label">Black</span>
+        <img src="static/keyboard-black.png" alt="Max AI" loading="lazy" onerror="this.style.display='none'">
+        <span class="kb-label">Max</span>
       </div>
+    </div>
+    <div class="kb-agent-strip" id="kbAgentStrip">
+      <div class="kb-agent-left">
+        <div class="kb-agent-dot" id="kbAgentDot"></div>
+        <div>
+          <div class="kb-agent-name" id="kbAgentName">Stela AI</div>
+          <div class="kb-agent-role" id="kbAgentRole">Operations &amp; Automation Manager</div>
+        </div>
+      </div>
+      <div class="kb-agent-pills" id="kbAgentPills"></div>
     </div>
     <div id="kbGame">
       <div id="kbGameGrid"></div>
@@ -2862,24 +2893,6 @@ footer::before {
     <div class="section-label">AI Tím</div>
     <h2 class="section-h2">Náš AI tím pracuje non-stop.</h2>
     <p style="font-size:16px; color:var(--text-secondary); margin-top:12px; max-width:480px">Každý agent má špecializáciu. Spoločne tvoria výkonný ekosystém.</p>
-  </div>
-  <div class="team-members fade-up">
-    <div class="team-card">
-      <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="team-photo">
-      <div class="team-info">
-        <div class="team-name">Andrea Kollová</div>
-        <div class="team-tag team-tag-dev">Vývoj</div>
-        <div class="team-bio">Full-stack developer a architektka systémov. Stojí za backendom, AI integráciami a technickým vedením projektov.</div>
-      </div>
-    </div>
-    <div class="team-card">
-      <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="team-photo">
-      <div class="team-info">
-        <div class="team-name">Natália Fondrková</div>
-        <div class="team-tag team-tag-design">Dizajn</div>
-        <div class="team-bio">UI/UX dizajnérka s citom pre detail. Zodpovedá za vizuálnu identitu, interakčný dizajn a používateľský zážitok.</div>
-      </div>
-    </div>
   </div>
   <div class="agents-grid">
     <!-- Max AI -->
@@ -2957,20 +2970,7 @@ footer::before {
     <div class="gradient-cta-label">Drixton Studio</div>
     <h2 class="gradient-cta-h2">Pripravení spustiť<br>váš ďalší projekt?</h2>
     <p class="gradient-cta-sub">Dohodnite si bezplatný 30-minútový discovery call. Bez záväzkov.</p>
-    <div class="gcta-team">
-      <div class="gcta-person">
-        <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="gcta-avatar">
-        <div class="gcta-person-name">Andrea Kollová</div>
-        <div class="gcta-person-role">Vývoj</div>
-      </div>
-      <div class="gcta-sep">&amp;</div>
-      <div class="gcta-person">
-        <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="gcta-avatar">
-        <div class="gcta-person-name">Natália Fondrková</div>
-        <div class="gcta-person-role">Dizajn</div>
-      </div>
-    </div>
-    <div class="gradient-cta-btns">
+    <div class="gradient-cta-btns" style="margin-top:40px">
       <a href="#contact" class="gradient-cta-btn-primary">Začnime spoluprácu →</a>
       <a href="#projects" class="gradient-cta-btn-ghost">Pozrieť portfólio</a>
     </div>
@@ -3405,13 +3405,42 @@ function toggleService(item) {
 
 // ===================== KEYBOARD INTERACTIVE GAME =====================
 const kbData = {
-  blue:   { hex: '#0ea5e9', text: 'Čistý kód je začiatok všetkého.' },
-  purple: { hex: '#a855f7', text: 'Kreativita mení nápady na produkty.' },
-  grey:   { hex: '#6b7280', text: 'Bez štruktúry sa veci rozpadajú.' },
-  yellow: { hex: '#b8f300', text: 'Každý produkt začína ako jednoduchý nápad.' },
-  green:  { hex: '#22c55e', text: 'Výkon nie je funkcia. Je to štandard.' },
-  black:  { hex: '#71717a', text: 'Zložitosť riešime v zákulisí.' }
+  blue:   { hex: '#0ea5e9', text: 'Všetko beží ako hodinky.',
+    agent: 'Stela AI', role: 'Operations & Automation Manager',
+    tools: ['Make.com','Zapier','n8n','Notion','Airtable','Slack','Linear','GitHub','Vercel','Supabase','Jira','Confluence'] },
+  purple: { hex: '#a855f7', text: 'Kreativita mení nápady na produkty.',
+    agent: 'Mia AI', role: 'Senior Growth & Marketing Manager',
+    tools: ['Google Ads','Meta Ads','HubSpot','Mailchimp','SEMrush','Hotjar','GA4','Webflow','Canva','Buffer','Klaviyo','Ahrefs'] },
+  grey:   { hex: '#6b7280', text: 'Dáta neklamú.',
+    agent: 'Pete AI', role: 'Junior Data & Insights Analyst',
+    tools: ['Python','Pandas','SQL','Tableau','Looker','BigQuery','dbt','Metabase','Jupyter','Power BI','Airflow','Snowflake'] },
+  yellow: { hex: '#b8f300', text: 'Každý obsah má svoju silu.',
+    agent: 'Jane AI', role: 'Product, Social Media & Content',
+    tools: ['Instagram','TikTok','YouTube','Canva','Notion','CapCut','Figma','ChatGPT','Buffer','Substack','Loom','Framer'] },
+  green:  { hex: '#22c55e', text: 'Správne oslovenie otvára dvere.',
+    agent: 'Vicky AI', role: 'Partner Outreach & Email Specialist',
+    tools: ['Apollo.io','Hunter.io','Instantly','Lemlist','HubSpot','LinkedIn','Clay','Reply.io','Snov.io','Phantombuster','Clearbit','Mailshake'] },
+  black:  { hex: '#71717a', text: 'Bezpečnosť nie je voliteľná.',
+    agent: 'Max AI', role: 'AI Security Engineer',
+    tools: ['Claude','OpenAI','LangChain','Pinecone','FastAPI','Docker','AWS','Terraform','Wiz','Vault','Semgrep','Falco'] }
 };
+
+function kbUpdateStrip(color) {
+  const d = kbData[color];
+  const dot = document.getElementById('kbAgentDot');
+  const name = document.getElementById('kbAgentName');
+  const role = document.getElementById('kbAgentRole');
+  const pills = document.getElementById('kbAgentPills');
+  if (!dot) return;
+  dot.style.background = d.hex;
+  dot.style.boxShadow = '0 0 6px ' + d.hex + '88';
+  name.textContent = d.agent;
+  role.textContent = d.role;
+  pills.innerHTML = d.tools.map(t =>
+    '<span class="kb-agent-pill">' + t + '</span>'
+  ).join('');
+}
+kbUpdateStrip('blue');
 
 (function initKbGame() {
   const gameEl  = document.getElementById('kbGame');
@@ -3523,6 +3552,7 @@ const kbData = {
     setTimeout(() => { el.style.transform = ''; }, 220);
     document.querySelectorAll('.kb-item').forEach(k => k.classList.remove('kb-active'));
     el.classList.add('kb-active');
+    kbUpdateStrip(type);
   };
 })();
 
