@@ -2538,15 +2538,8 @@ footer::before {
   .hero-bg-text { font-size: clamp(56px, 20vw, 110px); }
   /* Pill smaller */
   .hero-pill { font-size: 9px; padding: 4px 10px; gap: 5px; top: auto; bottom: 20px; left: 50%; right: auto; transform: translateX(-50%); }
-  /* Stat cards — corners, very compact */
-  .hero-mini { padding: 7px 9px; font-size: 10px; min-width: 78px; max-width: 110px; }
-  .hero-mini-value { font-size: 16px !important; }
-  .hero-mini-label { font-size: 9px; }
-  .hero-mini-sub { font-size: 9px; }
-  .hero-mini-1 { top: 7%; left: 2%; }
-  .hero-mini-2 { top: 7%; right: 2%; }
-  .hero-mini-3 { bottom: 8%; left: 2%; }
-  .hero-mini-4 { bottom: 8%; right: 2%; }
+  /* Stat cards — hidden on mobile */
+  .hero-mini { display: none; }
 
   /* Projects */
   #projects { padding-top: 36px !important; padding-bottom: 36px; }
