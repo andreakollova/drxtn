@@ -907,6 +907,183 @@ section { padding: 100px 40px; }
   transition: background 0.2s;
 }
 .project-link:hover { background: rgba(255,255,255,0.3); }
+.project-card { cursor: pointer; }
+
+/* ===== PROJECT MODAL ===== */
+#projectModal {
+  position: fixed; inset: 0; z-index: 9000;
+  display: flex; align-items: flex-end;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.35s ease;
+}
+#projectModal.open { pointer-events: all; opacity: 1; }
+
+#projectModal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+#projectModal-panel {
+  position: relative; z-index: 1;
+  width: 100%; max-height: 94dvh;
+  background: var(--bg);
+  border-radius: 28px 28px 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateY(100%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 0 0 48px;
+}
+#projectModal.open #projectModal-panel { transform: translateY(0); }
+
+.pm-handle {
+  width: 40px; height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 16px auto 0;
+}
+.pm-close {
+  position: absolute; top: 20px; right: 24px;
+  width: 36px; height: 36px;
+  background: var(--gray-100);
+  border: none; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-primary);
+  font-size: 18px; line-height: 1;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.pm-close:hover { background: var(--gray-200); transform: scale(1.08); }
+[data-theme="dark"] .pm-close { background: var(--gray-800); }
+[data-theme="dark"] .pm-close:hover { background: var(--gray-700); }
+
+.pm-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 40px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  align-items: start;
+}
+
+/* Left column */
+.pm-meta {
+  position: sticky; top: 0;
+  padding-top: 8px;
+}
+.pm-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-secondary); opacity: 0.5;
+  margin-bottom: 16px;
+}
+.pm-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue);
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.18);
+  padding: 4px 10px; border-radius: 20px;
+  margin-bottom: 16px;
+}
+.pm-tag.creative { color: var(--purple); background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.18); }
+.pm-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px; font-weight: 800;
+  line-height: 1.05; letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+.pm-desc {
+  font-size: 14px; line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+.pm-stats {
+  display: flex; flex-direction: column; gap: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px; margin-bottom: 32px;
+}
+.pm-stat { display: flex; gap: 12px; align-items: baseline; }
+.pm-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-secondary); opacity: 0.5;
+  width: 80px; flex-shrink: 0;
+}
+.pm-stat-value { font-size: 13px; color: var(--text-primary); font-weight: 500; }
+.pm-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--text-primary); color: var(--bg);
+  border: none; border-radius: 40px;
+  padding: 12px 24px; font-size: 13px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.pm-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* Right column — photo gallery */
+.pm-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+.pm-photo {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--gray-100);
+  cursor: zoom-in;
+  position: relative;
+}
+.pm-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  aspect-ratio: 4/3;
+}
+.pm-photo:hover img { transform: scale(1.04); }
+.pm-photo:first-child {
+  grid-column: 1 / -1;
+}
+.pm-photo:first-child img { aspect-ratio: 16/9; }
+
+/* Lightbox */
+#pmLightbox {
+  position: fixed; inset: 0; z-index: 9500;
+  background: rgba(0,0,0,0.92);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+#pmLightbox.open { opacity: 1; pointer-events: all; }
+#pmLightbox img {
+  max-width: 90vw; max-height: 88dvh;
+  object-fit: contain; border-radius: 12px;
+}
+#pmLightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.1);
+  border: none; border-radius: 50%;
+  color: #fff; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s;
+}
+#pmLightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+/* Mobile modal */
+@media (max-width: 768px) {
+  #projectModal-panel { border-radius: 24px 24px 0 0; max-height: 92dvh; }
+  .pm-inner { grid-template-columns: 1fr; gap: 32px; padding: 24px 20px 0; }
+  .pm-meta { position: static; }
+  .pm-title { font-size: 26px; }
+  .pm-gallery { gap: 8px; }
+  .pm-photo { border-radius: 10px; }
+}
 
 .carousel-nav {
   display: flex;
@@ -4520,6 +4697,178 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
   document.getElementById('cookieDecline').addEventListener('click', () => {
     localStorage.setItem('cookie-consent', 'declined');
     dismiss();
+  });
+})();
+</script>
+
+<!-- ===== PROJECT MODAL ===== -->
+<div id="projectModal" role="dialog" aria-modal="true" aria-label="Detail projektu">
+  <div id="projectModal-backdrop"></div>
+  <div id="projectModal-panel">
+    <div class="pm-handle"></div>
+    <button class="pm-close" id="pmClose" aria-label="Zavrieť">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="pm-inner">
+      <div class="pm-meta">
+        <div class="pm-number" id="pmNumber"></div>
+        <div class="pm-tag" id="pmTag"></div>
+        <h2 class="pm-title" id="pmTitle"></h2>
+        <p class="pm-desc" id="pmDesc"></p>
+        <div class="pm-stats" id="pmStats"></div>
+        <a href="#" class="pm-cta" id="pmCta" target="_blank" rel="noopener">
+          Navštíviť projekt
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+      <div class="pm-gallery" id="pmGallery"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="pmLightbox">
+  <button id="pmLightbox-close" aria-label="Zavrieť">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="pmLightboxImg" src="" alt="">
+</div>
+
+<script>
+(function() {
+  const PROJECTS = {
+    1: {
+      name: 'Antik Tech',
+      tag: 'Development',
+      number: '01 — Projekt',
+      desc: 'Komplexná digitálna transformácia pre technologickú spoločnosť Antik. Navrhli a implementovali sme moderný e-shop s katalógom produktov, zákazníckym portálom a integrovaným redakčným systémom. Dôraz sme kládli na výkon, prehľadnosť a konverzný potenciál každej stránky.\n\nVýsledkom je plynulý používateľský zážitok, ktorý zvýšil online konverzie o viac ako 40 % v prvom kvartáli po spustení.',
+      stats: [
+        { label: 'Rok', value: '2024' },
+        { label: 'Služby', value: 'Web Development · UI/UX Design · SEO' },
+        { label: 'Stack', value: 'Next.js · Supabase · Tailwind CSS' },
+        { label: 'Výsledok', value: '+40 % konverzií v Q1' },
+      ],
+      photos: ['static/projects/1a.png','static/projects/1b.png','static/projects/1c.png','static/projects/1d.webp'],
+      url: '#',
+    },
+    2: {
+      name: 'ASV Cekos',
+      tag: 'Development',
+      number: '02 — Projekt',
+      desc: 'Nová korporátna webová prezentácia pre lídrа v priemyselnom inžinierstve. Vytvorili sme čistý, dôveryhodný dizajn s intuitívnym systémom produktových kategórií, formulárom na dopyty a viacjazyčnou podporou pre európske trhy.\n\nStránka plne reflektuje technickú odbornosť značky a zároveň zostáva prístupná aj netechnickým návštevníkom.',
+      stats: [
+        { label: 'Rok', value: '2024' },
+        { label: 'Služby', value: 'Web Development · CMS Integrácia · Lokalizácia' },
+        { label: 'Stack', value: 'React · Node.js · PostgreSQL' },
+        { label: 'Výsledok', value: '3× rýchlejší dopytový tok' },
+      ],
+      photos: ['static/projects/2a.png','static/projects/2b.png','static/projects/2c.png','static/projects/2d.png'],
+      url: '#',
+    },
+    3: {
+      name: 'Soloxs',
+      tag: 'Development',
+      number: '03 — Projekt',
+      desc: 'SaaS platforma na správu a distribúciu obsahu pre mediálne a marketingové tímy. Navrhli sme komplexný dashboard s pokročilou analytikou, správou používateľov, plánovaním publikácií a API integráciami na tretie platformy.\n\nArkitektúra je postavená na škálovateľnosti — platforma zvláda stovky súbežných používateľov bez akýchkoľvek výkonnostných kompromisov.',
+      stats: [
+        { label: 'Rok', value: '2024' },
+        { label: 'Služby', value: 'Web App Development · API Design · UX Design' },
+        { label: 'Stack', value: 'Vue.js · FastAPI · Redis · PostgreSQL' },
+        { label: 'Výsledok', value: '500+ aktívnych tímov' },
+      ],
+      photos: ['static/projects/3a.png','static/projects/3b.webp','static/projects/3c.png','static/projects/3d.webp'],
+      url: '#',
+    },
+    4: {
+      name: 'Kerollajn Photo',
+      tag: 'Creative',
+      number: '04 — Projekt',
+      desc: 'Prémiové fotografické portfólio pre etablovanú fotografku Carolline K. Cieľom bolo vytvoriť online galériu, ktorá hovorí rovnakým jazykom ako jej práca — minimálne, priestranné, emocionálne.\n\nSúčasťou je aj rezervačný systém pre klientov, chránená klientska zóna na sťahovanie fotografií a plne spravovateľný CMS.',
+      stats: [
+        { label: 'Rok', value: '2024' },
+        { label: 'Služby', value: 'Web Design · Brand Identity · CMS' },
+        { label: 'Stack', value: 'Next.js · Framer Motion · Sanity CMS' },
+        { label: 'Výsledok', value: 'Prémiová vizuálna identita' },
+      ],
+      photos: ['static/projects/4a.jpg','static/projects/4b.png','static/projects/4c.jpg','static/projects/4d.png'],
+      url: '#',
+    },
+  };
+
+  const modal = document.getElementById('projectModal');
+  const backdrop = document.getElementById('projectModal-backdrop');
+  const pmClose = document.getElementById('pmClose');
+  const lightbox = document.getElementById('pmLightbox');
+  const lightboxImg = document.getElementById('pmLightboxImg');
+  const lightboxClose = document.getElementById('pmLightbox-close');
+
+  function openProject(id) {
+    const p = PROJECTS[id];
+    if (!p) return;
+
+    document.getElementById('pmNumber').textContent = p.number;
+    const tagEl = document.getElementById('pmTag');
+    tagEl.textContent = p.tag;
+    tagEl.className = 'pm-tag' + (p.tag === 'Creative' ? ' creative' : '');
+    document.getElementById('pmTitle').textContent = p.name;
+    document.getElementById('pmDesc').innerHTML = p.desc.replace(/\n\n/g, '<br><br>');
+
+    const statsEl = document.getElementById('pmStats');
+    statsEl.innerHTML = p.stats.map(s =>
+      `<div class="pm-stat"><span class="pm-stat-label">${s.label}</span><span class="pm-stat-value">${s.value}</span></div>`
+    ).join('');
+
+    const cta = document.getElementById('pmCta');
+    cta.href = p.url;
+    cta.style.display = p.url === '#' ? 'none' : 'inline-flex';
+
+    const gallery = document.getElementById('pmGallery');
+    gallery.innerHTML = p.photos.map((src, i) =>
+      `<div class="pm-photo"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy"></div>`
+    ).join('');
+
+    gallery.querySelectorAll('.pm-photo').forEach(ph => {
+      ph.addEventListener('click', () => {
+        lightboxImg.src = ph.querySelector('img').src;
+        lightbox.classList.add('open');
+      });
+    });
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Attach open to each card
+  document.querySelectorAll('.project-card').forEach((card, i) => {
+    card.setAttribute('data-project', i + 1);
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      openProject(i + 1);
+    });
+  });
+  // Also intercept the arrow links
+  document.querySelectorAll('.project-link').forEach((link, i) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openProject(i + 1);
+    });
+  });
+
+  pmClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox || e.target === lightboxImg) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (lightbox.classList.contains('open')) { lightbox.classList.remove('open'); return; }
+      closeModal();
+    }
   });
 })();
 </script>
