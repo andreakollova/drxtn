@@ -2808,7 +2808,7 @@ footer::before {
 <!-- Navigation -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="static/logo-full-black.png" alt="Drixton" class="logo-full" id="navLogoFull"
+    <img src="static/logo-black.png" alt="Drixton" class="logo-full" id="navLogoFull"
          onerror="this.style.display='none'; document.getElementById('navLogoShort').style.display='none'; document.getElementById('navLogoText').style.display='block'">
     <img src="static/logo-keyboard.png" alt="Drixton" class="logo-short" id="navLogoShort"
          onerror="this.style.display='none'">
@@ -3549,7 +3549,7 @@ function toggleTheme() {
   const logoFull = document.getElementById('navLogoFull');
   const logoShort = document.getElementById('navLogoShort');
   if (logoFull) {
-    logoFull.src = isDark ? 'static/logo-full-white.png' : 'static/logo-full-black.png';
+    logoFull.src = isDark ? 'static/logo-white.png' : 'static/logo-black.png';
     if (logoShort) logoShort.src = 'static/logo-keyboard.png';
   }
   if (typeof updateHeroLogo === 'function') updateHeroLogo(!isDark);
@@ -4402,7 +4402,7 @@ if (mockupImgEl) {
     const logoShort = document.getElementById('navLogoShort');
     if (sun) sun.style.display = dark ? 'none' : 'block';
     if (moon) moon.style.display = dark ? 'block' : 'none';
-    if (logoFull) logoFull.src = dark ? 'static/logo-full-white.png' : 'static/logo-full-black.png';
+    if (logoFull) logoFull.src = dark ? 'static/logo-white.png' : 'static/logo-black.png';
     if (logoShort) logoShort.src = 'static/logo-keyboard.png';
     if (typeof updateHeroLogo === 'function') updateHeroLogo(dark);
   };
