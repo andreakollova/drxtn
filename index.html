@@ -3800,6 +3800,8 @@ footer::before {
       </div>
 
       <form id="contactForm" onsubmit="submitForm(event)">
+        <input type="hidden" name="_subject" value="Nová správa z drixton.com">
+        <input type="hidden" name="_source" value="drixton.com">
         <div class="form-grid">
           <div class="form-field">
             <input type="text" id="fname" name="meno" placeholder=" " required data-i18n="form-firstname">
@@ -4848,7 +4850,7 @@ function submitForm(e) {
   if (selected.length) data.append('zaujmy', selected.join(', '));
 
   // Append meeting type
-  const meetingActive = document.querySelector('.meeting-toggle .toggle-option.active');
+  const meetingActive = document.querySelector('.meeting-btn.active');
   if (meetingActive) data.append('typ_stretnutia', meetingActive.textContent.trim());
 
   fetch('https://formspree.io/f/mgorlevv', {
