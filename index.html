@@ -1016,6 +1016,7 @@ section { padding: 100px 40px; }
   width: 80px; flex-shrink: 0;
 }
 .pm-stat-value { font-size: 13px; color: var(--text-primary); font-weight: 500; }
+.pm-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .pm-cta {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--text-primary); color: var(--bg);
@@ -1025,6 +1026,22 @@ section { padding: 100px 40px; }
   transition: opacity 0.2s, transform 0.2s;
 }
 .pm-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+.pm-appstore {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: #000; color: #fff;
+  border: none; border-radius: 40px;
+  padding: 11px 20px; font-size: 12px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+.pm-appstore:hover { opacity: 0.82; transform: translateY(-1px); }
+.pm-appstore.disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+.pm-appstore-icon { flex-shrink: 0; }
+.pm-appstore-text { display: flex; flex-direction: column; line-height: 1.15; }
+.pm-appstore-sub { font-size: 9px; font-weight: 400; opacity: 0.75; letter-spacing: 0.02em; }
+.pm-appstore-label { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
+[data-theme="dark"] .pm-appstore { background: #fff; color: #000; }
 
 /* Right column — photo gallery */
 .pm-gallery {
@@ -4736,10 +4753,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
         <h2 class="pm-title" id="pmTitle"></h2>
         <p class="pm-desc" id="pmDesc"></p>
         <div class="pm-stats" id="pmStats"></div>
-        <a href="#" class="pm-cta" id="pmCta" target="_blank" rel="noopener">
-          Navštíviť projekt
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
+        <div class="pm-actions" id="pmActions"></div>
       </div>
       <div class="pm-gallery" id="pmGallery"></div>
     </div>
@@ -4825,7 +4839,8 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
         { label: 'Výsledok', value: 'Plne automatizovaná distribúcia obsahu' },
       ],
       photos: ['static/apps/hockeyrefresh.png'],
-      url: '#',
+      url: 'https://www.hockeyrefresh.com/',
+      appStore: 'https://apps.apple.com/hu/app/hockeyrefresh/id6762254165',
     },
     6: {
       name: 'Drilzz',
@@ -4839,7 +4854,8 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
         { label: 'Výsledok', value: 'Tréningová platforma pre celú komunitu' },
       ],
       photos: ['static/apps/drilzz.png'],
-      url: '#',
+      url: 'https://www.drilzz.com/',
+      appStore: null,
     },
   };
 
@@ -4866,9 +4882,21 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       `<div class="pm-stat"><span class="pm-stat-label">${s.label}</span><span class="pm-stat-value">${s.value}</span></div>`
     ).join('');
 
-    const cta = document.getElementById('pmCta');
-    cta.href = p.url;
-    cta.style.display = p.url === '#' ? 'none' : 'inline-flex';
+    const actionsEl = document.getElementById('pmActions');
+    const arrowSvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>`;
+    const appStoreSvg = `<svg class="pm-appstore-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`;
+    let html = '';
+    if (p.url && p.url !== '#') {
+      html += `<a href="${p.url}" class="pm-cta" target="_blank" rel="noopener">Navštíviť projekt ${arrowSvg}</a>`;
+    }
+    if ('appStore' in p) {
+      if (p.appStore) {
+        html += `<a href="${p.appStore}" class="pm-appstore" target="_blank" rel="noopener">${appStoreSvg}<span class="pm-appstore-text"><span class="pm-appstore-sub">Stiahnuť na</span><span class="pm-appstore-label">App Store</span></span></a>`;
+      } else {
+        html += `<span class="pm-appstore disabled">${appStoreSvg}<span class="pm-appstore-text"><span class="pm-appstore-sub">Čoskoro na</span><span class="pm-appstore-label">App Store</span></span></span>`;
+      }
+    }
+    actionsEl.innerHTML = html;
 
     const gallery = document.getElementById('pmGallery');
     const single = p.photos.length === 1;
