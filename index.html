@@ -1071,60 +1071,77 @@ section { padding: 100px 40px; }
 [data-theme="dark"] .pm-photo img[style*="object-fit:contain"] { background: #1a1a1a !important; }
 
 /* App phone mockup */
-.pm-app-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 0;
-}
-.pm-phone {
-  position: relative;
-  width: 230px;
-  border-radius: 40px;
-  background: #111;
-  box-shadow:
-    0 0 0 2px #2a2a2a,
-    0 0 0 6px #111,
-    0 32px 80px rgba(0,0,0,0.35),
-    0 8px 24px rgba(0,0,0,0.2);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.pm-phone-inner {
-  position: relative;
-  overflow: hidden;
-  border-radius: 38px;
-}
-.pm-phone-screen {
-  width: 100%;
-  display: block;
-  border-radius: 38px;
-}
-.pm-phone-island {
-  position: absolute;
-  top: 10px; left: 50%;
-  transform: translateX(-50%);
-  width: 80px; height: 26px;
-  background: #111;
-  border-radius: 20px;
-  z-index: 2;
-}
 .pm-app-bg {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  padding: 40px 24px;
+  min-height: 360px;
+  box-sizing: border-box;
+}
+.pm-app-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pm-phone {
+  position: relative;
+  width: 220px;
+  flex-shrink: 0;
+  background: #1c1c1e;
+  border-radius: 48px;
+  padding: 14px;
+  box-sizing: border-box;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 0 0 1px #000 inset,
+    0 28px 64px rgba(0,0,0,0.55),
+    0 8px 20px rgba(0,0,0,0.3);
+}
+.pm-phone-inner {
+  position: relative;
+  border-radius: 36px;
   overflow: hidden;
-  min-height: 340px;
+  background: #000;
+}
+.pm-phone-screen {
+  width: 100%;
+  display: block;
+  border-radius: 0;
+}
+.pm-phone-island {
+  position: absolute;
+  top: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 76px; height: 24px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 2;
+}
+/* side buttons */
+.pm-phone::before,
+.pm-phone::after {
+  content: '';
+  position: absolute;
+  background: #2a2a2c;
+  border-radius: 3px;
+}
+.pm-phone::before {
+  width: 3px; height: 56px;
+  right: -4px; top: 28%;
+}
+.pm-phone::after {
+  width: 3px; height: 36px;
+  left: -4px; top: 32%;
 }
 
 @media (max-width: 768px) {
-  .pm-phone { width: 180px; border-radius: 32px; }
+  .pm-phone { width: 170px; border-radius: 40px; padding: 11px; }
   .pm-phone-inner { border-radius: 30px; }
-  .pm-phone-screen { border-radius: 30px; }
-  .pm-phone-island { width: 64px; height: 21px; top: 8px; }
-  .pm-app-bg { min-height: 260px; }
+  .pm-phone-island { width: 60px; height: 20px; top: 8px; }
+  .pm-app-bg { min-height: 280px; padding: 28px 16px; }
 }
 
 /* Lightbox */
@@ -1801,7 +1818,8 @@ section { padding: 100px 40px; }
   position: absolute; bottom: 20px; left: 50%;
   transform: translateX(-50%);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  white-space: normal; text-align: center; width: 90%; max-width: 340px;
   color: var(--text-secondary); opacity: 0.5;
   pointer-events: none; z-index: 5; white-space: nowrap;
 }
@@ -2864,6 +2882,20 @@ footer::before {
   .svc-show-more-light { color: var(--purple); }
   .svc-show-more-dark { color: var(--blue); }
   .services-panel.svc-expanded .svc-show-more { display: none; }
+  .svc-hide-more {
+    display: none;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; font-weight: 600;
+    border: none; background: none;
+    cursor: pointer; letter-spacing: 0.01em;
+    padding: 10px 0; text-align: left;
+    opacity: 0.5;
+  }
+  .services-panel.svc-expanded .svc-hide-more { display: block; }
+  .svc-hide-more-light { color: var(--purple); }
+  .svc-hide-more-dark { color: var(--blue); }
   .svc-list { grid-template-columns: 1fr; gap: 0; }
   .svc-entry { padding: 0; border-bottom: 1px solid rgba(0,0,0,0.07); cursor: pointer; }
   .services-panel-dark .svc-entry { border-bottom-color: rgba(255,255,255,0.08); }
@@ -2914,7 +2946,7 @@ footer::before {
     margin: 14px 0 0;
     border-radius: 18px;
   }
-  .kbgame-hint { font-size: 9px; }
+  .kbgame-hint { font-size: 8px; letter-spacing: 0.06em; }
 
   /* AI Agents — 2-col compact */
   #agents { padding: 48px 20px; }
@@ -3232,7 +3264,7 @@ footer::before {
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:4">
-        <img src="static/apps/hockeyrefresh.png" alt="HockeyRefresh" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#0ea5e9,#38bdf8)'">
+        <img src="static/projects/5.jpg" alt="HockeyRefresh" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#0ea5e9,#38bdf8)'">
         <div class="project-overlay">
           <div class="project-tag">Mobile App</div>
           <div class="project-name">HockeyRefresh</div>
@@ -3241,7 +3273,7 @@ footer::before {
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:5">
-        <img src="static/apps/drilzz.png" alt="Drilzz" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#f07443,#fbbf24)'">
+        <img src="static/projects/6432432.png" alt="Drilzz" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#f07443,#fbbf24)'">
         <div class="project-overlay">
           <div class="project-tag">Mobile App</div>
           <div class="project-name">Drilzz</div>
@@ -3286,6 +3318,7 @@ footer::before {
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-proto-name">Prototypovanie</div><div class="svc-entry-desc" data-i18n="svc-proto-desc">Interaktívne prototypy pre stakeholderov.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-copy-name">Copywriting &amp; Content</div><div class="svc-entry-desc" data-i18n="svc-copy-desc">Texty, tonalita, content stratégia.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-3d-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc" data-i18n="svc-3d-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
+            <button class="svc-hide-more svc-hide-more-light">Schovat' služby −</button>
           </div>
 
           <div class="section-label" style="color:var(--purple);margin-bottom:12px" data-i18n="services-tools-label">Nástroje</div>
@@ -3361,6 +3394,7 @@ footer::before {
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-security-name">Security Audit</div><div class="svc-entry-desc" data-i18n="svc-security-desc">OWASP, pentesting, bezpečnostné hardening.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-saas-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc" data-i18n="svc-saas-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-maint-name">Prevádzka &amp; Support</div><div class="svc-entry-desc" data-i18n="svc-maint-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
+            <button class="svc-hide-more svc-hide-more-dark">Schovat' služby −</button>
           </div>
 
           <div class="section-label" style="color:var(--blue);margin-bottom:12px" data-i18n="services-tools-label">Technológie</div>
@@ -4335,6 +4369,11 @@ document.querySelectorAll('.svc-show-more').forEach(btn => {
     btn.closest('.services-panel').classList.add('svc-expanded');
   });
 });
+document.querySelectorAll('.svc-hide-more').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.services-panel').classList.remove('svc-expanded');
+  });
+});
 
 // Mobile accordion for svc-entry items
 document.querySelectorAll('.svc-entry').forEach(entry => {
@@ -4494,9 +4533,8 @@ kbUpdateStrip('blue', 0);
   if (!gameEl) return;
   if (hintEl) {
     const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-    hintEl.textContent = isTouchDevice
-      ? 'Prejdi prstom po bielej ploche a zbieraj klávesy.'
-      : 'Prejdi myšou po bielej ploche a zbieraj klávesy.';
+    const action = isTouchDevice ? 'Prejdi prstom' : 'Prejdi myšou';
+    hintEl.textContent = `${action} po bielej ploche a zisti nástroje, ktoré používa ${kbData['blue'].agent}.`;
   }
 
   const ctx2 = canvasEl.getContext('2d');
@@ -4897,7 +4935,8 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
         { label: 'Stack', value: 'React Native · Python · Supabase · Discord API · Meta Graph API' },
         { label: 'Výsledok', value: 'Plne automatizovaná distribúcia obsahu' },
       ],
-      photos: ['static/apps/hockeyrefresh.png'],
+      photos: ['static/projects/5a.png','static/projects/5b.png','static/projects/5c.png','static/projects/5d.jpg'],
+      appPhoto: 'static/apps/hockeyrefresh.png',
       url: 'https://www.hockeyrefresh.com/',
       appStore: 'https://apps.apple.com/hu/app/hockeyrefresh/id6762254165',
       appBg: 'linear-gradient(135deg,#0c1a2e 0%,#0a3a5c 100%)',
@@ -4913,7 +4952,8 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
         { label: 'Stack', value: 'React Native · Expo · Supabase · TypeScript' },
         { label: 'Výsledok', value: 'Tréningová platforma pre celú komunitu' },
       ],
-      photos: ['static/apps/drilzz.png'],
+      photos: ['static/projects/6a.png','static/projects/6b.png','static/projects/6c.png','static/projects/6d.png'],
+      appPhoto: 'static/apps/drilzz.png',
       url: 'https://www.drilzz.com/',
       appStore: null,
       appBg: 'linear-gradient(135deg,#1a0e00 0%,#3d1f00 100%)',
@@ -4956,32 +4996,37 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
     actionsEl.innerHTML = html;
 
     const gallery = document.getElementById('pmGallery');
-    if (p.tag === 'Mobile App' && p.photos.length === 1) {
+    if (p.appPhoto) {
       gallery.style.gridTemplateColumns = '1fr';
+      const subGrid = p.photos.length > 0
+        ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">${p.photos.map((src, i) =>
+            `<div class="pm-photo"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy"></div>`
+          ).join('')}</div>`
+        : '';
       gallery.innerHTML = `
         <div class="pm-app-bg" style="background:${p.appBg || 'linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)'}">
           <div class="pm-app-wrap">
             <div class="pm-phone">
               <div class="pm-phone-inner">
                 <div class="pm-phone-island"></div>
-                <img class="pm-phone-screen" src="${p.photos[0]}" alt="${p.name}" loading="lazy">
+                <img class="pm-phone-screen" src="${p.appPhoto}" alt="${p.name}" loading="lazy">
               </div>
             </div>
           </div>
-        </div>`;
+        </div>${subGrid}`;
     } else {
       const single = p.photos.length === 1;
       gallery.style.gridTemplateColumns = single ? '1fr' : '';
       gallery.innerHTML = p.photos.map((src, i) =>
-        `<div class="pm-photo" style="${single ? 'grid-column:1/-1' : ''}"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy" style="${single ? 'aspect-ratio:auto;max-height:70dvh;object-fit:contain;background:#f4f4f5' : ''}"></div>`
+        `<div class="pm-photo" style="${single ? 'grid-column:1/-1' : ''}"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy"></div>`
       ).join('');
-      gallery.querySelectorAll('.pm-photo').forEach(ph => {
-        ph.addEventListener('click', () => {
-          lightboxImg.src = ph.querySelector('img').src;
-          lightbox.classList.add('open');
-        });
-      });
     }
+    gallery.querySelectorAll('.pm-photo').forEach(ph => {
+      ph.addEventListener('click', () => {
+        lightboxImg.src = ph.querySelector('img').src;
+        lightbox.classList.add('open');
+      });
+    });
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
