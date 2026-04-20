@@ -990,6 +990,7 @@ section { padding: 100px 40px; }
   margin-bottom: 16px;
 }
 .pm-tag.creative { color: var(--purple); background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.18); }
+.pm-tag.mobile { color: #f07443; background: rgba(240,116,67,0.08); border-color: rgba(240,116,67,0.18); }
 .pm-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 36px; font-weight: 800;
@@ -1050,6 +1051,7 @@ section { padding: 100px 40px; }
   grid-column: 1 / -1;
 }
 .pm-photo:first-child img { aspect-ratio: 16/9; }
+[data-theme="dark"] .pm-photo img[style*="object-fit:contain"] { background: #1a1a1a !important; }
 
 /* Lightbox */
 #pmLightbox {
@@ -3153,6 +3155,24 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
+      <div class="project-card fade-up" style="--i:4">
+        <img src="static/apps/hockeyrefresh.png" alt="HockeyRefresh" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#0ea5e9,#38bdf8)'">
+        <div class="project-overlay">
+          <div class="project-tag">Mobile App</div>
+          <div class="project-name">HockeyRefresh</div>
+          <div class="project-desc">AI-powered spravodajský bot a mobilná aplikácia pre pozemný hokej.</div>
+        </div>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+      </div>
+      <div class="project-card fade-up" style="--i:5">
+        <img src="static/apps/drilzz.png" alt="Drilzz" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#f07443,#fbbf24)'">
+        <div class="project-overlay">
+          <div class="project-tag">Mobile App</div>
+          <div class="project-name">Drilzz</div>
+          <div class="project-desc">Platforma na tvorbu a zdieľanie tréningových plánov pre hokejistov.</div>
+        </div>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+      </div>
     </div>
   </div>
 
@@ -4793,6 +4813,34 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/4a.jpg','static/projects/4b.png','static/projects/4c.jpg','static/projects/4d.png'],
       url: '#',
     },
+    5: {
+      name: 'HockeyRefresh',
+      tag: 'Mobile App',
+      number: '05 — Projekt',
+      desc: 'HockeyRefresh je inteligentný spravodajský ekosystém pre komunitu slovenského pozemného hokeja. Jadrom je automatizovaný scraper, ktorý nepretržite sleduje výsledky, správy a videá — a s pomocou AI ich sumarizuje do stručných, čitateľných príspevkov.\n\nObsah sa automaticky distribuuje do Discord servera, na Instagram a priamo do mobilnej aplikácie. Fanúšikovia tak dostávajú aktuálne informácie bez toho, aby museli aktívne hľadať. Systém spracuje desiatky zdrojov denne a celú distribúciu zvláda bez manuálneho zásahu.',
+      stats: [
+        { label: 'Rok', value: '2024 — 2025' },
+        { label: 'Typ', value: 'Mobilná aplikácia · Bot · Scraper' },
+        { label: 'Stack', value: 'React Native · Python · Supabase · Discord API · Meta Graph API' },
+        { label: 'Výsledok', value: 'Plne automatizovaná distribúcia obsahu' },
+      ],
+      photos: ['static/apps/hockeyrefresh.png'],
+      url: '#',
+    },
+    6: {
+      name: 'Drilzz',
+      tag: 'Mobile App',
+      number: '06 — Projekt',
+      desc: 'Drilzz je mobilná platforma určená pre trénerov a hráčov pozemného hokeja. Umožňuje jednoducho vytvárať, organizovať a zdieľať tréningové cvičenia — vrátane diagramov, videí a podrobných popisov jednotlivých drillов.\n\nTréneri môžu budovať vlastnú knižnicu cvičení, kategorizovať ich podľa zamerania a zdieľať ich so svojím tímom alebo celou komunitou. Aplikácia je navrhnutá tak, aby bola intuitívna priamo na ihrisku — rýchla, prehľadná a bez zbytočných krokov.',
+      stats: [
+        { label: 'Rok', value: '2025' },
+        { label: 'Typ', value: 'Mobilná aplikácia · iOS · Android' },
+        { label: 'Stack', value: 'React Native · Expo · Supabase · TypeScript' },
+        { label: 'Výsledok', value: 'Tréningová platforma pre celú komunitu' },
+      ],
+      photos: ['static/apps/drilzz.png'],
+      url: '#',
+    },
   };
 
   const modal = document.getElementById('projectModal');
@@ -4809,7 +4857,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
     document.getElementById('pmNumber').textContent = p.number;
     const tagEl = document.getElementById('pmTag');
     tagEl.textContent = p.tag;
-    tagEl.className = 'pm-tag' + (p.tag === 'Creative' ? ' creative' : '');
+    tagEl.className = 'pm-tag' + (p.tag === 'Creative' ? ' creative' : p.tag === 'Mobile App' ? ' mobile' : '');
     document.getElementById('pmTitle').textContent = p.name;
     document.getElementById('pmDesc').innerHTML = p.desc.replace(/\n\n/g, '<br><br>');
 
@@ -4823,8 +4871,10 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
     cta.style.display = p.url === '#' ? 'none' : 'inline-flex';
 
     const gallery = document.getElementById('pmGallery');
+    const single = p.photos.length === 1;
+    gallery.style.gridTemplateColumns = single ? '1fr' : '';
     gallery.innerHTML = p.photos.map((src, i) =>
-      `<div class="pm-photo"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy"></div>`
+      `<div class="pm-photo" style="${single ? 'grid-column:1/-1' : ''}"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy" style="${single ? 'aspect-ratio:auto;max-height:70dvh;object-fit:contain;background:#f4f4f5' : ''}"></div>`
     ).join('');
 
     gallery.querySelectorAll('.pm-photo').forEach(ph => {
