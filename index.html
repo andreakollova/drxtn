@@ -3801,26 +3801,26 @@ footer::before {
       <form id="contactForm" onsubmit="submitForm(event)">
         <div class="form-grid">
           <div class="form-field">
-            <input type="text" id="fname" placeholder=" " required data-i18n="form-firstname">
+            <input type="text" id="fname" name="meno" placeholder=" " required data-i18n="form-firstname">
             <label for="fname" data-i18n="form-firstname">Meno *</label>
           </div>
           <div class="form-field">
-            <input type="text" id="lname" placeholder=" " required data-i18n="form-lastname">
+            <input type="text" id="lname" name="priezvisko" placeholder=" " required data-i18n="form-lastname">
             <label for="lname" data-i18n="form-lastname">Priezvisko *</label>
           </div>
         </div>
         <div class="form-grid">
           <div class="form-field">
-            <input type="email" id="email" placeholder=" " required data-i18n="form-email-input">
+            <input type="email" id="email" name="email" placeholder=" " required data-i18n="form-email-input">
             <label for="email" data-i18n="form-email-input">Email *</label>
           </div>
           <div class="form-field">
-            <input type="tel" id="phone" placeholder=" " data-i18n="form-phone-input">
+            <input type="tel" id="phone" name="telefon" placeholder=" " data-i18n="form-phone-input">
             <label for="phone" data-i18n="form-phone-input">Telefón</label>
           </div>
         </div>
         <div class="form-field">
-          <textarea id="message" placeholder=" " data-i18n="form-message"></textarea>
+          <textarea id="message" name="sprava" placeholder=" " data-i18n="form-message"></textarea>
           <label for="message" data-i18n="form-message">Správa / Čo potrebujete?</label>
         </div>
         <button type="submit" class="submit-btn" data-i18n="form-submit">Odoslať správu →</button>
@@ -4837,13 +4837,36 @@ function submitForm(e) {
   e.preventDefault();
   const form = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
-  form.style.display = 'none';
-  success.classList.add('show');
-  console.log('Form submitted:', {
-    name: document.getElementById('fname').value + ' ' + document.getElementById('lname').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    message: document.getElementById('message').value
+  const btn = form.querySelector('[type="submit"]');
+  if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+
+  const data = new FormData(form);
+
+  // Append selected interest pills
+  const selected = [...document.querySelectorAll('.interest-pill.selected')].map(b => b.textContent.trim());
+  if (selected.length) data.append('zaujmy', selected.join(', '));
+
+  // Append meeting type
+  const meetingActive = document.querySelector('.meeting-toggle .toggle-option.active');
+  if (meetingActive) data.append('typ_stretnutia', meetingActive.textContent.trim());
+
+  fetch('https://formspree.io/f/mgorlevv', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if (res.ok) {
+      form.style.display = 'none';
+      success.classList.add('show');
+    } else {
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+      alert('Odoslanie zlyhalo. Skúste to prosím znova.');
+    }
+  })
+  .catch(() => {
+    if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+    alert('Odoslanie zlyhalo. Skúste to prosím znova.');
   });
 }
 
