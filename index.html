@@ -3524,12 +3524,13 @@ if ('ontouchstart' in window) {
 }
 
 // ===================== PAGE INTRO =====================
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('pageIntro').style.display = 'none';
+(function() {
+  const intro = document.getElementById('pageIntro');
+  intro.addEventListener('animationend', () => {
+    intro.style.display = 'none';
     animateHero();
-  }, 2300);
-});
+  }, { once: true });
+})();
 
 // ===================== NAV SCROLL =====================
 window.addEventListener('scroll', () => {
