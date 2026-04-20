@@ -4020,9 +4020,10 @@ carousel.addEventListener('mouseup', () => { isDragging = false; carousel.classL
 carousel.addEventListener('mouseleave', () => { isDragging = false; carousel.classList.remove('dragging'); });
 // Redirect vertical scroll from carousel to page
 carousel.addEventListener('wheel', e => {
-  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+  if (e.deltaY !== 0) {
     e.preventDefault();
     document.documentElement.scrollTop += e.deltaY;
+    if (e.deltaX !== 0) carousel.scrollLeft += e.deltaX;
   }
 }, { passive: false });
 
