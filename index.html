@@ -1070,6 +1070,63 @@ section { padding: 100px 40px; }
 .pm-photo:first-child img { aspect-ratio: 16/9; }
 [data-theme="dark"] .pm-photo img[style*="object-fit:contain"] { background: #1a1a1a !important; }
 
+/* App phone mockup */
+.pm-app-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+}
+.pm-phone {
+  position: relative;
+  width: 230px;
+  border-radius: 40px;
+  background: #111;
+  box-shadow:
+    0 0 0 2px #2a2a2a,
+    0 0 0 6px #111,
+    0 32px 80px rgba(0,0,0,0.35),
+    0 8px 24px rgba(0,0,0,0.2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.pm-phone-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 38px;
+}
+.pm-phone-screen {
+  width: 100%;
+  display: block;
+  border-radius: 38px;
+}
+.pm-phone-island {
+  position: absolute;
+  top: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 26px;
+  background: #111;
+  border-radius: 20px;
+  z-index: 2;
+}
+.pm-app-bg {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 340px;
+}
+
+@media (max-width: 768px) {
+  .pm-phone { width: 180px; border-radius: 32px; }
+  .pm-phone-inner { border-radius: 30px; }
+  .pm-phone-screen { border-radius: 30px; }
+  .pm-phone-island { width: 64px; height: 21px; top: 8px; }
+  .pm-app-bg { min-height: 260px; }
+}
+
 /* Lightbox */
 #pmLightbox {
   position: fixed; inset: 0; z-index: 9500;
@@ -2792,7 +2849,8 @@ footer::before {
   /* Show more button */
   .svc-show-more {
     display: block;
-    margin-top: 16px;
+    margin-top: 4px;
+    margin-bottom: 2px;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -2800,7 +2858,8 @@ footer::before {
     background: none;
     cursor: pointer;
     letter-spacing: 0.01em;
-    padding: 0;
+    padding: 10px 0;
+    text-align: left;
   }
   .svc-show-more-light { color: var(--purple); }
   .svc-show-more-dark { color: var(--blue); }
@@ -3220,6 +3279,7 @@ footer::before {
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-brand-name">Brand Identity &amp; Logo</div><div class="svc-entry-desc" data-i18n="svc-brand-desc">Vizuálna identita, logotyp, manuál.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-design-system-name">Design System</div><div class="svc-entry-desc" data-i18n="svc-design-system-desc">Konzistentné komponentové knižnice.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-motion-name">Motion Design</div><div class="svc-entry-desc" data-i18n="svc-motion-desc">UI animácie, micro-interactions, Lottie.</div></div>
+            <button class="svc-show-more svc-show-more-light" data-i18n="svc-show-more">Zobraziť všetky služby +</button>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-cro-name">CRO &amp; A/B testovanie</div><div class="svc-entry-desc" data-i18n="svc-cro-desc">Heatmapy, A/B testy, optimalizácia.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-research-name">User Research</div><div class="svc-entry-desc" data-i18n="svc-research-desc">Rozhovory, user testing, customer journey.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-a11y-name">Accessibility WCAG 2.2</div><div class="svc-entry-desc" data-i18n="svc-a11y-desc">Audity a implementácia prístupnosti.</div></div>
@@ -3227,7 +3287,6 @@ footer::before {
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-copy-name">Copywriting &amp; Content</div><div class="svc-entry-desc" data-i18n="svc-copy-desc">Texty, tonalita, content stratégia.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-3d-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc" data-i18n="svc-3d-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
           </div>
-          <button class="svc-show-more svc-show-more-light" data-i18n="svc-show-more">Zobraziť všetky služby +</button>
 
           <div class="section-label" style="color:var(--purple);margin-bottom:12px" data-i18n="services-tools-label">Nástroje</div>
           <div class="panel-pills">
@@ -3295,6 +3354,7 @@ footer::before {
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-ecom-name">Web &amp; SaaS na mieru</div><div class="svc-entry-desc" data-i18n="svc-ecom-desc">Prezentačné weby, SaaS platformy, portály.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-api-name">E-shop na mieru</div><div class="svc-entry-desc" data-i18n="svc-api-desc">Headless commerce, custom checkout, PIM.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-db-name">Mobilné aplikácie</div><div class="svc-entry-desc" data-i18n="svc-db-desc">React Native iOS &amp; Android aplikácie.</div></div>
+            <button class="svc-show-more svc-show-more-dark" data-i18n="svc-show-more">Zobraziť všetky služby +</button>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-ai-name">B2B Platformy &amp; Portály</div><div class="svc-entry-desc" data-i18n="svc-ai-desc">Intranety, objednávkové systémy, dashboardy.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-cms-name">API &amp; Integrácie</div><div class="svc-entry-desc" data-i18n="svc-cms-desc">ERP, CRM, platobné brány, third-party API.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-perf-name">Performance Optimalizácia</div><div class="svc-entry-desc" data-i18n="svc-perf-desc">Core Web Vitals, Lighthouse 98+, CDN.</div></div>
@@ -3302,7 +3362,6 @@ footer::before {
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-saas-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc" data-i18n="svc-saas-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
             <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-maint-name">Prevádzka &amp; Support</div><div class="svc-entry-desc" data-i18n="svc-maint-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
           </div>
-          <button class="svc-show-more svc-show-more-dark" data-i18n="svc-show-more">Zobraziť všetky služby +</button>
 
           <div class="section-label" style="color:var(--blue);margin-bottom:12px" data-i18n="services-tools-label">Technológie</div>
           <div class="panel-pills">
@@ -4841,6 +4900,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/apps/hockeyrefresh.png'],
       url: 'https://www.hockeyrefresh.com/',
       appStore: 'https://apps.apple.com/hu/app/hockeyrefresh/id6762254165',
+      appBg: 'linear-gradient(135deg,#0c1a2e 0%,#0a3a5c 100%)',
     },
     6: {
       name: 'Drilzz',
@@ -4856,6 +4916,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/apps/drilzz.png'],
       url: 'https://www.drilzz.com/',
       appStore: null,
+      appBg: 'linear-gradient(135deg,#1a0e00 0%,#3d1f00 100%)',
     },
   };
 
@@ -4889,28 +4950,38 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
     if (p.url && p.url !== '#') {
       html += `<a href="${p.url}" class="pm-cta" target="_blank" rel="noopener">Navštíviť projekt ${arrowSvg}</a>`;
     }
-    if ('appStore' in p) {
-      if (p.appStore) {
-        html += `<a href="${p.appStore}" class="pm-appstore" target="_blank" rel="noopener">${appStoreSvg}<span class="pm-appstore-text"><span class="pm-appstore-sub">Stiahnuť na</span><span class="pm-appstore-label">App Store</span></span></a>`;
-      } else {
-        html += `<span class="pm-appstore disabled">${appStoreSvg}<span class="pm-appstore-text"><span class="pm-appstore-sub">Čoskoro na</span><span class="pm-appstore-label">App Store</span></span></span>`;
-      }
+    if (p.appStore) {
+      html += `<a href="${p.appStore}" class="pm-appstore" target="_blank" rel="noopener">${appStoreSvg}<span class="pm-appstore-text"><span class="pm-appstore-sub">Stiahnuť na</span><span class="pm-appstore-label">App Store</span></span></a>`;
     }
     actionsEl.innerHTML = html;
 
     const gallery = document.getElementById('pmGallery');
-    const single = p.photos.length === 1;
-    gallery.style.gridTemplateColumns = single ? '1fr' : '';
-    gallery.innerHTML = p.photos.map((src, i) =>
-      `<div class="pm-photo" style="${single ? 'grid-column:1/-1' : ''}"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy" style="${single ? 'aspect-ratio:auto;max-height:70dvh;object-fit:contain;background:#f4f4f5' : ''}"></div>`
-    ).join('');
-
-    gallery.querySelectorAll('.pm-photo').forEach(ph => {
-      ph.addEventListener('click', () => {
-        lightboxImg.src = ph.querySelector('img').src;
-        lightbox.classList.add('open');
+    if (p.tag === 'Mobile App' && p.photos.length === 1) {
+      gallery.style.gridTemplateColumns = '1fr';
+      gallery.innerHTML = `
+        <div class="pm-app-bg" style="background:${p.appBg || 'linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)'}">
+          <div class="pm-app-wrap">
+            <div class="pm-phone">
+              <div class="pm-phone-inner">
+                <div class="pm-phone-island"></div>
+                <img class="pm-phone-screen" src="${p.photos[0]}" alt="${p.name}" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>`;
+    } else {
+      const single = p.photos.length === 1;
+      gallery.style.gridTemplateColumns = single ? '1fr' : '';
+      gallery.innerHTML = p.photos.map((src, i) =>
+        `<div class="pm-photo" style="${single ? 'grid-column:1/-1' : ''}"><img src="${src}" alt="${p.name} — foto ${i+1}" loading="lazy" style="${single ? 'aspect-ratio:auto;max-height:70dvh;object-fit:contain;background:#f4f4f5' : ''}"></div>`
+      ).join('');
+      gallery.querySelectorAll('.pm-photo').forEach(ph => {
+        ph.addEventListener('click', () => {
+          lightboxImg.src = ph.querySelector('img').src;
+          lightbox.classList.add('open');
+        });
       });
-    });
+    }
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
