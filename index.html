@@ -403,6 +403,18 @@ nav.scrolled .nav-logo .logo-short { opacity: 1; transform: scale(1); }
 }
 [data-theme="dark"] #hero { background: #06060c; }
 
+/* Bottom fade into next section */
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 2;
+}
+[data-theme="dark"] #hero::after { background: linear-gradient(to bottom, transparent, #06060c); }
+
 /* Noise grain overlay */
 #hero::before {
   content: '';
