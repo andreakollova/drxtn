@@ -3999,18 +3999,6 @@ carousel.addEventListener('scroll', () => {
   });
 });
 
-// Prevent carousel from hijacking vertical page scroll
-[carousel, carousel.closest('.carousel-wrap')].forEach(el => {
-  if (!el) return;
-  el.addEventListener('wheel', e => {
-    const isVert = Math.abs(e.deltaY) > Math.abs(e.deltaX);
-    if (isVert) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.scrollBy({ top: e.deltaY, behavior: 'auto' });
-    }
-  }, { passive: false });
-});
 
 // Drag scroll
 let isDragging = false, startX, scrollLeft;
@@ -4028,10 +4016,11 @@ carousel.addEventListener('mousemove', e => {
 });
 carousel.addEventListener('mouseup', () => { isDragging = false; carousel.classList.remove('dragging'); });
 carousel.addEventListener('mouseleave', () => { isDragging = false; carousel.classList.remove('dragging'); });
+// Redirect vertical scroll from carousel to page
 carousel.addEventListener('wheel', e => {
   if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
     e.preventDefault();
-    window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+    document.documentElement.scrollTop += e.deltaY;
   }
 }, { passive: false });
 
