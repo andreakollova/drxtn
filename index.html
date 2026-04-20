@@ -801,6 +801,9 @@ section { padding: 100px 40px; }
   transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* Show-more button — desktop hidden, mobile shown via media query */
+.svc-show-more { display: none; }
+
 /* Cards inside overflow carousel — always visible */
 .carousel .fade-up { opacity: 1; transform: none; }
 
@@ -2576,8 +2579,36 @@ footer::before {
     border-radius: 0;
   }
   .services-panel + .services-panel { border-top: none; }
-  .services-panel-inner { grid-template-columns: 1fr; gap: 28px; }
-  .services-visual { display: none; }
+  .services-panel-inner { grid-template-columns: 1fr; gap: 0; }
+  .services-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    margin-left: 0;
+    padding-top: 32px;
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  /* Hide extra entries on mobile until expanded */
+  .svc-extra { display: none; }
+  .services-panel.svc-expanded .svc-extra { display: block; }
+  /* Show more button */
+  .svc-show-more {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    padding: 0;
+  }
+  .svc-show-more-light { color: var(--purple); }
+  .svc-show-more-dark { color: var(--blue); }
+  .services-panel.svc-expanded .svc-show-more { display: none; }
   .svc-list { grid-template-columns: 1fr; gap: 0; }
   .svc-entry { padding: 0; border-bottom: 1px solid rgba(0,0,0,0.07); cursor: pointer; }
   .services-panel-dark .svc-entry { border-bottom-color: rgba(255,255,255,0.08); }
@@ -2649,7 +2680,10 @@ footer::before {
   .gradient-cta-h2 { font-size: clamp(26px, 7vw, 38px); }
   .gradient-cta-btns { flex-direction: column; gap: 10px; align-items: center; }
   .gradient-cta-btn-primary, .gradient-cta-btn-ghost { width: 100%; max-width: 280px; text-align: center; }
-  .gradient-cta-stats { gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+  .gradient-cta-stats { gap: 0; flex-wrap: nowrap; justify-content: center; margin-top: 28px; }
+  .gradient-cta-stat { flex-direction: column; align-items: center; padding: 0 16px; gap: 2px; }
+  .gcs-num { font-size: 22px; }
+  .gcs-label { font-size: 10px; }
 
   /* Contact */
   #contact { padding: 48px 20px; }
@@ -2971,13 +3005,14 @@ footer::before {
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-brand-name">Brand Identity &amp; Logo</div><div class="svc-entry-desc" data-i18n="svc-brand-desc">Vizuálna identita, logotyp, manuál.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-design-system-name">Design System</div><div class="svc-entry-desc" data-i18n="svc-design-system-desc">Konzistentné komponentové knižnice.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-motion-name">Motion Design</div><div class="svc-entry-desc" data-i18n="svc-motion-desc">UI animácie, micro-interactions, Lottie.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-cro-name">CRO &amp; A/B testovanie</div><div class="svc-entry-desc" data-i18n="svc-cro-desc">Heatmapy, A/B testy, optimalizácia.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-research-name">User Research</div><div class="svc-entry-desc" data-i18n="svc-research-desc">Rozhovory, user testing, customer journey.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-a11y-name">Accessibility WCAG 2.2</div><div class="svc-entry-desc" data-i18n="svc-a11y-desc">Audity a implementácia prístupnosti.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-proto-name">Prototypovanie</div><div class="svc-entry-desc" data-i18n="svc-proto-desc">Interaktívne prototypy pre stakeholderov.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-copy-name">Copywriting &amp; Content</div><div class="svc-entry-desc" data-i18n="svc-copy-desc">Texty, tonalita, content stratégia.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-3d-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc" data-i18n="svc-3d-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-cro-name">CRO &amp; A/B testovanie</div><div class="svc-entry-desc" data-i18n="svc-cro-desc">Heatmapy, A/B testy, optimalizácia.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-research-name">User Research</div><div class="svc-entry-desc" data-i18n="svc-research-desc">Rozhovory, user testing, customer journey.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-a11y-name">Accessibility WCAG 2.2</div><div class="svc-entry-desc" data-i18n="svc-a11y-desc">Audity a implementácia prístupnosti.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-proto-name">Prototypovanie</div><div class="svc-entry-desc" data-i18n="svc-proto-desc">Interaktívne prototypy pre stakeholderov.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-copy-name">Copywriting &amp; Content</div><div class="svc-entry-desc" data-i18n="svc-copy-desc">Texty, tonalita, content stratégia.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-3d-name">3D &amp; Ilustrácie</div><div class="svc-entry-desc" data-i18n="svc-3d-desc">Custom ilustrácie, Spline 3D elementy.</div></div>
           </div>
+          <button class="svc-show-more svc-show-more-light" data-i18n="svc-show-more">Zobraziť všetky služby +</button>
 
           <div class="section-label" style="color:var(--purple);margin-bottom:12px" data-i18n="services-tools-label">Nástroje</div>
           <div class="panel-pills">
@@ -3045,13 +3080,14 @@ footer::before {
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-ecom-name">Web &amp; SaaS na mieru</div><div class="svc-entry-desc" data-i18n="svc-ecom-desc">Prezentačné weby, SaaS platformy, portály.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-api-name">E-shop na mieru</div><div class="svc-entry-desc" data-i18n="svc-api-desc">Headless commerce, custom checkout, PIM.</div></div>
             <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-db-name">Mobilné aplikácie</div><div class="svc-entry-desc" data-i18n="svc-db-desc">React Native iOS &amp; Android aplikácie.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-ai-name">B2B Platformy &amp; Portály</div><div class="svc-entry-desc" data-i18n="svc-ai-desc">Intranety, objednávkové systémy, dashboardy.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-cms-name">API &amp; Integrácie</div><div class="svc-entry-desc" data-i18n="svc-cms-desc">ERP, CRM, platobné brány, third-party API.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-perf-name">Performance Optimalizácia</div><div class="svc-entry-desc" data-i18n="svc-perf-desc">Core Web Vitals, Lighthouse 98+, CDN.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-security-name">Security Audit</div><div class="svc-entry-desc" data-i18n="svc-security-desc">OWASP, pentesting, bezpečnostné hardening.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-saas-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc" data-i18n="svc-saas-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
-            <div class="svc-entry"><div class="svc-entry-name" data-i18n="svc-maint-name">Prevádzka &amp; Support</div><div class="svc-entry-desc" data-i18n="svc-maint-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-ai-name">B2B Platformy &amp; Portály</div><div class="svc-entry-desc" data-i18n="svc-ai-desc">Intranety, objednávkové systémy, dashboardy.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-cms-name">API &amp; Integrácie</div><div class="svc-entry-desc" data-i18n="svc-cms-desc">ERP, CRM, platobné brány, third-party API.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-perf-name">Performance Optimalizácia</div><div class="svc-entry-desc" data-i18n="svc-perf-desc">Core Web Vitals, Lighthouse 98+, CDN.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-security-name">Security Audit</div><div class="svc-entry-desc" data-i18n="svc-security-desc">OWASP, pentesting, bezpečnostné hardening.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-saas-name">DevOps &amp; CI/CD</div><div class="svc-entry-desc" data-i18n="svc-saas-desc">Docker, GitHub Actions, zero-downtime deploy.</div></div>
+            <div class="svc-entry svc-extra"><div class="svc-entry-name" data-i18n="svc-maint-name">Prevádzka &amp; Support</div><div class="svc-entry-desc" data-i18n="svc-maint-desc">Monitoring, alerting, SLA podpora 24/7.</div></div>
           </div>
+          <button class="svc-show-more svc-show-more-dark" data-i18n="svc-show-more">Zobraziť všetky služby +</button>
 
           <div class="section-label" style="color:var(--blue);margin-bottom:12px" data-i18n="services-tools-label">Technológie</div>
           <div class="panel-pills">
@@ -3582,6 +3618,7 @@ const translations = {
     'footer-newsletter-label': 'Newsletter',
     'footer-newsletter-sub': 'Dostávajte novinky zo sveta webu a AI.',
     'footer-copy': '© 2026 Drixton. Web & Dev Studio. Všetky práva vyhradené.',
+    'svc-show-more': 'Zobraziť všetky služby +',
     'cookie-text': 'Používame cookies na zlepšenie vašej skúsenosti. Viac v <a href="#">zásadách ochrany súkromia</a>.',
     'cookie-accept': 'Prijať všetky',
     'cookie-decline': 'Odmietnuť',
@@ -3710,6 +3747,7 @@ const translations = {
     'footer-newsletter-label': 'Newsletter',
     'footer-newsletter-sub': 'Get the latest news from the world of web and AI.',
     'footer-copy': '© 2026 Drixton. Web & Dev Studio. All rights reserved.',
+    'svc-show-more': 'Show all services +',
     'cookie-text': 'We use cookies to improve your experience. Learn more in our <a href="#">privacy policy</a>.',
     'cookie-accept': 'Accept all',
     'cookie-decline': 'Decline',
@@ -4017,6 +4055,13 @@ function toggleService(item) {
   if (!isOpen) item.classList.add('open');
 }
 
+// Mobile "show more" for svc-list
+document.querySelectorAll('.svc-show-more').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.services-panel').classList.add('svc-expanded');
+  });
+});
+
 // Mobile accordion for svc-entry items
 document.querySelectorAll('.svc-entry').forEach(entry => {
   entry.addEventListener('click', () => {
@@ -4306,6 +4351,15 @@ kbUpdateStrip('blue', 0);
     document.querySelectorAll('.kb-item').forEach(k => k.classList.remove('kb-active'));
     el.classList.add('kb-active');
     kbUpdateStrip(type, 0);
+    // Update hint with agent name
+    if (hintEl) {
+      const agentName = kbData[type]?.agent || '';
+      const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      const action = isTouchDevice ? 'Prejdi prstom' : 'Prejdi myšou';
+      hintEl.textContent = agentName
+        ? `${action} po bielej ploche a zisti nástroje, ktoré používa ${agentName}.`
+        : `${action} po bielej ploche a zbieraj klávesy.`;
+    }
   };
 })();
 
