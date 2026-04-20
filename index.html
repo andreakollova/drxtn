@@ -3230,6 +3230,15 @@ footer::before {
   <div class="carousel-wrap">
     <div class="carousel" id="carousel">
       <div class="project-card fade-up">
+        <img src="static/projects/5.jpg" alt="Sportqo" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#0ea5e9,#38bdf8)'">
+        <div class="project-overlay">
+          <div class="project-tag">Mobile App</div>
+          <div class="project-name">Sportqo</div>
+          <div class="project-desc">AI-powered spravodajský bot a mobilná aplikácia pre pozemný hokej.</div>
+        </div>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+      </div>
+      <div class="project-card fade-up" style="--i:1">
         <img src="static/projects/1.png" alt="Antik Tech" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#77BAF8,#C1BFFF)'">
         <div class="project-overlay">
           <div class="project-tag">Development</div>
@@ -3238,7 +3247,7 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
-      <div class="project-card fade-up" style="--i:1">
+      <div class="project-card fade-up" style="--i:2">
         <img src="static/projects/2.png" alt="ASV Cekos" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#C1BFFF,#B8F200)'">
         <div class="project-overlay">
           <div class="project-tag">Development</div>
@@ -3247,7 +3256,7 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
-      <div class="project-card fade-up" style="--i:2">
+      <div class="project-card fade-up" style="--i:3">
         <img src="static/projects/3.png" alt="Soloxs" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#B8F200,#00E57A)'">
         <div class="project-overlay">
           <div class="project-tag">Development</div>
@@ -3256,30 +3265,12 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
-      <div class="project-card fade-up" style="--i:3">
+      <div class="project-card fade-up" style="--i:4">
         <img src="static/projects/4.png" alt="Kerollajn Photo" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#00E57A,#77BAF8)'">
         <div class="project-overlay">
           <div class="project-tag">Creative</div>
           <div class="project-name">Kerollajn Photo</div>
           <div class="project-desc">Fotografické portfólio s prémiovou vizuálnou identitou.</div>
-        </div>
-        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
-      </div>
-      <div class="project-card fade-up" style="--i:4">
-        <img src="static/projects/5.jpg" alt="HockeyRefresh" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#0ea5e9,#38bdf8)'">
-        <div class="project-overlay">
-          <div class="project-tag">Mobile App</div>
-          <div class="project-name">HockeyRefresh</div>
-          <div class="project-desc">AI-powered spravodajský bot a mobilná aplikácia pre pozemný hokej.</div>
-        </div>
-        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
-      </div>
-      <div class="project-card fade-up" style="--i:5">
-        <img src="static/projects/6432432.png" alt="Drilzz" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#f07443,#fbbf24)'">
-        <div class="project-overlay">
-          <div class="project-tag">Mobile App</div>
-          <div class="project-name">Drilzz</div>
-          <div class="project-desc">Platforma na tvorbu a zdieľanie tréningových plánov pre hokejistov.</div>
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
@@ -4871,9 +4862,23 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
 (function() {
   const PROJECTS = {
     1: {
+      name: 'Sportqo',
+      tag: 'Mobile App',
+      number: '01 — Projekt',
+      desc: 'Sportqo je moderná mobilná platforma spájajúca športovú komunitu. Aplikácia prináša aktuálne výsledky, správy a štatistiky priamo do rúk fanúšikov a hráčov — rýchlo, prehľadne a bez zbytočného šumu.\n\nVyvíjali sme od nuly: od návrhu používateľského rozhrania cez vývoj backendu až po nasadenie na App Store a Google Play.',
+      stats: [
+        { label: 'Rok', value: '2024 — 2025' },
+        { label: 'Typ', value: 'Mobilná aplikácia · iOS · Android' },
+        { label: 'Stack', value: 'React Native · Expo · Supabase · TypeScript' },
+        { label: 'Výsledok', value: 'Kompletná platforma od dizajnu po deploy' },
+      ],
+      photos: ['static/projects/5a.png','static/projects/5b.png','static/projects/5c.png','static/projects/5d.jpg'],
+      url: '#',
+    },
+    2: {
       name: 'Antik Tech',
       tag: 'Development',
-      number: '01 — Projekt',
+      number: '02 — Projekt',
       desc: 'Komplexná digitálna transformácia pre technologickú spoločnosť Antik. Navrhli a implementovali sme moderný e-shop s katalógom produktov, zákazníckym portálom a integrovaným redakčným systémom. Dôraz sme kládli na výkon, prehľadnosť a konverzný potenciál každej stránky.\n\nVýsledkom je plynulý používateľský zážitok, ktorý zvýšil online konverzie o viac ako 40 % v prvom kvartáli po spustení.',
       stats: [
         { label: 'Rok', value: '2024' },
@@ -4884,10 +4889,10 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/1a.png','static/projects/1b.png','static/projects/1c.png','static/projects/1d.webp'],
       url: '#',
     },
-    2: {
+    3: {
       name: 'ASV Cekos',
       tag: 'Development',
-      number: '02 — Projekt',
+      number: '03 — Projekt',
       desc: 'Nová korporátna webová prezentácia pre lídrа v priemyselnom inžinierstve. Vytvorili sme čistý, dôveryhodný dizajn s intuitívnym systémom produktových kategórií, formulárom na dopyty a viacjazyčnou podporou pre európske trhy.\n\nStránka plne reflektuje technickú odbornosť značky a zároveň zostáva prístupná aj netechnickým návštevníkom.',
       stats: [
         { label: 'Rok', value: '2024' },
@@ -4898,10 +4903,10 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/2a.png','static/projects/2b.png','static/projects/2c.png','static/projects/2d.png'],
       url: '#',
     },
-    3: {
+    4: {
       name: 'Soloxs',
       tag: 'Development',
-      number: '03 — Projekt',
+      number: '04 — Projekt',
       desc: 'SaaS platforma na správu a distribúciu obsahu pre mediálne a marketingové tímy. Navrhli sme komplexný dashboard s pokročilou analytikou, správou používateľov, plánovaním publikácií a API integráciami na tretie platformy.\n\nArkitektúra je postavená na škálovateľnosti — platforma zvláda stovky súbežných používateľov bez akýchkoľvek výkonnostných kompromisov.',
       stats: [
         { label: 'Rok', value: '2024' },
@@ -4912,10 +4917,10 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/3a.png','static/projects/3b.webp','static/projects/3c.png','static/projects/3d.webp'],
       url: '#',
     },
-    4: {
+    5: {
       name: 'Kerollajn Photo',
       tag: 'Creative',
-      number: '04 — Projekt',
+      number: '05 — Projekt',
       desc: 'Prémiové fotografické portfólio pre etablovanú fotografku Carolline K. Cieľom bolo vytvoriť online galériu, ktorá hovorí rovnakým jazykom ako jej práca — minimálne, priestranné, emocionálne.\n\nSúčasťou je aj rezervačný systém pre klientov, chránená klientska zóna na sťahovanie fotografií a plne spravovateľný CMS.',
       stats: [
         { label: 'Rok', value: '2024' },
@@ -4925,40 +4930,6 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       ],
       photos: ['static/projects/4a.jpg','static/projects/4b.png','static/projects/4c.jpg','static/projects/4d.png'],
       url: '#',
-    },
-    5: {
-      name: 'HockeyRefresh',
-      tag: 'Mobile App',
-      number: '05 — Projekt',
-      desc: 'HockeyRefresh je inteligentný spravodajský ekosystém pre komunitu slovenského pozemného hokeja. Jadrom je automatizovaný scraper, ktorý nepretržite sleduje výsledky, správy a videá — a s pomocou AI ich sumarizuje do stručných, čitateľných príspevkov.\n\nObsah sa automaticky distribuuje do Discord servera, na Instagram a priamo do mobilnej aplikácie. Fanúšikovia tak dostávajú aktuálne informácie bez toho, aby museli aktívne hľadať. Systém spracuje desiatky zdrojov denne a celú distribúciu zvláda bez manuálneho zásahu.',
-      stats: [
-        { label: 'Rok', value: '2024 — 2025' },
-        { label: 'Typ', value: 'Mobilná aplikácia · Bot · Scraper' },
-        { label: 'Stack', value: 'React Native · Python · Supabase · Discord API · Meta Graph API' },
-        { label: 'Výsledok', value: 'Plne automatizovaná distribúcia obsahu' },
-      ],
-      photos: ['static/projects/5a.png','static/projects/5b.png','static/projects/5c.png','static/projects/5d.jpg'],
-      appPhoto: 'static/apps/hockeyrefresh.png',
-      url: 'https://www.hockeyrefresh.com/',
-      appStore: 'https://apps.apple.com/hu/app/hockeyrefresh/id6762254165',
-      appBg: 'linear-gradient(135deg,#0c1a2e 0%,#0a3a5c 100%)',
-    },
-    6: {
-      name: 'Drilzz',
-      tag: 'Mobile App',
-      number: '06 — Projekt',
-      desc: 'Drilzz je mobilná platforma určená pre trénerov a hráčov pozemného hokeja. Umožňuje jednoducho vytvárať, organizovať a zdieľať tréningové cvičenia — vrátane diagramov, videí a podrobných popisov jednotlivých drillов.\n\nTréneri môžu budovať vlastnú knižnicu cvičení, kategorizovať ich podľa zamerania a zdieľať ich so svojím tímom alebo celou komunitou. Aplikácia je navrhnutá tak, aby bola intuitívna priamo na ihrisku — rýchla, prehľadná a bez zbytočných krokov.',
-      stats: [
-        { label: 'Rok', value: '2025' },
-        { label: 'Typ', value: 'Mobilná aplikácia · iOS · Android' },
-        { label: 'Stack', value: 'React Native · Expo · Supabase · TypeScript' },
-        { label: 'Výsledok', value: 'Tréningová platforma pre celú komunitu' },
-      ],
-      photos: ['static/projects/6a.png','static/projects/6b.png','static/projects/6c.png','static/projects/6d.png'],
-      appPhoto: 'static/apps/drilzz.png',
-      url: 'https://www.drilzz.com/',
-      appStore: null,
-      appBg: 'linear-gradient(135deg,#1a0e00 0%,#3d1f00 100%)',
     },
   };
 
