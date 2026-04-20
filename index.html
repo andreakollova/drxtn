@@ -807,6 +807,7 @@ section { padding: 100px 40px; }
   display: flex;
   gap: 24px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -4027,6 +4028,12 @@ carousel.addEventListener('mousemove', e => {
 });
 carousel.addEventListener('mouseup', () => { isDragging = false; carousel.classList.remove('dragging'); });
 carousel.addEventListener('mouseleave', () => { isDragging = false; carousel.classList.remove('dragging'); });
+carousel.addEventListener('wheel', e => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    e.preventDefault();
+    window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+  }
+}, { passive: false });
 
 // ===================== SERVICE ACCORDION =====================
 function toggleService(item) {
