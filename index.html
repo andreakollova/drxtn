@@ -3077,7 +3077,7 @@ footer::before {
   transform: translateX(-50%) translateY(120px);
   z-index: 9999;
   width: calc(100% - 48px);
-  max-width: 620px;
+  max-width: 760px;
   background: rgba(6,6,7,0.97);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -3122,6 +3122,7 @@ footer::before {
   text-decoration: none;
   white-space: nowrap;
 }
+.cookie-text p { white-space: nowrap; }
 .cookie-text a:hover { text-decoration: underline; }
 .cookie-actions {
   display: flex;
@@ -3880,8 +3881,8 @@ footer::before {
         <h4 data-i18n="footer-newsletter-label">Newsletter</h4>
         <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:16px; line-height:1.6" data-i18n="footer-newsletter-sub">Dostávajte novinky zo sveta webu a AI.</p>
         <div class="newsletter-input-wrap">
-          <input type="email" class="newsletter-input" placeholder="vas@email.sk" data-i18n="newsletter-placeholder">
-          <button class="newsletter-submit">→</button>
+          <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="vas@email.sk" data-i18n="newsletter-placeholder">
+          <button class="newsletter-submit" onclick="submitNewsletter(event)">→</button>
         </div>
       </div>
     </div>
@@ -4867,6 +4868,42 @@ function submitForm(e) {
   .catch(() => {
     if (btn) { btn.disabled = false; btn.style.opacity = ''; }
     alert('Odoslanie zlyhalo. Skúste to prosím znova.');
+  });
+}
+
+// ===================== NEWSLETTER =====================
+function submitNewsletter(e) {
+  e.preventDefault();
+  const input = document.getElementById('newsletterEmail');
+  const btn = e.currentTarget;
+  const email = input.value.trim();
+  if (!email) return;
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  const data = new FormData();
+  data.append('email', email);
+  data.append('zdroj', 'newsletter');
+
+  fetch('https://formspree.io/f/mgorlevv', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if (res.ok) {
+      btn.textContent = '✓';
+      input.value = '';
+      input.placeholder = 'Ďakujeme!';
+    } else {
+      btn.disabled = false;
+      btn.textContent = '→';
+    }
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = '→';
   });
 }
 
