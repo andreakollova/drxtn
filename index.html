@@ -564,7 +564,7 @@ nav.scrolled .nav-logo .logo-short { opacity: 1; transform: scale(1); }
   .hero-inner { padding: 120px 24px 60px; }
 }
 @media (max-width: 768px) {
-  .hero-inner { padding: 80px 20px 48px; }
+  .hero-inner { padding: 60px 20px 32px; }
 }
 
 /* Logo inside hero */
@@ -2874,7 +2874,7 @@ footer::before {
     display: flex;
     align-items: center;
   }
-  .hero-inner { padding: 76px 24px 56px; }
+  .hero-inner { padding: 60px 24px 36px; }
   .hero-h1 { font-size: clamp(34px, 9vw, 50px); line-height: 1.1; }
   .hero-sub { font-size: 14px; }
   .hero-btns { flex-direction: column; gap: 10px; align-items: flex-start; }
@@ -2888,7 +2888,7 @@ footer::before {
   .hero-mini { display: none; }
 
   /* Projects */
-  #projects { padding-top: 20px !important; padding-bottom: 36px; }
+  #projects { padding-top: 8px !important; padding-bottom: 24px; }
   .projects-header { padding: 0 20px; margin-bottom: 28px; }
   .carousel { padding: 0 20px 16px; touch-action: pan-x; }
   .carousel-nav { padding: 0 20px; }
@@ -3048,7 +3048,7 @@ footer::before {
 /* --- Small mobile (≤480px) --- */
 @media (max-width: 480px) {
   .hero-h1 { font-size: 32px; }
-  .hero-inner { padding: 80px 20px 52px; }
+  .hero-inner { padding: 56px 20px 28px; }
   /* keep mini cards but hide on very small screens if needed */
   .hero-mini { padding: 6px 8px; min-width: 70px; }
   .hero-mini-value { font-size: 14px !important; }
@@ -3096,6 +3096,8 @@ footer::before {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+.cookie-mobile-header { display: contents; }
+.cookie-mobile-title { display: none; }
 .cookie-icon {
   flex-shrink: 0;
   width: 36px;
@@ -3159,6 +3161,15 @@ footer::before {
   }
   .cookie-actions { width: 100%; }
   .cookie-btn { flex: 1; text-align: center; }
+  .cookie-mobile-header { display: flex; align-items: center; gap: 10px; }
+  .cookie-mobile-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-display, sans-serif);
+    letter-spacing: -0.01em;
+  }
 }
 </style>
 </head>
@@ -3878,8 +3889,8 @@ footer::before {
       <span class="footer-copy" data-i18n="footer-copy">© 2026 Drixton. Web & Dev Studio. Všetky práva vyhradené.</span>
       <div class="footer-legal">
         <a href="#">SK | EN</a>
-        <a href="#">GDPR</a>
-        <a href="#">Cookies</a>
+        <a href="privacy.html">GDPR</a>
+        <a href="cookies.html">Cookies</a>
       </div>
     </div>
   </div>
@@ -4215,7 +4226,9 @@ function setLang(lang) {
     const key = el.dataset.i18n;
     if (t[key] !== undefined) {
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = t[key];
+        // Don't overwrite floating-label inputs (those with an associated label sharing the same key)
+        const hasFloatingLabel = el.id && document.querySelector(`label[for="${el.id}"][data-i18n="${key}"]`);
+        if (!hasFloatingLabel) el.placeholder = t[key];
       } else {
         el.innerHTML = t[key];
       }
@@ -4850,13 +4863,16 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
 
 <!-- Cookie Banner -->
 <div id="cookie-banner" role="dialog" aria-label="Cookie consent">
-  <div class="cookie-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/><circle cx="8" cy="9" r="1" fill="#fff" stroke="none"/><circle cx="14" cy="14" r="1.5" fill="#fff" stroke="none"/><circle cx="10" cy="15" r="1" fill="#fff" stroke="none"/>
-    </svg>
+  <div class="cookie-mobile-header">
+    <div class="cookie-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><circle cx="8" cy="9" r="1" fill="#fff" stroke="none"/><circle cx="14" cy="14" r="1.5" fill="#fff" stroke="none"/><circle cx="10" cy="15" r="1" fill="#fff" stroke="none"/>
+      </svg>
+    </div>
+    <span class="cookie-mobile-title">Máme radi Cookies!</span>
   </div>
   <div class="cookie-text">
-    <p data-i18n="cookie-text">Používame cookies na zlepšenie vašej skúsenosti. Viac v <a href="#" data-i18n-href="privacy">zásadách ochrany súkromia</a>.</p>
+    <p data-i18n="cookie-text">Používame cookies na zlepšenie vašej skúsenosti. Viac v <a href="privacy.html" data-i18n-href="privacy">zásadách ochrany súkromia</a>.</p>
   </div>
   <div class="cookie-actions">
     <button class="cookie-btn cookie-btn-decline" id="cookieDecline" data-i18n="cookie-decline">Odmietnuť</button>

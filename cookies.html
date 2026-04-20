@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zásady používania cookies – Drixton</title>
+<meta name="description" content="Zásady používania súborov cookies na webovom sídle Drixton. Aké cookies používame a ako ich môžete spravovať.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://drixton.sk/cookies">
+<link rel="icon" type="image/png" href="static/keyboard-blue.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #FFFFFF;
+  --bg-secondary: #FAFAFA;
+  --text: #0A0A0A;
+  --text-secondary: #525252;
+  --border: rgba(0,0,0,0.08);
+  --nav-bg: rgba(255,255,255,0.85);
+  --card-bg: #FFFFFF;
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --radius: 16px;
+  --accent: #f07443;
+}
+
+[data-theme="dark"] {
+  --bg: #0A0A0A;
+  --bg-secondary: #111111;
+  --text: #FFFFFF;
+  --text-secondary: #A3A3A3;
+  --border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,10,10,0.85);
+  --card-bg: #141414;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+  line-height: 1.7;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s ease, background 0.3s ease;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 18px;
+}
+.nav-logo img { height: 32px; width: auto; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+.nav-home-btn:hover { color: var(--text); border-color: var(--text); }
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.theme-toggle:hover { background: var(--bg-secondary); }
+
+.legal-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .legal-page { padding: 96px 20px 60px; }
+}
+
+.legal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(240,116,67,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(240,116,67,0.2);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.legal-page h1 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.legal-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal-section { margin-bottom: 40px; }
+
+.legal-section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.legal-section p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.legal-section ul, .legal-section ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.legal-section li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.legal-section a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.legal-section a:hover { text-decoration: underline; }
+
+.legal-highlight {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 12px;
+}
+.legal-highlight p { margin-bottom: 0; }
+
+/* Cookie table */
+.cookie-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cookie-table th {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cookie-table td {
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.cookie-table tr:hover td { background: var(--bg-secondary); }
+
+.cookie-type-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.badge-necessary { background: rgba(34,197,94,0.12); color: #16a34a; }
+.badge-analytics { background: rgba(59,130,246,0.12); color: #2563eb; }
+.badge-marketing { background: rgba(240,116,67,0.12); color: #f07443; }
+
+.legal-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.legal-footer-copy { font-size: 13px; color: var(--text-secondary); }
+.legal-footer-links { display: flex; gap: 20px; }
+.legal-footer-links a {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.legal-footer-links a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="static/logo-black.png" alt="Drixton" id="navLogo"
+         onerror="this.outerHTML='<span style=\'font-weight:800;font-size:18px\'>Drixton</span>'">
+  </a>
+  <div class="nav-right">
+    <a href="/" class="nav-home-btn">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Späť na web
+    </a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="sunIcon">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="moonIcon" style="display:none">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<main class="legal-page">
+  <div class="legal-badge">Právne informácie</div>
+  <h1>Zásady používania<br>súborov cookies</h1>
+  <p class="legal-meta">Posledná aktualizácia: 20. apríla 2026 &nbsp;·&nbsp; Platné od: 1. januára 2026</p>
+
+  <div class="legal-section">
+    <div class="legal-highlight">
+      <p>Táto stránka vysvetľuje, čo sú cookies, aké cookies na drixton.sk používame a ako ich môžete ovládať. Viac o ochrane osobných údajov nájdete v <a href="/privacy.html">Zásadách ochrany súkromia</a>.</p>
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. Čo sú cookies?</h2>
+    <p>Súbory cookies sú malé textové súbory, ktoré sa ukladajú vo vašom prehliadači pri návšteve webovej stránky. Umožňujú stránke zapamätať si vaše preferencie, prispôsobiť obsah a analyzovať návštevnosť.</p>
+    <p>Cookies môžu byť <strong>relačné</strong> (vymažú sa po zatvorení prehliadača) alebo <strong>trvalé</strong> (zostávajú uložené do uplynutia platnosti). Môžu byť nastavené priamo naším webom (<em>first-party</em>) alebo tretími stranami (<em>third-party</em>).</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Aké cookies používame</h2>
+
+    <table class="cookie-table">
+      <thead>
+        <tr>
+          <th>Názov / Typ</th>
+          <th>Účel</th>
+          <th>Platnosť</th>
+          <th>Kategória</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>cookie-consent</code></td>
+          <td>Zapamätá si váš súhlas s cookies, aby sme vás neobťažovali opakovanými výzvami.</td>
+          <td>1 rok</td>
+          <td><span class="cookie-type-badge badge-necessary">Nevyhnutné</span></td>
+        </tr>
+        <tr>
+          <td><code>theme</code></td>
+          <td>Uloží vašu preferenciu svetlého / tmavého režimu.</td>
+          <td>1 rok</td>
+          <td><span class="cookie-type-badge badge-necessary">Nevyhnutné</span></td>
+        </tr>
+        <tr>
+          <td>Google Analytics (<code>_ga</code>, <code>_gid</code>)</td>
+          <td>Anonymná štatistika návštevnosti — počet návštev, zdroje a správanie na webe.</td>
+          <td>2 roky / 24 hod</td>
+          <td><span class="cookie-type-badge badge-analytics">Analytické</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Aktuálne nepoužívame žiadne marketingové ani reklamné cookies tretích strán.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. Kategórie cookies</h2>
+    <ul>
+      <li><strong>Nevyhnutné cookies</strong> — potrebné na správne fungovanie webu. Bez nich by niektoré funkcie nepracovali správne. Tieto cookies nie je možné vypnúť.</li>
+      <li><strong>Analytické cookies</strong> — pomáhajú nám pochopiť, ako návštevníci web používajú. Všetky zbierané dáta sú anonymné a slúžia výhradne na zlepšenie obsahu a výkonu stránky.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. Ako spravovať a odstrániť cookies</h2>
+    <p>Cookies môžete kedykoľvek spravovať alebo odstrániť priamo vo vašom prehliadači:</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+      <li><a href="https://support.mozilla.org/sk/kb/cookies-informacie-ktore-webove-stranky-ukladaju" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+      <li><a href="https://support.apple.com/sk-sk/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+      <li><a href="https://support.microsoft.com/sk-sk/windows/odstr%C3%A1nenie-a-spr%C3%A1va-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener">Microsoft Edge</a></li>
+    </ul>
+    <p>Upozorňujeme, že vypnutie analytických cookies nemá vplyv na funkčnosť webu, no môže obmedziť naše možnosti zlepšovať obsah podľa vašich potrieb.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Zmeny týchto zásad</h2>
+    <p>Tieto zásady môžeme priebežne aktualizovať. O podstatných zmenách vás informujeme prostredníctvom oznámenia na webe. Odporúčame vám túto stránku pravidelne navštevovať.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. Kontakt</h2>
+    <p>Ak máte otázky k používaniu cookies, kontaktujte nás:</p>
+    <ul>
+      <li>E-mail: <a href="mailto:hello@drixton.sk">hello@drixton.sk</a></li>
+      <li>Web: <a href="https://drixton.sk">drixton.sk</a></li>
+    </ul>
+  </div>
+
+  <div class="legal-footer">
+    <span class="legal-footer-copy">© 2026 Drixton. Web & Dev Studio.</span>
+    <div class="legal-footer-links">
+      <a href="/">Domov</a>
+      <a href="/privacy.html">Ochrana súkromia</a>
+      <a href="mailto:hello@drixton.sk">Kontakt</a>
+    </div>
+  </div>
+</main>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('sunIcon').style.display = isDark ? 'block' : 'none';
+  document.getElementById('moonIcon').style.display = isDark ? 'none' : 'block';
+  const logo = document.getElementById('navLogo');
+  if (logo) logo.src = isDark ? 'static/logo-black.png' : 'static/logo-white.png';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+(function() {
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  if (saved === 'dark') {
+    const sun = document.getElementById('sunIcon');
+    const moon = document.getElementById('moonIcon');
+    const logo = document.getElementById('navLogo');
+    if (sun) sun.style.display = 'none';
+    if (moon) moon.style.display = 'block';
+    if (logo) logo.src = 'static/logo-white.png';
+  }
+})();
+</script>
+</body>
+</html>
