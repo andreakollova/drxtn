@@ -801,11 +801,13 @@ section { padding: 100px 40px; }
   transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* Cards inside overflow carousel — always visible */
+.carousel .fade-up { opacity: 1; transform: none; }
 
 /* ===================== PROJECTS CAROUSEL ===================== */
 #projects {
   background: var(--bg);
-  overflow: hidden;
+  overflow-x: clip;
   padding-top: 56px;
   padding-bottom: 60px;
 }
@@ -2560,26 +2562,20 @@ footer::before {
   .carousel-nav { padding: 0 20px; }
   .project-card { flex: 0 0 82vw; }
 
-  /* Services — horizontal swipe carousel on mobile */
+  /* Services — stacked vertically on mobile */
   #services { padding: 0 !important; position: relative; }
   .services-grid {
     display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
     gap: 0;
-    padding-bottom: 0;
   }
-  .services-grid::-webkit-scrollbar { display: none; }
   .services-panel {
-    flex: 0 0 100vw;
-    scroll-snap-align: start;
+    width: 100%;
     min-height: auto !important;
     padding: 56px 24px 64px;
     border-radius: 0;
   }
-  .services-panel + .services-panel { border-left: none; }
+  .services-panel + .services-panel { border-top: none; }
   .services-panel-inner { grid-template-columns: 1fr; gap: 28px; }
   .services-visual { display: none; }
   .svc-list { grid-template-columns: 1fr; gap: 0; }
@@ -2597,7 +2593,7 @@ footer::before {
   .panel-pill { font-size: 11px; padding: 5px 10px; }
 
   /* Services swipe indicator */
-  .services-swipe-hint { display: flex; }
+  .services-swipe-hint { display: none !important; }
 
   /* Mobile mockups */
   .mobile-inner { grid-template-columns: 1fr; }
@@ -3240,7 +3236,7 @@ footer::before {
       <canvas id="kbGameCanvas"></canvas>
       <img src="static/robot-blue.png" alt="Robot" id="kbGameRobot">
       <img src="static/keyboard-blue.png" alt="Klávesnica" id="kbGameKeyboard">
-      <div class="kbgame-hint" id="kbGameHint" data-i18n="kb-hint">Prejdi myšou a zbieraj klávesy.</div>
+      <div class="kbgame-hint" id="kbGameHint">Prejdi myšou po bielej ploche a zbieraj klávesy.</div>
     </div>
   </div>
 </section>
@@ -4193,6 +4189,12 @@ kbUpdateStrip('blue', 0);
   const kbEl    = document.getElementById('kbGameKeyboard');
   const hintEl  = document.getElementById('kbGameHint');
   if (!gameEl) return;
+  if (hintEl) {
+    const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+    hintEl.textContent = isTouchDevice
+      ? 'Prejdi prstom po bielej ploche a zbieraj klávesy.'
+      : 'Prejdi myšou po bielej ploche a zbieraj klávesy.';
+  }
 
   const ctx2 = canvasEl.getContext('2d');
   let activeColor = 'blue';
