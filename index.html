@@ -3574,12 +3574,12 @@ footer::before {
       <div class="iphone-frame" id="mainMockup">
         <div class="iphone-notch"></div>
         <div class="iphone-screen" id="mockupScreen">
-          <video id="mockupVideo" autoplay muted loop playsinline
-               style="width:100%;display:block;border-radius:inherit;">
+          <video id="mockupVideo" muted loop playsinline
+               style="width:100%;display:none;border-radius:inherit;position:absolute;top:0;left:0;height:100%;object-fit:cover;">
             <source src="static/hockeyrefresh.mp4" type="video/mp4">
           </video>
-          <img id="mockupImg" src="static/apps/hockeyrefresh.png" alt="HockeyRefresh mockup" style="display:none;">
-          <div class="mockup-scroll-hint"><div class="mockup-scroll-hint-line"></div><div class="mockup-scroll-hint-dot"></div></div>
+          <img id="mockupImg" src="static/apps/hockeyrefresh.png" alt="HockeyRefresh mockup" style="display:block;">
+          <div class="mockup-scroll-hint" id="mockupScrollHint"><div class="mockup-scroll-hint-line"></div><div class="mockup-scroll-hint-dot"></div></div>
         </div>
       </div>
     </div>
@@ -4751,15 +4751,38 @@ function goMockup(idx) {
   document.getElementById('mslide-' + currentMockup).classList.add('active');
   const img = document.getElementById('mockupImg');
   const vid = document.getElementById('mockupVideo');
+  const hint = document.getElementById('mockupScrollHint');
   if (currentMockup === 0) {
-    // HockeyRefresh — show video
-    img.style.display = 'none';
-    vid.style.display = 'block';
-    vid.play();
+    // HockeyRefresh — reset to screenshot first, let observer handle scroll→video
+    vid.style.display = 'none';
+    vid.pause();
+    vid.currentTime = 0;
+    img.style.transition = '';
+    img.style.opacity = '1';
+    img.style.display = 'block';
+    img.classList.remove('playing');
+    if (hint) { hint.style.display = ''; hint.style.opacity = ''; }
+    // Trigger scroll→video sequence after short delay
+    setTimeout(() => { img.classList.add('playing'); }, 300);
+    setTimeout(() => {
+      img.style.transition = 'opacity 0.8s ease';
+      img.style.opacity = '0';
+      if (hint) { hint.style.transition = 'opacity 0.5s'; hint.style.opacity = '0'; }
+      setTimeout(() => {
+        img.style.display = 'none';
+        if (hint) hint.style.display = 'none';
+        vid.style.display = 'block';
+        vid.style.opacity = '0';
+        vid.style.transition = 'opacity 0.8s ease';
+        vid.play();
+        requestAnimationFrame(() => { vid.style.opacity = '1'; });
+      }, 800);
+    }, 4500);
   } else {
     // Other slides — show static image
     vid.style.display = 'none';
     vid.pause();
+    img.classList.remove('playing');
     img.style.display = 'block';
     img.style.opacity = '0';
     img.style.transform = 'translateY(10px)';
@@ -4786,17 +4809,58 @@ if (mainMock) {
   mainMock.addEventListener('mouseleave', () => { mainMock.style.transform = ''; });
 }
 
-// Trigger mockup scroll when visible
-const mockupImgEl = document.getElementById('mockupImg');
-if (mockupImgEl) {
-  const mockupObserver = new IntersectionObserver(entries => {
+// Scroll preview → video transition for HockeyRefresh
+(function() {
+  const img   = document.getElementById('mockupImg');
+  const vid   = document.getElementById('mockupVideo');
+  const hint  = document.getElementById('mockupScrollHint');
+  const frame = document.getElementById('mainMockup');
+  if (!img || !vid || !frame) return;
+
+  let triggered = false;
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) mockupImgEl.classList.add('playing');
-      else mockupImgEl.classList.remove('playing');
+      if (e.isIntersecting && !triggered) {
+        triggered = true;
+
+        // Step 1 — start scroll animation on screenshot
+        img.classList.add('playing');
+
+        // Step 2 — after 4.5s fade out screenshot, fade in video
+        setTimeout(() => {
+          img.style.transition = 'opacity 0.8s ease';
+          img.style.opacity = '0';
+          if (hint) { hint.style.transition = 'opacity 0.5s'; hint.style.opacity = '0'; }
+
+          setTimeout(() => {
+            img.style.display = 'none';
+            if (hint) hint.style.display = 'none';
+            vid.style.display = 'block';
+            vid.style.opacity = '0';
+            vid.style.transition = 'opacity 0.8s ease';
+            vid.play();
+            requestAnimationFrame(() => { vid.style.opacity = '1'; });
+          }, 800);
+        }, 4500);
+
+      } else if (!e.isIntersecting && triggered) {
+        // Reset when scrolled away so it replays next visit
+        triggered = false;
+        img.style.transition = '';
+        img.style.opacity = '1';
+        img.style.display = 'block';
+        img.classList.remove('playing');
+        if (hint) { hint.style.display = ''; hint.style.opacity = ''; }
+        vid.style.display = 'none';
+        vid.pause();
+        vid.currentTime = 0;
+      }
     });
-  }, { threshold: 0.3 });
-  mockupObserver.observe(document.getElementById('mainMockup'));
-}
+  }, { threshold: 0.4 });
+
+  observer.observe(frame);
+})();
 
 // ===================== SERVICES SCROLL DARK MODE =====================
 // Temporarily switch to dark mode when the dev (dark) panel is visible,
