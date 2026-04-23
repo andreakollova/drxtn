@@ -3574,9 +3574,11 @@ footer::before {
       <div class="iphone-frame" id="mainMockup">
         <div class="iphone-notch"></div>
         <div class="iphone-screen" id="mockupScreen">
-          <img id="mockupImg"
-               src="static/apps/hockeyrefresh.png"
-               alt="HockeyRefresh mockup">
+          <video id="mockupVideo" autoplay muted loop playsinline
+               style="width:100%;display:block;border-radius:inherit;">
+            <source src="static/hockeyrefresh.mp4" type="video/mp4">
+          </video>
+          <img id="mockupImg" src="static/apps/hockeyrefresh.png" alt="HockeyRefresh mockup" style="display:none;">
           <div class="mockup-scroll-hint"><div class="mockup-scroll-hint-line"></div><div class="mockup-scroll-hint-dot"></div></div>
         </div>
       </div>
@@ -4748,14 +4750,26 @@ function goMockup(idx) {
   currentMockup = idx;
   document.getElementById('mslide-' + currentMockup).classList.add('active');
   const img = document.getElementById('mockupImg');
-  img.style.opacity = '0';
-  img.style.transform = 'translateY(10px)';
-  setTimeout(() => {
-    img.src = mockupImages[currentMockup];
-    img.style.transition = 'opacity 0.4s, transform 0.4s';
-    img.style.opacity = '1';
-    img.style.transform = 'translateY(0)';
-  }, 200);
+  const vid = document.getElementById('mockupVideo');
+  if (currentMockup === 0) {
+    // HockeyRefresh — show video
+    img.style.display = 'none';
+    vid.style.display = 'block';
+    vid.play();
+  } else {
+    // Other slides — show static image
+    vid.style.display = 'none';
+    vid.pause();
+    img.style.display = 'block';
+    img.style.opacity = '0';
+    img.style.transform = 'translateY(10px)';
+    setTimeout(() => {
+      img.src = mockupImages[currentMockup];
+      img.style.transition = 'opacity 0.4s, transform 0.4s';
+      img.style.opacity = '1';
+      img.style.transform = 'translateY(0)';
+    }, 200);
+  }
 }
 function mockupNext() { goMockup((currentMockup + 1) % mockupImages.length); }
 function mockupPrev() { goMockup((currentMockup - 1 + mockupImages.length) % mockupImages.length); }
