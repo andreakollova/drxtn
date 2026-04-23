@@ -100,12 +100,24 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Andrea Kollova",
-  "alternateName": ["Andrea Kollová", "Andrea Kollova Drixton"],
+  "alternateName": ["Andrea Kollová", "Andrea Kollova Drixton", "Andrea Kollova developer"],
+  "givenName": "Andrea",
+  "familyName": "Kollova",
   "jobTitle": "Co-founder, Web Developer & UI/UX Designer",
+  "description": "Andrea Kollova je spoluzakladateľka Drixton Web & Dev Studia. Špecializuje sa na vývoj webstránok, e-shopov, mobilných aplikácií a digitálnych produktov.",
   "url": "https://drixton.sk",
-  "image": "https://drixton.sk/static/andrea-kollova.png",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://drixton.sk/static/andrea-kollova.png",
+    "width": 400,
+    "height": 400,
+    "caption": "Andrea Kollova — Co-founder & Developer at Drixton"
+  },
   "worksFor": { "@type": "Organization", "name": "Drixton", "url": "https://drixton.sk" },
-  "knowsAbout": ["Web Development", "React", "Next.js", "UI/UX Design", "AI Solutions", "Mobile Development"]
+  "nationality": { "@type": "Country", "name": "Slovakia" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Bratislava", "addressCountry": "SK" },
+  "email": "kollova@drixton.com",
+  "knowsAbout": ["Web Development", "Shopify", "React", "Next.js", "UI/UX Design", "AI Solutions", "Mobile Development", "E-commerce"]
 }
 </script>
 
@@ -2518,9 +2530,10 @@ section { padding: 100px 40px; }
 .contact-person-email:hover { text-decoration: underline; }
 .contact-team-avatars { display: flex; }
 .contact-team-avatar {
-  width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
   border: 2.5px solid var(--bg);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-shrink: 0;
 }
 .contact-team-names {
   font-family: 'Space Grotesk', sans-serif;
@@ -3740,20 +3753,24 @@ footer::before {
         Dohodnime si<br>stretnutie.
       </h2>
       <div class="contact-team" style="margin-bottom:24px; flex-direction:column; align-items:flex-start; gap:12px;">
-        <div class="contact-person">
-          <img src="static/andrea-kollova.png" alt="Andrea Kollová" class="contact-team-avatar">
+        <div class="contact-person" itemscope itemtype="https://schema.org/Person">
+          <img src="static/andrea-kollova.png" alt="Andrea Kollová — Co-founder &amp; Developer, Drixton" class="contact-team-avatar" itemprop="image" width="56" height="56">
           <div class="contact-person-info">
-            <div class="contact-person-name">Andrea Kollová</div>
-            <div class="contact-person-role">Vývoj</div>
-            <a href="mailto:kollova@drixton.com" class="contact-person-email">kollova@drixton.com</a>
+            <div class="contact-person-name" itemprop="name">Andrea Kollová</div>
+            <div class="contact-person-role" itemprop="jobTitle">Vývoj</div>
+            <a href="mailto:kollova@drixton.com" class="contact-person-email" itemprop="email">kollova@drixton.com</a>
+            <meta itemprop="url" content="https://drixton.sk">
+            <meta itemprop="worksFor" content="Drixton">
           </div>
         </div>
-        <div class="contact-person">
-          <img src="static/natalia-fondrkova.png" alt="Natália Fondrková" class="contact-team-avatar">
+        <div class="contact-person" itemscope itemtype="https://schema.org/Person">
+          <img src="static/natalia-fondrkova.png" alt="Natália Fondrková — Co-founder &amp; Designer, Drixton" class="contact-team-avatar" itemprop="image" width="56" height="56">
           <div class="contact-person-info">
-            <div class="contact-person-name">Natália Fondrková</div>
-            <div class="contact-person-role">Dizajn</div>
-            <a href="mailto:fondrkova@drixton.com" class="contact-person-email">fondrkova@drixton.com</a>
+            <div class="contact-person-name" itemprop="name">Natália Fondrková</div>
+            <div class="contact-person-role" itemprop="jobTitle">Dizajn</div>
+            <a href="mailto:fondrkova@drixton.com" class="contact-person-email" itemprop="email">fondrkova@drixton.com</a>
+            <meta itemprop="url" content="https://drixton.sk">
+            <meta itemprop="worksFor" content="Drixton">
           </div>
         </div>
       </div>
