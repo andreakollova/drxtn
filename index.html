@@ -3985,7 +3985,7 @@ function toggleTheme() {
   const logoShort = document.getElementById('navLogoShort');
   if (logoFull) {
     logoFull.src = isDark ? 'static/logo-white.png' : 'static/logo-black.png';
-    if (logoShort) logoShort.src = 'static/logo-keyboard.png';
+    if (logoShort) logoShort.src = isDark ? 'static/logo-keyboard.png' : 'static/logo-keyboard-white.png';
   }
   if (typeof updateHeroLogo === 'function') updateHeroLogo(!isDark);
 }
@@ -4926,7 +4926,7 @@ if (mainMock) {
     if (sun) sun.style.display = dark ? 'none' : 'block';
     if (moon) moon.style.display = dark ? 'block' : 'none';
     if (logoFull) logoFull.src = dark ? 'static/logo-white.png' : 'static/logo-black.png';
-    if (logoShort) logoShort.src = 'static/logo-keyboard.png';
+    if (logoShort) logoShort.src = dark ? 'static/logo-keyboard-white.png' : 'static/logo-keyboard.png';
     if (typeof updateHeroLogo === 'function') updateHeroLogo(dark);
   };
 
