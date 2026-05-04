@@ -3984,7 +3984,7 @@ function toggleTheme() {
   const logoFull = document.getElementById('navLogoFull');
   const logoShort = document.getElementById('navLogoShort');
   if (logoFull) {
-    logoFull.src = isDark ? 'static/logo-white.png' : 'static/logo-black.png';
+    logoFull.src = isDark ? 'static/logo-black.png' : 'static/logo-white.png';
     if (logoShort) logoShort.src = isDark ? 'static/logo-keyboard.png' : 'static/logo-keyboard-white.png';
   }
   if (typeof updateHeroLogo === 'function') updateHeroLogo(!isDark);
