@@ -3336,6 +3336,15 @@ footer::before {
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
       <div class="project-card fade-up" style="--i:1">
+        <img src="static/projects/6.png" alt="Woeva" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#B8F200,#000)'">
+        <div class="project-overlay">
+          <div class="project-tag">Mobile App · Web · Design</div>
+
+          <div class="project-desc">Platforma spájajúca ľudí s lokálnymi zážitkami - app, web aj brand.</div>
+        </div>
+        <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+      </div>
+      <div class="project-card fade-up" style="--i:2">
         <img src="static/projects/5.png" alt="Sportqo" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#0ea5e9,#38bdf8)'">
         <div class="project-overlay">
           <div class="project-tag">Development · Design</div>
@@ -3344,7 +3353,7 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
-      <div class="project-card fade-up" style="--i:2">
+      <div class="project-card fade-up" style="--i:3">
         <img src="static/projects/2.png" alt="ASV Cekos" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#C1BFFF,#B8F200)'">
         <div class="project-overlay">
           <div class="project-tag">Development · Design</div>
@@ -3353,7 +3362,7 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
-      <div class="project-card fade-up" style="--i:3">
+      <div class="project-card fade-up" style="--i:4">
         <img src="static/projects/4.png" alt="Kerollajn" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#00E57A,#77BAF8)'">
         <div class="project-overlay">
           <div class="project-tag">Development · Design</div>
@@ -3362,7 +3371,7 @@ footer::before {
         </div>
         <a href="#" class="project-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
       </div>
-      <div class="project-card fade-up" style="--i:4">
+      <div class="project-card fade-up" style="--i:5">
         <img src="static/projects/3.png" alt="Soloxs" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#B8F200,#00E57A)'">
         <div class="project-overlay">
           <div class="project-tag">Development · Design</div>
@@ -5120,10 +5129,23 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       url: '#',
     },
     2: {
+      name: 'Woeva',
+      logo: 'static/projects/woeva-logo.png',
+      tag: 'Mobile App · Web · Design',
+      number: '02 - Projekt',
+      desc: 'Woeva je platforma, ktorá spája ľudí s lokálnymi zážitkami - od športu a kultúry po komunity a eventy. Navrhli a vyvinuli sme kompletnú mobilnú aplikáciu pre iOS aj Android, webovú platformu a celú brand identity.\n\nDôraz sme kládli na živý vizuálny jazyk, rýchlosť a jednoduchosť - aby každý mohol nájsť, čo sa deje práve teraz.',
+      stats: [
+        { label: 'Služby', value: 'Mobile App · Web · Dizajn · Brand' },
+        { label: 'Stack', value: 'React Native · Expo · Supabase · TypeScript · Node.js' },
+      ],
+      photos: ['static/projects/6b.png','static/projects/6c.jpg'],
+      url: '#',
+    },
+    3: {
       name: 'Sportqo',
       logo: 'https://sportqo.com/assets/brand_logo-93a425fd.png',
       tag: 'Web App · Design',
-      number: '02 - Projekt',
+      number: '03 - Projekt',
       desc: 'Sportqo je platforma na vyhľadávanie a rezerváciu športových tréningov - kdekoľvek, kedykoľvek. Pre Sportqo sme mali na starosti úplne všetko: od brand identity a vizuálneho dizajnu po vývoj webovej aplikácie a backendového systému.\n\nVýsledkom je ucelený produkt s konzistentnou identitou, ktorý spája trénerov a športovcov na jednom mieste.',
       stats: [
         { label: 'Služby', value: 'Web App · Dizajn · Brand' },
@@ -5132,11 +5154,11 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/5a.png','static/projects/5b.png','static/projects/5c.png','static/projects/5d.jpg'],
       url: '#',
     },
-    3: {
+    4: {
       name: 'ASV Cekos',
       logo: 'static/logo-asv-cekos.png',
       tag: 'Development · Design',
-      number: '03 - Projekt',
+      number: '04 - Projekt',
       desc: 'Nová webová prezentácia pre účtovnícku firmu ASV Cekos. Vytvorili sme čistý, dôveryhodný dizajn, ktorý buduje dôveru klientov a jasne komunikuje ponúkané služby.\n\nStránka je plne spravovateľná a optimalizovaná pre vyhľadávače.',
       stats: [
         { label: 'Služby', value: 'Web Development · Dizajn' },
@@ -5145,11 +5167,11 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/2a.png','static/projects/2b.png','static/projects/2c.png','static/projects/2d.png'],
       url: '#',
     },
-    4: {
+    5: {
       name: 'Kerollajn',
       logo: 'https://www.kerollajn-photo.sk/wp-content/uploads/2023/06/kerollajn-logo-black.png',
       tag: 'Development · Design',
-      number: '04 - Projekt',
+      number: '05 - Projekt',
       desc: 'Prémiové fotografické portfólio pre fotografku Karolínu Kerollajn. Cieľom bolo vytvoriť online galériu, ktorá hovorí rovnakým jazykom ako jej práca - minimálne, priestranné, emocionálne.\n\nNavrhli a vyvinuli sme celý web od základov s dôrazom na vizuálnu čistotu, ktorá nechá vyniknúť fotografiu.',
       stats: [
         { label: 'Služby', value: 'Web Design · Brand Identity · CMS' },
@@ -5158,11 +5180,11 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
       photos: ['static/projects/4a.jpg','static/projects/4b.png','static/projects/4c.jpg','static/projects/4d.png'],
       url: '#',
     },
-    5: {
+    6: {
       name: 'Soloxs',
       logo: 'https://soloxs.com/cdn/shop/files/logo.jpg?v=1746000436&width=320',
       tag: 'Development · Design',
-      number: '05 - Projekt',
+      number: '06 - Projekt',
       desc: 'Web a e-shop pre Soloxs - inovatívnu značku špeciálnych pinziet na bezpečné odstraňovanie kliešťov. Navrhli sme produktový web s dôrazom na jednoduchosť a dôveryhodnosť, ktorý zákazníkovi ihneď vysvetlí, prečo je produkt výnimočný.\n\nSúčasťou projektu bol aj kompletný dizajn a napojenie na e-commerce riešenie.',
       stats: [
         { label: 'Služby', value: 'Web · E-shop · Dizajn' },
