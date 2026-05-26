@@ -5188,12 +5188,7 @@ document.querySelectorAll('.btn-primary, .btn-secondary, .cta-btn').forEach(btn 
     const tagEl = document.getElementById('pmTag');
     tagEl.textContent = p.tag;
     tagEl.className = 'pm-tag' + (p.tag === 'Creative' ? ' creative' : p.tag === 'Mobile App' ? ' mobile' : '');
-    const titleEl = document.getElementById('pmTitle');
-    if (p.logo) {
-      titleEl.innerHTML = `<img src="${p.logo}" alt="${p.name}" style="max-height:48px;max-width:200px;object-fit:contain;display:block;">`;
-    } else {
-      titleEl.textContent = p.name;
-    }
+    document.getElementById('pmTitle').textContent = p.name;
     document.getElementById('pmDesc').innerHTML = p.desc.replace(/\n\n/g, '<br><br>');
 
     const statsEl = document.getElementById('pmStats');
