@@ -3,13 +3,13 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.drixton.com/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.drixton.com/static/andrea-kollova.png</image:loc>
-      <image:title>Andrea Kollova - Co-founder and Developer at Drixton</image:title>
-      <image:caption>Andrea Kollova, Co-founder and Web and App Developer at Drixton Web and Dev Studio</image:caption>
+      <image:title>Andrea Kollova - Co-founder and Full-stack Developer at Drixton, Bratislava</image:title>
+      <image:caption>Andrea Kollova, Co-founder and Full-stack Developer at Drixton Web and Dev Studio in Bratislava, Slovakia. Specializing in React Native, Next.js, TypeScript, AI solutions.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://www.drixton.com/static/natalia-fondrkova.png</image:loc>
